@@ -142,7 +142,18 @@ class ProfessionalVRPAlgorithm {
           const matrixIndex = location.originalIndex + 1; // +1 porque depot es 0
           
           if (currentLoad + location.peso <= config.capacityKg) {
-            const distance = this.distanceMatrix[currentIndex][matrixIndex];
+            // Validar que el índice existe en la matriz antes de acceder
+            let distance;
+            if (this.distanceMatrix && this.distanceMatrix[currentIndex] && this.distanceMatrix[currentIndex][matrixIndex] !== undefined) {
+              distance = this.distanceMatrix[currentIndex][matrixIndex];
+            } else {
+              // Si la matriz no está disponible o el índice no existe, calcular distancia directamente
+              distance = this.calculateHaversineDistance(
+                currentLocation.lat, currentLocation.lon,
+                location.lat, location.lon
+              );
+            }
+            
             if (distance < nearestDistance) {
               nearestDistance = distance;
               nearestIndex = i;
@@ -204,7 +215,19 @@ class ProfessionalVRPAlgorithm {
           for (let k = 0; k < newRoute.length - 1; k++) {
             const idx1 = newRoute[k].index || 0;
             const idx2 = newRoute[k + 1].index || 0;
-            newDistance += this.distanceMatrix[idx1][idx2];
+            
+            // Validar que los índices existen en la matriz
+            if (!this.distanceMatrix || !this.distanceMatrix[idx1] || this.distanceMatrix[idx1][idx2] === undefined) {
+              // Si la matriz no está disponible o el índice no existe, calcular distancia directamente
+              const loc1 = newRoute[k];
+              const loc2 = newRoute[k + 1];
+              newDistance += this.calculateHaversineDistance(
+                loc1.lat, loc1.lon,
+                loc2.lat, loc2.lon
+              );
+            } else {
+              newDistance += this.distanceMatrix[idx1][idx2];
+            }
           }
           
           // Si mejora, actualizar
@@ -232,7 +255,19 @@ class ProfessionalVRPAlgorithm {
     for (let i = 0; i < routeLocations.length - 1; i++) {
       const idx1 = routeLocations[i].index || 0;
       const idx2 = routeLocations[i + 1].index || 0;
-      totalDistance += this.distanceMatrix[idx1][idx2];
+      
+      // Validar que los índices existen en la matriz
+      if (!this.distanceMatrix || !this.distanceMatrix[idx1] || this.distanceMatrix[idx1][idx2] === undefined) {
+        // Si la matriz no está disponible o el índice no existe, calcular distancia directamente
+        const loc1 = routeLocations[i];
+        const loc2 = routeLocations[i + 1];
+        totalDistance += this.calculateHaversineDistance(
+          loc1.lat, loc1.lon,
+          loc2.lat, loc2.lon
+        );
+      } else {
+        totalDistance += this.distanceMatrix[idx1][idx2];
+      }
     }
     
     // Calcular peso total
@@ -310,9 +345,6 @@ class ProfessionalVRPAlgorithm {
       
       console.log(`\n🏘️ Procesando localidad: ${localidad} (${ubicacionesLocalidad.length} ubicaciones)`);
       
-      // Guardar ubicaciones originales
-      const ubicacionesOriginales = this.locations;
-      
       // Usar solo ubicaciones de esta localidad
       this.locations = ubicacionesLocalidad;
       
@@ -343,8 +375,8 @@ class ProfessionalVRPAlgorithm {
       
       console.log(`   ✅ ${localidad}: ${camionRoutes.length} rutas camión, ${motoRoutes.length} rutas moto`);
       
-      // Restaurar locations originales
-      this.locations = ubicacionesOriginales;
+      // Restaurar locations originales (usar ubicacionesCompletas que se guardó al inicio)
+      this.locations = ubicacionesCompletas;
     }
     
     // Restaurar locations completa para estadísticas
@@ -379,8 +411,8 @@ class ProfessionalVRPAlgorithm {
     // Calcular métricas combinadas
     const metrics = this.calculateCombinedMetrics(improvedRoutes);
     
-    // Restaurar ubicaciones originales
-    this.locations = ubicacionesOriginales;
+    // Restaurar ubicaciones originales (ya están restauradas en línea 386, pero por seguridad)
+    this.locations = ubicacionesCompletas;
     
     // Calcular desglose por vehículo
     const vehicleAssignments = this.classifyLocationsByVehicle();
