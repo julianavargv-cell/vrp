@@ -1,0 +1,3206 @@
+Servidor ejecutándose en http://localhost:3000
+📍 1551 puntos con coordenadas válidas (lat/lon del CSV) para subida 30
+📍 1551 puntos con coordenadas válidas (lat/lon del CSV) para subida más reciente
+🚀 Iniciando cálculo de rutas VRP personalizado...
+🔍 DEBUG - vehicleType: personalizado
+🔍 DEBUG - customVehicles.length: 3
+🔍 DEBUG - VEHICLE_TYPES[vehicleType]: not exists
+🚛 Usando 3 vehículos personalizados
+   📋 camion: 2000kg, $350000 COP/viaje
+   📋 camion 2: 5000kg, $400000 COP/viaje
+   📋 moto: 250kg, $100000 COP/viaje
+🚛 Usando VRP con vehículos personalizados
+📍 1551 ubicaciones encontradas para VRP
+⚖️ 0 ubicaciones con peso > 0
+📦 Peso total: 0.00 kg
+🔍 Ejemplo ubicación: { direccion: 'KR 92 147C 02', peso: 0, lat: 4.743257, lon: -74.084513 }
+🚛 Calculando rutas con vehículos personalizados...
+🔍 DEBUG - customVehicles: [
+  {
+    id: 1761602737149,
+    name: 'camion',
+    type: 'camion',
+    capacity: 2000,
+    costPerTrip: 350000
+  },
+  {
+    id: 1762409637235,
+    name: 'camion 2',
+    type: 'camion',
+    capacity: 5000,
+    costPerTrip: 400000
+  },
+  {
+    id: 1762409660850,
+    name: 'moto',
+    type: 'moto',
+    capacity: 250,
+    costPerTrip: 100000
+  }
+]
+🚛 Iniciando VRP con vehículos personalizados...
+   🚛 KR 92 147C 02: 0kg → camion 2
+   🚛 AK 72 12D 60: 0kg → camion 2
+   🚛 CL 100 19 05: 0kg → camion 2
+   🚛 CL 148 7B 65: 0kg → camion 2
+   🚛 KR 82A 6B 74: 0kg → camion 2
+   🚛 KR 79B 35B 38 Sur: 0kg → camion 2
+   🚛 KR 14 98 51 Piso 2: 0kg → camion 2
+   🚛 CL 22F 103 09: 0kg → camion 2
+   🚛 AC 26 # 106 - 74: 0kg → camion 2
+   🚛 CL 73 20 01: 0kg → camion 2
+   🚛 CL 26 92 32: 0kg → camion 2
+   🚛 KR 80I 61 05 S: 0kg → camion 2
+   🚛 CL 18 99 38: 0kg → camion 2
+   🚛 TV 78K 41A 04 S: 0kg → camion 2
+   🚛 KR 31D 4 43: 0kg → camion 2
+   🚛 CL 32 S 23 62: 0kg → camion 2
+   🚛 CL 22 S 1 40 E: 0kg → camion 2
+   🚛 CL 21 5 74: 0kg → camion 2
+   🚛 CL 146CBIS 90 57: 0kg → camion 2
+   🚛 CL 19 S 69C 17: 0kg → camion 2
+   🚛 AC 72 72 43: 0kg → camion 2
+   🚛 KR 69 170 15: 0kg → camion 2
+   🚛 KR 30 10 77: 0kg → camion 2
+   🚛 AV Boyacá 15 - 98: 0kg → camion 2
+   🚛 CL 120 A 7 14: 0kg → camion 2
+   🚛 Dg 45 c Sur 51 90: 0kg → camion 2
+   🚛 AK 30 78 20: 0kg → camion 2
+   🚛 AK 30 70 48: 0kg → camion 2
+   🚛 AK 15 106 72: 0kg → camion 2
+   🚛 AC 127 20 79: 0kg → camion 2
+   🚛 KR 32 17 09: 0kg → camion 2
+   🚛 AC 116 70C 65: 0kg → camion 2
+   🚛 AC 19 28 80: 0kg → camion 2
+   🚛 AK 15 127 30: 0kg → camion 2
+   🚛 KR 24C 48 94 SUR: 0kg → camion 2
+   🚛 KR 21 62 47: 0kg → camion 2
+   🚛 AC 183 45 01: 0kg → camion 2
+   🚛 AUTOPISTA NORTE 103B - 35: 0kg → camion 2
+   🚛 AC 116 70C 12: 0kg → camion 2
+   🚛 CL 10 65 28: 0kg → camion 2
+   🚛 KR 6 65D 58 S: 0kg → camion 2
+   🚛 CL 10 65 28: 0kg → camion 2
+   🚛 AK 129 22B 57: 0kg → camion 2
+   🚛 TV 23 93 23: 0kg → camion 2
+   🚛 KR 103 26 - 92: 0kg → camion 2
+   🚛 KR 35 50 40 Sur: 0kg → camion 2
+   🚛 CL 52 Sur 95A 10: 0kg → camion 2
+   🚛 CL 82 10 39: 0kg → camion 2
+   🚛 CL 22F 103 09: 0kg → camion 2
+   🚛 AC 32 15 31: 0kg → camion 2
+   🚛 KR 16 59 54: 0kg → camion 2
+   🚛 TV 27A 53B 13: 0kg → camion 2
+   🚛 CL 98 70 91: 0kg → camion 2
+   🚛 CL 99 9A 54: 0kg → camion 2
+   🚛 KR 7 71 21: 0kg → camion 2
+   🚛 AK 30 63A 51: 0kg → camion 2
+   🚛 KR 11 67 32: 0kg → camion 2
+   🚛 AK 45 118 59: 0kg → camion 2
+   🚛 KR 67 4G 31: 0kg → camion 2
+   🚛 CL 100 19 61: 0kg → camion 2
+   🚛 TV 14 49 04 S: 0kg → camion 2
+   🚛 KR 37 22 70: 0kg → camion 2
+   🚛 AC 26 66A 48: 0kg → camion 2
+   🚛 CL 19 S 10 73: 0kg → camion 2
+   🚛 TV 78 # 41C-48: 0kg → camion 2
+   🚛 CL 27 S 22 37: 0kg → camion 2
+   🚛 CL 40 S 77A 72: 0kg → camion 2
+   🚛 AC 100 49 45: 0kg → camion 2
+   🚛 KR 20 22 00 S: 0kg → camion 2
+   🚛 TV 78H 42A 29 S: 0kg → camion 2
+   🚛 AC 12 79A 25: 0kg → camion 2
+   🚛 KR 7 40B 45: 0kg → camion 2
+   🚛 KR 11C ESTE 72 01 SUR: 0kg → camion 2
+   🚛 KR 2 E 166A 07: 0kg → camion 2
+   🚛 KR 12C 19 11 Sur: 0kg → camion 2
+   🚛 CL 13 47 67: 0kg → camion 2
+   🚛 CL 73 10 83: 0kg → camion 2
+   🚛 CL 6D 4 42: 0kg → camion 2
+   🚛 CL 45 # 54 - 91: 0kg → camion 2
+   🚛 CL 22F 103 09: 0kg → camion 2
+   🚛 CL 106 7 25: 0kg → camion 2
+   🚛 AK 50 18 06 S: 0kg → camion 2
+   🚛 KR 8 6 25: 0kg → camion 2
+   🚛 AK 50 18 06 S: 0kg → camion 2
+   🚛 KR 60 10 76: 0kg → camion 2
+   🚛 KR 65B 10 77: 0kg → camion 2
+   🚛 CL 93 13 71: 0kg → camion 2
+   🚛 AK 30 45 03: 0kg → camion 2
+   🚛 CL 75 S 34 05: 0kg → camion 2
+   🚛 KR 94 69A 08: 0kg → camion 2
+   🚛 KR 30 CL 57 LC 9: 0kg → camion 2
+   🚛 KR 92 146C 24: 0kg → camion 2
+   🚛 AC 8 S 36 21: 0kg → camion 2
+   🚛 AK 86 6C 09: 0kg → camion 2
+   🚛 CL 48C S 21 13: 0kg → camion 2
+   🚛 AC 170 67 51: 0kg → camion 2
+   🚛 KR 104B 22J 15: 0kg → camion 2
+   🚛 KR 7 E 5 57: 0kg → camion 2
+   🚛 KR 69J 73 02: 0kg → camion 2
+   🚛 CL 37BISB S 2 81 E: 0kg → camion 2
+   🚛 DG 62G S 72B 51: 0kg → camion 2
+   🚛 CL 4 31D 30: 0kg → camion 2
+   🚛 KR 13B 31G 40 S: 0kg → camion 2
+   🚛 TV 21A 19 59 S: 0kg → camion 2
+   🚛 KR 74 42G 52 S: 0kg → camion 2
+   🚛 CL 165 7 52: 0kg → camion 2
+   🚛 DG 47A S 53B 27: 0kg → camion 2
+   🚛 AK 60 57 60: 0kg → camion 2
+   🚛 AK 60 57 60: 0kg → camion 2
+   🚛 DG 76 B 1C 40 sur: 0kg → camion 2
+   🚛 AK 45 232 35: 0kg → camion 2
+   🚛 CL 56F Sur 106 22: 0kg → camion 2
+   🚛 KR 11 84 09: 0kg → camion 2
+   🚛 CL 93A 11 30: 0kg → camion 2
+   🚛 KR 14 93A 36: 0kg → camion 2
+   🚛 AK 68 90 88: 0kg → camion 2
+   🚛 KR 7 45 10: 0kg → camion 2
+   🚛 KR 47 123A 33: 0kg → camion 2
+   🚛 AC 26 69 63: 0kg → camion 2
+   🚛 KR 106 15A 25: 0kg → camion 2
+   🚛 KR 74 24A 02: 0kg → camion 2
+   🚛 CL 31C S 23C 07: 0kg → camion 2
+   🚛 CL 27 S 5 72: 0kg → camion 2
+   🚛 CL 90 11A 40: 0kg → camion 2
+   🚛 CL 4 S 68A 03: 0kg → camion 2
+   🚛 AK 45 245 15: 0kg → camion 2
+   🚛 CL 12B 71D 31: 0kg → camion 2
+   🚛 CL 53 S 86C 06: 0kg → camion 2
+   🚛 CL 85 11 54: 0kg → camion 2
+   🚛 CL 24 26 44: 0kg → camion 2
+   🚛 AV 68 16 A 07: 0kg → camion 2
+   🚛 CL 19A 114 14: 0kg → camion 2
+   🚛 CL 26 S 93D 01: 0kg → camion 2
+   🚛 CL 54F S 93C 45: 0kg → camion 2
+   🚛 KR 79 42C 00 S: 0kg → camion 2
+   🚛 AC 80 111C 98: 0kg → camion 2
+   🚛 KR 136 131B 05: 0kg → camion 2
+   🚛 CL 70 101 21: 0kg → camion 2
+   🚛 CL 22 55 30: 0kg → camion 2
+   🚛 CL 77B 120A 51: 0kg → camion 2
+   🚛 AC 116 71 21: 0kg → camion 2
+   🚛 KR 73A 70 18: 0kg → camion 2
+   🚛 CL 93 13 20: 0kg → camion 2
+   🚛 CL 67 10A 02: 0kg → camion 2
+   🚛 AV 68 49A 47: 0kg → camion 2
+   🚛 CL 94 23 43: 0kg → camion 2
+   🚛 KR 10 27 05 S: 0kg → camion 2
+   🚛 KR 10 # 27 - 27: 0kg → camion 2
+   🚛 KR 13 # 27 - 0: 0kg → camion 2
+   🚛 KR 10 # 27 - 51: 0kg → camion 2
+   🚛 KR 56B 65 63: 0kg → camion 2
+   🚛 CL 102 7 11: 0kg → camion 2
+   🚛 KR 8 1C 50 SUR: 0kg → camion 2
+   🚛 AC24 #60-50: 0kg → camion 2
+   🚛 CL 114A 45 78: 0kg → camion 2
+   🚛 AK 45 116 34: 0kg → camion 2
+   🚛 AK 19 102 68: 0kg → camion 2
+   🚛 KR 11 140 29: 0kg → camion 2
+   🚛 CL 63 7 09: 0kg → camion 2
+   🚛 CL 85 15 00: 0kg → camion 2
+   🚛 AK 72 98 54: 0kg → camion 2
+   🚛 AUTOPISTA NORTE 146 - 48: 0kg → camion 2
+   🚛 CL 121 6 46: 0kg → camion 2
+   🚛 AK 15 114A 33: 0kg → camion 2
+   🚛 KR 10A 70 37: 0kg → camion 2
+   🚛 AK 72 152B 60: 0kg → camion 2
+   🚛 KR 11 91 16: 0kg → camion 2
+   🚛 AV 24 41 33: 0kg → camion 2
+   🚛 AC 26 90 10: 0kg → camion 2
+   🚛 DG 52A S 27 11: 0kg → camion 2
+   🚛 KR 80K 61 28 S: 0kg → camion 2
+   🚛 CL 40 20 38: 0kg → camion 2
+   🚛 AC 26 100 Bis 70: 0kg → camion 2
+   🚛 CL 75 69H 05: 0kg → camion 2
+   🚛 CL 22F 112 09: 0kg → camion 2
+   🚛 CL 99 9A 54: 0kg → camion 2
+   🚛 CL 185 43 05: 0kg → camion 2
+   🚛 AK 58 127 59: 0kg → camion 2
+   🚛 CL 6A 78A 68: 0kg → camion 2
+   🚛 AK 30 25 90: 0kg → camion 2
+   🚛 KR 18B 145 62: 0kg → camion 2
+   🚛 CL 72 # 10 - 34: 0kg → camion 2
+   🚛 CL 9 20 29: 0kg → camion 2
+   🚛 AK 58 127 59: 0kg → camion 2
+   🚛 CL 150 16 56: 0kg → camion 2
+   🚛 CL 140 12B 61: 0kg → camion 2
+   🚛 CL 93 14 50: 0kg → camion 2
+   🚛 KR 15 77 05: 0kg → camion 2
+   🚛 CL 38 A SUR 34 D 51: 0kg → camion 2
+   🚛 CL 145 91 - 19: 0kg → camion 2
+   🚛 KR 5 # 22 - 41: 0kg → camion 2
+   🚛 CL 47B SUR 24B 33: 0kg → camion 2
+   🚛 AC 26 # 85D - 55: 0kg → camion 2
+   🚛 KR 10 9 37: 0kg → camion 2
+   🚛 KR 24C # 48 - 94 Sur: 0kg → camion 2
+   🚛 CL 53B 25 21: 0kg → camion 2
+   🚛 CL 65 S 78H 51: 0kg → camion 2
+   🚛 CL 59 C Sur 81 21: 0kg → camion 2
+   🚛 KR 10 23 66: 0kg → camion 2
+   🚛 TV 55 98A 66: 0kg → camion 2
+   🚛 CL 19 28 80: 0kg → camion 2
+   🚛 KR 46 152 46: 0kg → camion 2
+   🚛 KR 97 C 69 A - 08 SUR: 0kg → camion 2
+   🚛 CL 54F SUR 94 18: 0kg → camion 2
+   🚛 AV Boyaca 17A 23: 0kg → camion 2
+   🚛 KR 70 D 127 48: 0kg → camion 2
+   🚛 AK 86 # 55A - 75: 0kg → camion 2
+   🚛 CL 57A SUR 77K 91: 0kg → camion 2
+   🚛 AV. AMERICAS 62 84: 0kg → camion 2
+   🚛 AC 9 # 62 - 84: 0kg → camion 2
+   🚛 KR 7 138 33: 0kg → camion 2
+   🚛 DG 182 20 91: 0kg → camion 2
+   🚛 KR 58D 145 51 : 0kg → camion 2
+   🚛 AC 134 55 32: 0kg → camion 2
+   🚛 DG 57C Sur 62 60: 0kg → camion 2
+   🚛 KR 65 11 50: 0kg → camion 2
+   🚛 TV 71D 6 94 S: 0kg → camion 2
+   🚛 KR 103C 150C 07: 0kg → camion 2
+   🚛 TV 100A 80A 75: 0kg → camion 2
+   🚛 AK 58 137B 01: 0kg → camion 2
+   🚛 KR 68B 24 39: 0kg → camion 2
+   🚛 AK 19 122 49: 0kg → camion 2
+   🚛 CL 185 45 03: 0kg → camion 2
+   🚛 Calle 145 #91-34: 0kg → camion 2
+   🚛 AK 86 6 37: 0kg → camion 2
+   🚛 KR 95A 49C 80 S: 0kg → camion 2
+   🚛 AK 15 124 30: 0kg → camion 2
+   🚛 KR 111C 86 05: 0kg → camion 2
+   🚛 KR 15 78 33: 0kg → camion 2
+   🚛 KR 11 # 82 - 71: 0kg → camion 2
+   🚛 CL 26 68C 61: 0kg → camion 2
+   🚛 CL 28 13A 00: 0kg → camion 2
+   🚛 KR 32A 1H 06: 0kg → camion 2
+   🚛 KR 80 43 43 S: 0kg → camion 2
+   🚛 CL 38 S 94C 01: 0kg → camion 2
+   🚛 KR 4ABIS E 57 51: 0kg → camion 2
+   🚛 KR 74 42G 52 S: 0kg → camion 2
+   🚛 KR 6 45 09: 0kg → camion 2
+   🚛 AK 32 79: 0kg → camion 2
+   🚛 CL 80 10 43: 0kg → camion 2
+   🚛 AK 60 63 81: 0kg → camion 2
+   🚛 AV 68 49A 47: 0kg → camion 2
+   🚛 KR 71G 6D 22: 0kg → camion 2
+   🚛 CL 26 69C 03: 0kg → camion 2
+   🚛 CL 127A 53A 45: 0kg → camion 2
+   🚛 CL 33 S 52A 77: 0kg → camion 2
+   🚛 KR 68D 24A 51: 0kg → camion 2
+   🚛 KR 27 43 39: 0kg → camion 2
+   🚛 KR 18 143 39: 0kg → camion 2
+   🚛 AC 26 68B 01: 0kg → camion 2
+   🚛 KR 14 94 49: 0kg → camion 2
+   🚛 KR 45 176 31: 0kg → camion 2
+   🚛 KR 7 119 14: 0kg → camion 2
+   🚛 CL 45C 22 59: 0kg → camion 2
+   🚛 TV 78H 42C 10 S: 0kg → camion 2
+   🚛 CL 30 S 21 32: 0kg → camion 2
+   🚛 CL 22F 112 09: 0kg → camion 2
+   🚛 KR 27A 52 14: 0kg → camion 2
+   🚛 KR 47 94 06: 0kg → camion 2
+   🚛 KR 21 22 64 S: 0kg → camion 2
+   🚛 CL 44A S 68B 30: 0kg → camion 2
+   🚛 AC 26 59 00: 0kg → camion 2
+   🚛 AV Boyacá 142 A 55: 0kg → camion 2
+   🚛 CL 63 77 73: 0kg → camion 2
+   🚛 CL 139 94 55: 0kg → camion 2
+   🚛 CL 59B S 49B 23: 0kg → camion 2
+   🚛 DG 127 87 51: 0kg → camion 2
+   🚛 KR 3 12B 86: 0kg → camion 2
+   🚛 CL 46 13 04: 0kg → camion 2
+   🚛 KR 94 6C 30: 0kg → camion 2
+   🚛 CL 132 123A 12: 0kg → camion 2
+   🚛 CL 54C Sur 98B 6: 0kg → camion 2
+   🚛 AC 13 68F 25: 0kg → camion 2
+   🚛 AC 6 71C 29: 0kg → camion 2
+   🚛 CL 45C 22 02: 0kg → camion 2
+   🚛 CL 126A 7 48: 0kg → camion 2
+   🚛 KR 7A 151 80: 0kg → camion 2
+   🚛 AUTOPISTA NORTE 86 47: 0kg → camion 2
+   🚛 DG 42A 20 11: 0kg → camion 2
+   🚛 AC 222 55 09: 0kg → camion 2
+   🚛 CL 150C 103F 37: 0kg → camion 2
+   🚛 AC 80 83 40: 0kg → camion 2
+   🚛 KR 68 B 12 A 20: 0kg → camion 2
+   🚛 KR 45 246 A 45: 0kg → camion 2
+   🚛 KR 7 78 96: 0kg → camion 2
+   🚛 CL 94 15 45: 0kg → camion 2
+   🚛 CL 22F 112 09: 0kg → camion 2
+   🚛 CL 18A 28A 43: 0kg → camion 2
+   🚛 KR 15 106 73: 0kg → camion 2
+   🚛 AC 28 19B 11: 0kg → camion 2
+   🚛 AC 72 28A 28: 0kg → camion 2
+   🚛 Av. de las Amércias 51-39: 0kg → camion 2
+   🚛 AC 116 60 19: 0kg → camion 2
+   🚛 AK 30 15 82: 0kg → camion 2
+   🚛 Avenida Boyacá # 48 A 76: 0kg → camion 2
+   🚛 CL 63F 26 41: 0kg → camion 2
+   🚛 CL 14 S 28 16: 0kg → camion 2
+   🚛 CL 52 S 97C 35: 0kg → camion 2
+   🚛 Av. Guaymaral: 0kg → camion 2
+   🚛 AC 201 67 12: 0kg → camion 2
+   🚛 KR 68 D 80 77: 0kg → camion 2
+   🚛 KR 7 128 40 Barrio Bella Suiza: 0kg → camion 2
+   🚛 CL 202 56 50: 0kg → camion 2
+   🚛 AK 45 198 40: 0kg → camion 2
+   🚛 KR 12 6 25: 0kg → camion 2
+   🚛 KR 24 63C 69: 0kg → camion 2
+   🚛 TV 74 81C 05: 0kg → camion 2
+   🚛 KR 16 31A 30: 0kg → camion 2
+   🚛 KR 46 73A 48: 0kg → camion 2
+   🚛 k.m. 7 Vía San Juan de Sumapaz: 0kg → camion 2
+   🚛 KR 7 116 50: 0kg → camion 2
+   🚛 KR 28 8 96: 0kg → camion 2
+   🚛 CL 134 bis 19 05: 0kg → camion 2
+   🚛 CL 72 25  14: 0kg → camion 2
+   🚛 AK 72 73 A 31: 0kg → camion 2
+   🚛 KR 30 8 74: 0kg → camion 2
+   🚛 KR 56 4B 84: 0kg → camion 2
+   🚛 CL 33 S 52A 77: 0kg → camion 2
+   🚛 AC 80 111C 98: 0kg → camion 2
+   🚛 CL 167 48 55: 0kg → camion 2
+   🚛 KR 111C 86 05: 0kg → camion 2
+   🚛 AK 45 176 31: 0kg → camion 2
+   🚛 CL 63 24 45: 0kg → camion 2
+   🚛 CL 24A 24 34: 0kg → camion 2
+   🚛 AC 26 25 07: 0kg → camion 2
+   🚛 KR 15 74 22: 0kg → camion 2
+   🚛 CL 60 13A 19: 0kg → camion 2
+   🚛 CL 26 24 34: 0kg → camion 2
+   🚛 CL 67 10A 02: 0kg → camion 2
+   🚛 KR 45 97 80: 0kg → camion 2
+   🚛 KR 7 21 52: 0kg → camion 2
+   🚛 KR 80 53 20 S: 0kg → camion 2
+   🚛 AC 138 58 74: 0kg → camion 2
+   🚛 TV 76 131 90: 0kg → camion 2
+   🚛 KR 52 67A 30: 0kg → camion 2
+   🚛 CL 100 19A 13: 0kg → camion 2
+   🚛 CL 63 24 45: 0kg → camion 2
+   🚛 CL 4 S 68A 03: 0kg → camion 2
+   🚛 CL 37 S 78J 21: 0kg → camion 2
+   🚛 AV KR 1A # 76 A 04 SUR: 0kg → camion 2
+   🚛 CL 145B 91 35: 0kg → camion 2
+   🚛 AC 134 7B 83: 0kg → camion 2
+   🚛 KR 15 78 02: 0kg → camion 2
+   🚛 AC 72 69K 06: 0kg → camion 2
+   🚛 CL 19A 114 12: 0kg → camion 2
+   🚛 TV 24 53 22: 0kg → camion 2
+   🚛 CL 90 15 51: 0kg → camion 2
+   🚛 CL 26 S 93D 12: 0kg → camion 2
+   🚛 KR 13 49 55: 0kg → camion 2
+   🚛 KR 24 39B 23: 0kg → camion 2
+   🚛 AC 13 62 96: 0kg → camion 2
+   🚛 CL 67 7 35: 0kg → camion 2
+   🚛 KR 94K 80B 09: 0kg → camion 2
+   🚛 KR 15 108 09: 0kg → camion 2
+   🚛 KR 27 26 31: 0kg → camion 2
+   🚛 KR 13 2 56 S: 0kg → camion 2
+   🚛 KR 45 26 85: 0kg → camion 2
+   🚛 AC 147 7 70: 0kg → camion 2
+   🚛 KR 136 131B 05: 0kg → camion 2
+   🚛 KR 52C 47A 16 S: 0kg → camion 2
+   🚛 Autopista Sur Calle 38 A Sur 07: 0kg → camion 2
+   🚛 CL 58BIS S 79 30: 0kg → camion 2
+   🚛 CL 175 22 13: 0kg → camion 2
+   🚛 KR 68D 15 26: 0kg → camion 2
+   🚛 CL 53 10 39: 0kg → camion 2
+   🚛 CL 90C S 0 03: 0kg → camion 2
+   🚛 CL 5B 31 52: 0kg → camion 2
+   🚛 Autopista NORTE 94-72: 0kg → camion 2
+   🚛 KR 54 26 25: 0kg → camion 2
+   🚛 CL 36 # 28A - 41: 0kg → camion 2
+   🚛 AC 24 51 40: 0kg → camion 2
+   🚛 CL 159 54 42: 0kg → camion 2
+   🚛 KR 70C 80 48: 0kg → camion 2
+   🚛 CL 128B 60 57: 0kg → camion 2
+   🚛 CL 52 SUR # 97 - 68: 0kg → camion 2
+   🚛 KR 2 E 61 05: 0kg → camion 2
+   🚛 CL 60 S 68B 23: 0kg → camion 2
+   🚛 CL 134 72 31: 0kg → camion 2
+   🚛 KR 32A 26A 10: 0kg → camion 2
+   🚛 KR 16A 75 29: 0kg → camion 2
+   🚛 KR 69B 35 06 S: 0kg → camion 2
+   🚛 KR 19 143A 38: 0kg → camion 2
+   🚛 AK 80 2 51: 0kg → camion 2
+   🚛 KR 71D 1 14 S: 0kg → camion 2
+   🚛 KR 11A 90 16: 0kg → camion 2
+   🚛 AK 45 245 01: 0kg → camion 2
+   🚛 AC 9 50 15: 0kg → camion 2
+   🚛 CL 128 A 51 52: 0kg → camion 2
+   🚛 KR 14 A 71 29: 0kg → camion 2
+   🚛 AC 9 50 15: 0kg → camion 2
+   🚛 TV 53 70 40 Sur: 0kg → camion 2
+   🚛 AC 80 81 73: 0kg → camion 2
+   🚛 TV 73A 82 61: 0kg → camion 2
+   🚛 CL 86 19A 21: 0kg → camion 2
+   🚛 KR 17 14 18 Sur: 0kg → camion 2
+   🚛 AUTOPISTA NORTE # 108 A- 50: 0kg → camion 2
+   🚛 CL 16 6 66: 0kg → camion 2
+   🚛 CL 22 S 28 70: 0kg → camion 2
+   🚛 AC 72 25 28: 0kg → camion 2
+   🚛 KR 11 4 79: 0kg → camion 2
+   🚛 CL 32 SUR 26 F 27: 0kg → camion 2
+   🚛 CL 91 59 43: 0kg → camion 2
+   🚛 CL 36 Sur 51 90: 0kg → camion 2
+   🚛 CL 151 7B 02: 0kg → camion 2
+   🚛 CL 55 10 03: 0kg → camion 2
+   🚛 KR 9 16 21: 0kg → camion 2
+   🚛 AK 30 25 90: 0kg → camion 2
+   🚛 AK 129 22B 57: 0kg → camion 2
+   🚛 CL 26 102 20: 0kg → camion 2
+   🚛 KR 75A 62D 30 Sur: 0kg → camion 2
+   🚛 KR 114D 145 24: 0kg → camion 2
+   🚛 CL 42 Sur 24B 25: 0kg → camion 2
+   🚛 CL 152 54 39: 0kg → camion 2
+   🚛 KR 7 6C 54: 0kg → camion 2
+   🚛 KR 6 15 32: 0kg → camion 2
+   🚛 AV Américas 39A 11: 0kg → camion 2
+   🚛 DG 16 96I 78: 0kg → camion 2
+   🚛 CL 48B S 27 05: 0kg → camion 2
+   🚛 CL 14 65 08: 0kg → camion 2
+   🚛 CL 44 50 51: 0kg → camion 2
+   🚛 KR 7 52 48: 0kg → camion 2
+   🚛 KR 14 66 24: 0kg → camion 2
+   🚛 CL 70 51 31: 0kg → camion 2
+   🚛 AK 27 13 50: 0kg → camion 2
+   🚛 KR 7 52 48: 0kg → camion 2
+   🚛 CL 12B 26 50: 0kg → camion 2
+   🚛 CL 68 105F 16: 0kg → camion 2
+   🚛 CL 12B 26 50: 0kg → camion 2
+   🚛 CL 106 # 8A - 19: 0kg → camion 2
+   🚛 AC 100 61 48: 0kg → camion 2
+   🚛 KR 19C 26A 15 S: 0kg → camion 2
+   🚛 CL 63 18 19: 0kg → camion 2
+   🚛 DG 49 S 53 39: 0kg → camion 2
+   🚛 CL 65 S 78L 65: 0kg → camion 2
+   🚛 5 d 32 Cl 51 Sur: 0kg → camion 2
+   🚛 CL 121 6 37: 0kg → camion 2
+   🚛 CL 65J S 77K 24: 0kg → camion 2
+   🚛 CL 67 14A 46: 0kg → camion 2
+   🚛 KR 68 B BIS # 44 - 58: 0kg → camion 2
+   🚛 AC 116 70D 78: 0kg → camion 2
+   🚛 AUTOPISTA SUR # 51 D- 03: 0kg → camion 2
+   🚛 CL 48 14 90: 0kg → camion 2
+   🚛 AV.CIUDAD DE CALI 53-80 SUR: 0kg → camion 2
+   🚛 KR 34 6 57: 0kg → camion 2
+   🚛 AK 70 102 02: 0kg → camion 2
+   🚛 AK 96 70A 89: 0kg → camion 2
+   🚛 CL 70B 111 85: 0kg → camion 2
+   🚛 KR 19 76A 5 Sur: 0kg → camion 2
+   🚛 CL 188BIS 8C 15: 0kg → camion 2
+   🚛 CL 37B S 68F 17: 0kg → camion 2
+   🚛 CL 85 16A 29: 0kg → camion 2
+   🚛 KR 4BISA 32 19: 0kg → camion 2
+   🚛 KR 7 1D 12: 0kg → camion 2
+   🚛 CL 67 115A 30: 0kg → camion 2
+   🚛 CL 1F 33 65: 0kg → camion 2
+   🚛 KR 76 89B 19: 0kg → camion 2
+   🚛 CL 42A S 88F 12: 0kg → camion 2
+   🚛 AC 100 18A 00: 0kg → camion 2
+   🚛 AC 145 103B 69: 0kg → camion 2
+   🚛 KR 15 74 22: 0kg → camion 2
+   🚛 KR 73A 70 18: 0kg → camion 2
+   🚛 CL 122 18C 56: 0kg → camion 2
+   🚛 CL 72 9 25: 0kg → camion 2
+   🚛 CL 140 7C 50: 0kg → camion 2
+   🚛 CL 140 10A 71: 0kg → camion 2
+   🚛 AVENIDA KR 27 38A-83 SUR: 0kg → camion 2
+   🚛 KR 81H 53 21 S: 0kg → camion 2
+   🚛 AV 68 # 16 - 55: 0kg → camion 2
+   🚛 KR 7 118 38: 0kg → camion 2
+   🚛 CL 18 S 18 20: 0kg → camion 2
+   🚛 KR 7 112 32: 0kg → camion 2
+   🚛 KR 15 119 48: 0kg → camion 2
+   🚛 CL 1F 27 08: 0kg → camion 2
+   🚛 KR 21 169 62: 0kg → camion 2
+   🚛 CL 70 101 00: 0kg → camion 2
+   🚛 AV BOYACÁ # 163 - 31: 0kg → camion 2
+   🚛 CL 150 50 37: 0kg → camion 2
+   🚛 TV 127 137 16: 0kg → camion 2
+   🚛 CL 9D 69B 63: 0kg → camion 2
+   🚛 KR 112 64A 05: 0kg → camion 2
+   🚛 CL 172A 21A 18: 0kg → camion 2
+   🚛 KR 11 78 76: 0kg → camion 2
+   🚛 CL 8 S 68B 60: 0kg → camion 2
+   🚛 CL 147A 54 72: 0kg → camion 2
+   🚛 KR 8 127 18: 0kg → camion 2
+   🚛 AK 45 183A 86: 0kg → camion 2
+   🚛 KR 9 47 04: 0kg → camion 2
+   🚛 KR 19 104 37: 0kg → camion 2
+   🚛 AK 68D 23B 12: 0kg → camion 2
+   🚛 CL 75C 105F 09: 0kg → camion 2
+   🚛 TV 5 E 19 50 S: 0kg → camion 2
+   🚛 KR 81 8A 49: 0kg → camion 2
+   🚛 AK 19 22C 07: 0kg → camion 2
+   🚛 KR 99 155D 70: 0kg → camion 2
+   🚛 AK 70 77A 03: 0kg → camion 2
+   🚛 CL 4 16 64: 0kg → camion 2
+   🚛 TV 50 70 01 S: 0kg → camion 2
+   🚛 KR 111 143A 28: 0kg → camion 2
+   🚛 KR 17G 67A 51 S: 0kg → camion 2
+   🚛 KR 77A 64I 39: 0kg → camion 2
+   🚛 CL 65J S 64 12 S: 0kg → camion 2
+   🚛 KR 107 22 F 25: 0kg → camion 2
+   🚛 TV 60 127D 09: 0kg → camion 2
+   🚛 AC 116 19 36: 0kg → camion 2
+   🚛 CL 98 68 64: 0kg → camion 2
+   🚛 KR 13B 42 89 S: 0kg → camion 2
+   🚛 KR 7A 151 05: 0kg → camion 2
+   🚛 KR 101 71B 40: 0kg → camion 2
+   🚛 DG 58 S 29 54: 0kg → camion 2
+   🚛 AC 72 106A 06: 0kg → camion 2
+   🚛 AV P1 DE MAYO # 42C-10 SUR: 0kg → camion 2
+   🚛 DG 84A 82 56: 0kg → camion 2
+   🚛 CL 66A 97 38: 0kg → camion 2
+   🚛 CL 53 13 64: 0kg → camion 2
+   🚛 KR 13 12 19: 0kg → camion 2
+   🚛 KR 7 82 62: 0kg → camion 2
+   🚛 KR 68A 100 10: 0kg → camion 2
+   🚛 CL 57B S 80D 22: 0kg → camion 2
+   🚛 CL 65 S 80 05: 0kg → camion 2
+   🚛 KR 112A 75A 03: 0kg → camion 2
+   🚛 KR 91 136 04: 0kg → camion 2
+   🚛 KR 10 E 17B 46 S: 0kg → camion 2
+   🚛 KR 62 162A 20: 0kg → camion 2
+   🚛 AV AMERICAS 8 86: 0kg → camion 2
+   🚛 KR 71 17A 11: 0kg → camion 2
+   🚛 CL 58D S 51 10: 0kg → camion 2
+   🚛 CL175 B 23-73: 0kg → camion 2
+   🚛 CL 78B # 114A - 62: 0kg → camion 2
+   🚛 KR 87 49 12 S: 0kg → camion 2
+   🚛 KR 16 86B 65: 0kg → camion 2
+   🚛 CL 16 6 66: 0kg → camion 2
+   🚛 KR 10 27 05 S: 0kg → camion 2
+   🚛 KR 38 9 32: 0kg → camion 2
+   🚛 CL 28 13A 00: 0kg → camion 2
+   🚛 KR 7 74 09: 0kg → camion 2
+   🚛 CL 44 50 51: 0kg → camion 2
+   🚛 KR 78 17 57: 0kg → camion 2
+   🚛 AK 68 19 81: 0kg → camion 2
+   🚛 AC 134 7B 83: 0kg → camion 2
+   🚛 CL 73 8 13: 0kg → camion 2
+   🚛 AC 127 7A 47: 0kg → camion 2
+   🚛 AK 7 155C 20: 0kg → camion 2
+   🚛 AC 26 59 51: 0kg → camion 2
+   🚛 KR 9 17 84: 0kg → camion 2
+   🚛 CL 110 9 25: 0kg → camion 2
+   🚛 KR 14 99 33: 0kg → camion 2
+   🚛 AK 9 113 52: 0kg → camion 2
+   🚛 CL 81 13 05: 0kg → camion 2
+   🚛 AK 72 12D 60: 0kg → camion 2
+   🚛 KR 18 96 38: 0kg → camion 2
+   🚛 CL 82 11 75: 0kg → camion 2
+   🚛 AC 24 37 15: 0kg → camion 2
+   🚛 DG 57C Sur 64b 17: 0kg → camion 2
+   🚛 KR 69 98A 28: 0kg → camion 2
+   🚛 AC 28 # 19B - 11: 0kg → camion 2
+   🚛 AK 30 # 15 - 82: 0kg → camion 2
+   🚛 AC 9 # 50 - 15: 0kg → camion 2
+   🚛 AK 15 # 106 - 73: 0kg → camion 2
+   🚛 CL 63F # 26 - 49: 0kg → camion 2
+   🚛 CL 17 # 100 - 57: 0kg → camion 2
+   🚛 AC 72 # 28A - 28: 0kg → camion 2
+   🚛 AK 72 # 48A - 76: 0kg → camion 2
+   🚛 AC 116 # 60 - 19: 0kg → camion 2
+   🚛 AK 7 # 126 - 41: 0kg → camion 2
+   🚛 AK 116 22H 31: 0kg → camion 2
+   🚛 AK 45 205 59: 0kg → camion 2
+   🚛 AC 45A S 51B 24: 0kg → camion 2
+   🚛 CLL 80 58 00: 0kg → camion 2
+   🚛 CL 44 53 37: 0kg → camion 2
+   🚛 KR 58 9 81: 0kg → camion 2
+   🚛 KR 8 20 39: 0kg → camion 2
+   🚛 AK 68 17 64: 0kg → camion 2
+   🚛 CL 22A S 5A 34: 0kg → camion 2
+   🚛 AK 96 70A 00: 0kg → camion 2
+   🚛 AC 6 # 68A - 94: 0kg → camion 2
+   🚛 CL 65 S 78H 50: 0kg → camion 2
+   🚛 CL 58BIS S 79 30: 0kg → camion 2
+   🚛 CL 52 13 70: 0kg → camion 2
+   🚛 CL 40A S 24B 31: 0kg → camion 2
+   🚛 AC 134 9 51: 0kg → camion 2
+   🚛 AK 68 90 88: 0kg → camion 2
+   🚛 Av Centenario # 106-104: 0kg → camion 2
+   🚛 KR 22 62 49: 0kg → camion 2
+   🚛 AK 72 146B 00: 0kg → camion 2
+   🚛 KR 75 A 23 F - 30: 0kg → camion 2
+   🚛 CL 175 22 13: 0kg → camion 2
+   🚛 TV 81 34A 53 S: 0kg → camion 2
+   🚛 AK 114 79B 00: 0kg → camion 2
+   🚛 KR 19 14 17 S: 0kg → camion 2
+   🚛 KR 11 140 04: 0kg → camion 2
+   🚛 CL 58BIS S 79 30: 0kg → camion 2
+   🚛 CL 125BIS 20 23: 0kg → camion 2
+   🚛 AC 127 60 26: 0kg → camion 2
+   🚛 TV 61 98A 06: 0kg → camion 2
+   🚛 CL 63 7 09: 0kg → camion 2
+   🚛 CL 58BIS S 79 30: 0kg → camion 2
+   🚛 KR 10A 70 37: 0kg → camion 2
+   🚛 AK 72 152B 60: 0kg → camion 2
+   🚛 KR 11 76 19: 0kg → camion 2
+   🚛 KR 17 151 44: 0kg → camion 2
+   🚛 CL 110 9 60: 0kg → camion 2
+   🚛 KR 22 101 16: 0kg → camion 2
+   🚛 KR 15 114A 33: 0kg → camion 2
+   🚛 CL 9 32 84: 0kg → camion 2
+   🚛 AC 145 104 00: 0kg → camion 2
+   🚛 KR 6 65D 58 S: 0kg → camion 2
+   🚛 AUTOPISTA SUR CON 38 A SUR: 0kg → camion 2
+   🚛 CL 38 A SUR 34D 51 : 0kg → camion 2
+   🚛 TV 99 70A 89 : 0kg → camion 2
+   🚛 CL 53 25 30 : 0kg → camion 2
+   🚛 CL 20 82 52 : 0kg → camion 2
+   🚛 CL 19 A 72 57 : 0kg → camion 2
+   🚛 KR 65 11 50 : 0kg → camion 2
+   🚛 AK 104 148 07: 0kg → camion 2
+   🚛 CL 185 45 03: 0kg → camion 2
+   🚛 AK 72 80 94: 0kg → camion 2
+   🚛 AK 15 123 30: 0kg → camion 2
+   🚛 CL 99 11A 32: 0kg → camion 2
+   🚛 KR 13 31F 02 S: 0kg → camion 2
+   🚛 KR 105 64D 05: 0kg → camion 2
+   🚛 CL 17 98 05: 0kg → camion 2
+   🚛 KR 12A 77 34: 0kg → camion 2
+   🚛 TV 3C 49 02: 0kg → camion 2
+   🚛 KR 67A 42 28: 0kg → camion 2
+   🚛 CL 8 S 32B 20: 0kg → camion 2
+   🚛 TV 3C 49 02: 0kg → camion 2
+   🚛 CL 64 93 11: 0kg → camion 2
+   🚛 KR 14 94 65: 0kg → camion 2
+   🚛 KR 54 50A 26 S: 0kg → camion 2
+   🚛 KR 43A 20B 07: 0kg → camion 2
+   🚛 KR 40 1H 24: 0kg → camion 2
+   🚛 KR 90 23J 22: 0kg → camion 2
+   🚛 CL 167 73 02: 0kg → camion 2
+   🚛 CL 100 11 59: 0kg → camion 2
+   🚛 AC 127 17A 19: 0kg → camion 2
+   🚛 KR 11 138 18: 0kg → camion 2
+   🚛 CL 140 13 27: 0kg → camion 2
+   🚛 KR 13 27 08 S: 0kg → camion 2
+   🚛 AC 138 59A 98: 0kg → camion 2
+   🚛 KR 21 98 81: 0kg → camion 2
+   🚛 AC 53 20 08: 0kg → camion 2
+   🚛 KR 19 103 98: 0kg → camion 2
+   🚛 CL 73 11 12: 0kg → camion 2
+   🚛 CL 53 72 49: 0kg → camion 2
+   🚛 KR 15 94 72: 0kg → camion 2
+   🚛 KR 15 106 18: 0kg → camion 2
+   🚛 AC 24 59 20: 0kg → camion 2
+   🚛 CL 154A 94 91: 0kg → camion 2
+   🚛 CL 163 8F 57: 0kg → camion 2
+   🚛 CL 156 8F 40: 0kg → camion 2
+   🚛 CL 76 27A 04: 0kg → camion 2
+   🚛 KR 14 1 85 S: 0kg → camion 2
+   🚛 AV 68 94 88: 0kg → camion 2
+   🚛 CL 72 9 23: 0kg → camion 2
+   🚛 CL 140 18A 70: 0kg → camion 2
+   🚛 KR 7 155C 20: 0kg → camion 2
+   🚛 TV 93 63 76: 0kg → camion 2
+   🚛 Autopista Sur 66 78: 0kg → camion 2
+   🚛 No registra: 0kg → camion 2
+   🚛 DG 115A 70C 75: 0kg → camion 2
+   🚛 CL 163A 13B 60: 0kg → camion 2
+   🚛 DG 115A 70C 06: 0kg → camion 2
+   🚛 AK 14 # 70A - 85: 0kg → camion 2
+   🚛 Guaymaral lote 2 puente el otoño la lomita: 0kg → camion 2
+   🚛 CL 23 83 94: 0kg → camion 2
+   🚛 KR 9 74 99: 0kg → camion 2
+   🚛 AC 170 54A 10: 0kg → camion 2
+   🚛 KR 14A 69 35: 0kg → camion 2
+   🚛 KR 17 25 25: 0kg → camion 2
+   🚛 KR 14 63 13 S: 0kg → camion 2
+   🚛 AK 86 86 43 SUR: 0kg → camion 2
+   🚛 KR 10A: 0kg → camion 2
+   🚛 AUTOPISTA SUR 73: 0kg → camion 2
+   🚛 AC 145 104: 0kg → camion 2
+   🚛 AC 26 66 63: 0kg → camion 2
+   🚛 AC 13 27: 0kg → camion 2
+   🚛 KR 10 31 29 S: 0kg → camion 2
+   🚛 CL 5C 53D 05: 0kg → camion 2
+   🚛 CL 72 5 38: 0kg → camion 2
+   🚛 KR 7 156 10: 0kg → camion 2
+   🚛 AK 72 80 94: 0kg → camion 2
+   🚛 AV 56A Sur 33 09: 0kg → camion 2
+   🚛 TV 23 97 73: 0kg → camion 2
+   🚛 CL 100 13 21: 0kg → camion 2
+   🚛 Aeropuerto Guaymaral, Costado Sur Occidental: 0kg → camion 2
+   🚛 AC 26 69B 53: 0kg → camion 2
+   🚛 CL 18 68D 72: 0kg → camion 2
+   🚛 CL 56A S 36A 09: 0kg → camion 2
+   🚛 AC 26 51 53: 0kg → camion 2
+   🚛 CL 93 16 20: 0kg → camion 2
+   🚛 CL 17F 126 70: 0kg → camion 2
+   🚛 CL 20 82 52: 0kg → camion 2
+   🚛 CL 36 S 74 31: 0kg → camion 2
+   🚛 CL 31 13A 51: 0kg → camion 2
+   🚛 KR 29C 18 45 Sur: 0kg → camion 2
+   🚛 KR 33 19 60: 0kg → camion 2
+   🚛 TV 93 53 48: 0kg → camion 2
+   🚛 KR 106 131 57: 0kg → camion 2
+   🚛 KR 14B 160 42: 0kg → camion 2
+   🚛 KR 54 44 21: 0kg → camion 2
+   🚛 CL 45 174 B 45: 0kg → camion 2
+   🚛 AK 68 37 37 S: 0kg → camion 2
+   🚛 CL 22 27 49: 0kg → camion 2
+   🚛 AK 145 175 50: 0kg → camion 2
+   🚛 AK 68 80 77: 0kg → camion 2
+   🚛 CL 152 9 08: 0kg → camion 2
+   🚛 CL 50 82 55: 0kg → camion 2
+   🚛 KR 103C 150C 07: 0kg → camion 2
+   🚛 CL 10 86 58: 0kg → camion 2
+   🚛 CL 127D 45 81: 0kg → camion 2
+   🚛 Avenida KR 68 con CL 66: 0kg → camion 2
+   🚛 CL 10 # 18 - 75: 0kg → camion 2
+   🚛 TV 36 59B 59 S: 0kg → camion 2
+   🚛 CL 100 18A 30: 0kg → camion 2
+   🚛 CL 65 108 84: 0kg → camion 2
+   🚛 KR 76 75B 03: 0kg → camion 2
+   🚛 KR 3 18 32: 0kg → camion 2
+   🚛 KR 21 70A 39: 0kg → camion 2
+   🚛 KR 37 52 02 S: 0kg → camion 2
+   🚛 CL 76 13 52: 0kg → camion 2
+   🚛 CL 77 13 35: 0kg → camion 2
+   🚛 AK 45 122 68: 0kg → camion 2
+   🚛 CL 61 7 78: 0kg → camion 2
+   🚛 AC 57R S 67 59: 0kg → camion 2
+   🚛 CL 15A 69 73: 0kg → camion 2
+   🚛 KR 49D 91 56: 0kg → camion 2
+   🚛 CL 28A 15 09: 0kg → camion 2
+   🚛 KR 50C 38 08 SUR: 0kg → camion 2
+   🚛 KR 28 42 42: 0kg → camion 2
+   🚛 AC 26 85B 09: 0kg → camion 2
+   🚛 KR 47 91 74: 0kg → camion 2
+   🚛 AC 26 69 01: 0kg → camion 2
+   🚛 KR 106A 66A 06: 0kg → camion 2
+   🚛 DG 47 77A 09: 0kg → camion 2
+   🚛 Avenida Boyaca # 62 - 30 sur: 0kg → camion 2
+   🚛 KR 107 70 58: 0kg → camion 2
+   🚛 KR 25A 10 78: 0kg → camion 2
+   🚛 CL 27A S 13 51: 0kg → camion 2
+   🚛 KR 12D 22 80 S: 0kg → camion 2
+   🚛 KR 17D BIS 4A 54 SUR: 0kg → camion 2
+   🚛 KR 7 22 47: 0kg → camion 2
+   🚛 KR 3 19 10: 0kg → camion 2
+   🚛 CL 18 1 07: 0kg → camion 2
+   🚛 CL 7 36 05: 0kg → camion 2
+   🚛 AC 8 S 36 21: 0kg → camion 2
+   🚛 KR 44 20A 42: 0kg → camion 2
+   🚛 KR 3D 100 45 S: 0kg → camion 2
+   🚛 CL 70A S 80I 15: 0kg → camion 2
+   🚛 CL 68 S 78H 37: 0kg → camion 2
+   🚛 KR 75 8B 89: 0kg → camion 2
+   🚛 AV BOYACÁ 43A 62: 0kg → camion 2
+   🚛 AC 55 S 79G 09: 0kg → camion 2
+   🚛 CL 20C 96C 51: 0kg → camion 2
+   🚛 CL 23G 111 16: 0kg → camion 2
+   🚛 CL 78 77B 86: 0kg → camion 2
+   🚛 CL 146B 91 44: 0kg → camion 2
+   🚛 CL 146A 94A 05: 0kg → camion 2
+   🚛 KR 28A 77 70: 0kg → camion 2
+   🚛 KR 55 75 40: 0kg → camion 2
+   🚛 CL 19 2A 20: 0kg → camion 2
+   🚛 CL 23 5 93: 0kg → camion 2
+   🚛 KR 8 15 46: 0kg → camion 2
+   🚛 AK 30 48 51: 0kg → camion 2
+   🚛 CL 1 9 50: 0kg → camion 2
+   🚛 AC 26 51 20: 0kg → camion 2
+   🚛 KR 89A 64C 30: 0kg → camion 2
+   🚛 AC 127 11 20: 0kg → camion 2
+   🚛 KR 12D  26A - 62 Sur: 0kg → camion 2
+   🚛 CL 75 69 H 05: 0kg → camion 2
+   🚛 CL 10 86 58 : 0kg → camion 2
+   🚛 AK 50 17 15: 0kg → camion 2
+   🚛 CL 22B 30 32: 0kg → camion 2
+   🚛 AvenidaCaracas 64-23 Sur: 0kg → camion 2
+   🚛 CL 93B 15 31: 0kg → camion 2
+   🚛 KR 25 39A 75: 0kg → camion 2
+   🚛 KR 10 64 28: 0kg → camion 2
+   🚛 AUTOPISTA NORTE 103B - 35: 0kg → camion 2
+   🚛 AV. CIUDAD DE CALI KR 86 37 - 08 SUR: 0kg → camion 2
+   🚛 AV 63 68 95: 0kg → camion 2
+   🚛 AK 50 18 06 S: 0kg → camion 2
+   🚛 CL 142 104 60: 0kg → camion 2
+   🚛 KR 78B 76A 4 Sur: 0kg → camion 2
+   🚛 CL 163B 50 80: 0kg → camion 2
+   🚛 KR 49 132 2: 0kg → camion 2
+   🚛 CL 30C Sur 1 52 Este: 0kg → camion 2
+   🚛 CL 30C Sur 1 52 Este: 0kg → camion 2
+   🚛 CL 170 69 47: 0kg → camion 2
+   🚛 DG 80 69Q 50: 0kg → camion 2
+   🚛 KR 32 17B 04: 0kg → camion 2
+   🚛 AC 146A 106 20: 0kg → camion 2
+   🚛 KR 32 17B 04: 0kg → camion 2
+   🚛 AK 86 19A 50: 0kg → camion 2
+   🚛 KR 7 63 44: 0kg → camion 2
+   🚛 AC 13 69 64: 0kg → camion 2
+   🚛 KR 7 128 40: 0kg → camion 2
+   🚛 KR 15 94 07: 0kg → camion 2
+   🚛 KR 68B 25B 80: 0kg → camion 2
+   🚛 TV 91 135 56: 0kg → camion 2
+   🚛 AK 122 15 59: 0kg → camion 2
+   🚛 KR 65B 17 59: 0kg → camion 2
+   🚛 AK 39 19 68: 0kg → camion 2
+   🚛 CL 71C 29B 07: 0kg → camion 2
+   🚛 AC 63 16A 21: 0kg → camion 2
+   🚛 KR 16A 160 42: 0kg → camion 2
+   🚛 CL 100 17A 36: 0kg → camion 2
+   🚛 CL 113 7 21: 0kg → camion 2
+   🚛 KR 51 96 11: 0kg → camion 2
+   🚛 TV 23 97 73: 0kg → camion 2
+   🚛 CL 110 9 25: 0kg → camion 2
+   🚛 KR 19B 168 16: 0kg → camion 2
+   🚛 KR 106 15A 25: 0kg → camion 2
+   🚛 AV 68 # 37 B - 31 SUR: 0kg → camion 2
+   🚛 CL 18A 28A 43: 0kg → camion 2
+   🚛 CL 36 S 4B 30: 0kg → camion 2
+   🚛 CL 17 42 09: 0kg → camion 2
+   🚛 CL 19 68B 50: 0kg → camion 2
+   🚛 CL 17 34 64: 0kg → camion 2
+   🚛 KR 14 10 45 S: 0kg → camion 2
+   🚛 TV 55 95 66: 0kg → camion 2
+   🚛 KR 44 20C 73: 0kg → camion 2
+   🚛 KR 19B 168 16: 0kg → camion 2
+   🚛 CL 30C 3A 36: 0kg → camion 2
+   🚛 KR 34 17B 13: 0kg → camion 2
+   🚛 KR 17 163A 23: 0kg → camion 2
+   🚛 CL 108 51 45: 0kg → camion 2
+   🚛 KR 15 80 88: 0kg → camion 2
+   🚛 CL 13 42 10: 0kg → camion 2
+   🚛 AK 97 22A 52: 0kg → camion 2
+   🚛 CL 98 17 20: 0kg → camion 2
+   🚛 TV 73D 39A 95 S: 0kg → camion 2
+   🚛 CL 72 68H 19: 0kg → camion 2
+   🚛 TV 60 122 03: 0kg → camion 2
+   🚛 CL 65 S 80A 27: 0kg → camion 2
+   🚛 KR 20 78 42: 0kg → camion 2
+   🚛 CL 139 126: 0kg → camion 2
+   🚛 AC 100 47A 79: 0kg → camion 2
+   🚛 KR 19 45 04: 0kg → camion 2
+   🚛 KR 13 38 41: 0kg → camion 2
+   🚛 KR 7 124 15: 0kg → camion 2
+   🚛 CL 174A 45 24: 0kg → camion 2
+   🚛 KR 58 94B 06: 0kg → camion 2
+   🚛 AK 30 2B 53: 0kg → camion 2
+   🚛 CL 129B 92B 11: 0kg → camion 2
+   🚛 CL 134A 91 03: 0kg → camion 2
+   🚛 KR 53 50 02 S: 0kg → camion 2
+   🚛 KR 16 95 70: 0kg → camion 2
+   🚛 TV 55 # 97 - 65: 0kg → camion 2
+   🚛 KR 69F 63 01: 0kg → camion 2
+   🚛 TV 55 97 35: 0kg → camion 2
+   🚛 CL 78 69 50: 0kg → camion 2
+   🚛 KR 32 17B 04: 0kg → camion 2
+   🚛 CL 17 120 60: 0kg → camion 2
+   🚛 AK 86 26 48 S: 0kg → camion 2
+   🚛 AK 30 63C 72: 0kg → camion 2
+   🚛 CL 170 69 47: 0kg → camion 2
+   🚛 AC 13 53 16: 0kg → camion 2
+   🚛 AC 80 # 69Q - 50: 0kg → camion 2
+   🚛 AK 19 # 30 - 71: 0kg → camion 2
+   🚛 KR 14 134A 65: 0kg → camion 2
+   🚛 CL 67 5 27: 0kg → camion 2
+   🚛 CL 99 # 14 - 49: 0kg → camion 2
+   🚛 CL 72 10 07: 0kg → camion 2
+   🚛 CL 12B 36 81: 0kg → camion 2
+   🚛 DG 7 # 38 - 37: 0kg → camion 2
+   🚛 DG 7 38 37: 0kg → camion 2
+   🚛 KR 9 139 47: 0kg → camion 2
+   🚛 KR 13 51 57: 0kg → camion 2
+   🚛 KR 7 115 60: 0kg → camion 2
+   🚛 KR 18 17 27 S: 0kg → camion 2
+   🚛 AK 45 114 78: 0kg → camion 2
+   🚛 CL 69 Sur 87B 42: 0kg → camion 2
+   🚛 KR 7B BIS 155A 45: 0kg → camion 2
+   🚛 CL 97 A Sur 8 70: 0kg → camion 2
+   🚛 AK 72 81B 13: 0kg → camion 2
+   🚛 AK 45 192 18: 0kg → camion 2
+   🚛 AC 9 65 09: 0kg → camion 2
+   🚛 KR 63 57G 00 S: 0kg → camion 2
+   🚛 KR 63 57G 74 S: 0kg → camion 2
+   🚛 CL 42B Sur 7 32 Este: 0kg → camion 2
+   🚛 CL 7 Sur 10 86: 0kg → camion 2
+   🚛 KR 19 76A 23 Sur: 0kg → camion 2
+   🚛 CL 74A 114A 30: 0kg → camion 2
+   🚛 KR 98B 71 49 Sur: 0kg → camion 2
+   🚛 AC 26 59 00: 0kg → camion 2
+   🚛 KR 69T 80 25: 0kg → camion 2
+   🚛 CL 53 D sur 5 A 36: 0kg → camion 2
+   🚛 CL 49 S 72C 30: 0kg → camion 2
+   🚛 CL 98 70 90: 0kg → camion 2
+   🚛 CL 83 16A 44: 0kg → camion 2
+   🚛 CL 5C 78H 03: 0kg → camion 2
+   🚛 CL 70 77C 05: 0kg → camion 2
+   🚛 AV BOYACA # 142 A - 55: 0kg → camion 2
+   🚛 TV 78J 41 70 S: 0kg → camion 2
+   🚛 KR 14B 0 61 S: 0kg → camion 2
+   🚛 KR 20 # 194 - 78: 0kg → camion 2
+   🚛 CL 10 65 28: 0kg → camion 2
+   🚛 KR 9 101 67: 0kg → camion 2
+   🚛 CL 127A 53A 45: 0kg → camion 2
+   🚛 Avenida Centenario # 116 - 40: 0kg → camion 2
+   🚛 AC 17 86 75: 0kg → camion 2
+   🚛 KR 10 30B 20 S: 0kg → camion 2
+   🚛 Autopista Sur 77A 18: 0kg → camion 2
+   🚛 Cl 6 A #78-68: 0kg → camion 2
+   🚛 KR 92 60 90 S: 0kg → camion 2
+   🚛 TV 55 98 A 66: 0kg → camion 2
+   🚛 KR 15B 112 58: 0kg → camion 2
+   🚛 AK 68 75A 50: 0kg → camion 2
+   🚛 CL 46A 85A 51: 0kg → camion 2
+   🚛 Autopista Sur # 71 - 75: 0kg → camion 2
+   🚛 AK 86 42B 01 S: 0kg → camion 2
+   🚛 CL 28 13A 00: 0kg → camion 2
+   🚛 CL 43 57 14: 0kg → camion 2
+   🚛 AC 26 69 01: 0kg → camion 2
+   🚛 KR 8 6C 38: 0kg → camion 2
+   🚛 CL 10 S 12B 31: 0kg → camion 2
+   🚛 CL 38 8 61: 0kg → camion 2
+   🚛 KR 6 9 46: 0kg → camion 2
+   🚛 KR 13 32 76: 0kg → camion 2
+   🚛 CL 16 16 68: 0kg → camion 2
+   🚛 CL 69B 105F 39: 0kg → camion 2
+   🚛 KR 3A BIS 3A 49: 0kg → camion 2
+   🚛 DG 68D Sur 70C 31: 0kg → camion 2
+   🚛 DG 26 S 35 31: 0kg → camion 2
+   🚛 AC 100 60D 35: 0kg → camion 2
+   🚛 CL 22 S 29A 50: 0kg → camion 2
+   🚛 CL 130A 104 06: 0kg → camion 2
+   🚛 AC 145 94D 30: 0kg → camion 2
+   🚛 Boyacá # 68 B 71: 0kg → camion 2
+   🚛 CL 98 68C 06: 0kg → camion 2
+   🚛 CL 17F 126 70: 0kg → camion 2
+   🚛 DG 23 69 00: 0kg → camion 2
+   🚛 KR 21 195 08: 0kg → camion 2
+   🚛 KR 7 28 66: 0kg → camion 2
+   🚛 KR 32 25B 90: 0kg → camion 2
+   🚛 KR 20 194 78: 0kg → camion 2
+   🚛 CL 93B 16 31: 0kg → camion 2
+   🚛 CL 19 68A 45: 0kg → camion 2
+   🚛 CL 12 79A 25: 0kg → camion 2
+   🚛 KR 116 19A 51: 0kg → camion 2
+   🚛 KR 7 8 68: 0kg → camion 2
+   🚛 CL 9 39 46: 0kg → camion 2
+   🚛 KR 7 155C 22 piso 37 y 38: 0kg → camion 2
+   🚛 CL 72 10 34: 0kg → camion 2
+   🚛 KR 78p 42c 66sur : 0kg → camion 2
+   🚛 AC 100 45 81: 0kg → camion 2
+   🚛 KR 24 63 55: 0kg → camion 2
+   🚛 KR 4 18 42: 0kg → camion 2
+   🚛 TV 86B 60 58 S: 0kg → camion 2
+   🚛 AK 58 169A 55: 0kg → camion 2
+   🚛 CL 67 10 06: 0kg → camion 2
+   🚛 AK 30 22C 10: 0kg → camion 2
+   🚛 AC 63 16 02: 0kg → camion 2
+   🚛 KR 15 97 25: 0kg → camion 2
+   🚛 CL 64 11 10: 0kg → camion 2
+   🚛 KR 74 38 10 S: 0kg → camion 2
+   🚛 CL 35 # 80 - 35: 0kg → camion 2
+   🚛 AC 127 13A 74: 0kg → camion 2
+   🚛 CL 44 50 52: 0kg → camion 2
+   🚛 CL 70A S 44 20: 0kg → camion 2
+   🚛 AVENIDA BOYACÁ 53 - 12: 0kg → camion 2
+   🚛 TV 64 A 26 50 Sur: 0kg → camion 2
+   🚛 AC 80 100 52: 0kg → camion 2
+   🚛 KR 10 11 34 S: 0kg → camion 2
+   🚛 CL 16 S 16 03: 0kg → camion 2
+   🚛 CL 10 27 56: 0kg → camion 2
+   🚛 AK 30 2B 53: 0kg → camion 2
+   🚛 AC 145 91 19: 0kg → camion 2
+   🚛 KR 10 11 34 S: 0kg → camion 2
+   🚛 CL 46 S 21 56: 0kg → camion 2
+   🚛 Av. Boyacá # 49 a sur 44: 0kg → camion 2
+   🚛 CL 12B 71D 61: 0kg → camion 2
+   🚛 KR 14 79 71: 0kg → camion 2
+   🚛 CL 21 42 81: 0kg → camion 2
+   🚛 CL 59C S 51 21: 0kg → camion 2
+   🚛 CL 65 S 78H 51: 0kg → camion 2
+   🚛 DG 24C 96B 65: 0kg → camion 2
+   🚛 AK 45 168 30: 0kg → camion 2
+   🚛 KR 38A 34D 50 SUR: 0kg → camion 2
+   🚛 CL 113 7 21: 0kg → camion 2
+   🚛 CL 138 55 53: 0kg → camion 2
+   🚛 Carrera 3 Este No. 50 - 00 Sur: 0kg → camion 2
+   🚛 KR 84C 145 50: 0kg → camion 2
+   🚛 Av. Caracas 9-48: 0kg → camion 2
+   🚛 CL 74 11 81: 0kg → camion 2
+   🚛 CL 9 8 79: 0kg → camion 2
+   🚛 TV 18JBISB 71 75 S: 0kg → camion 2
+   🚛 CL 110 9 25: 0kg → camion 2
+   🚛 AC 26 59 70: 0kg → camion 2
+   🚛 CL 25G 74B 51: 0kg → camion 2
+   🚛 KR 65B 13 13: 0kg → camion 2
+   🚛 AK 36 11A 54: 0kg → camion 2
+   🚛 KR 14 6 04 S: 0kg → camion 2
+   🚛 CL 165 8A 43: 0kg → camion 2
+   🚛 CL 22F 103 09: 0kg → camion 2
+   🚛 KR 7 34 86: 0kg → camion 2
+   🚛 KR 33 48C 02 S: 0kg → camion 2
+   🚛 KR 2 56 40: 0kg → camion 2
+   🚛 KR 5 29 01 S: 0kg → camion 2
+   🚛 AV 1 de mayo 1 90 este: 0kg → camion 2
+   🚛 Av. Boyaca 142 A - 55: 0kg → camion 2
+   🚛 AV usme 96a 97 sur: 0kg → camion 2
+   🚛 KR 33 48C 02 S: 0kg → camion 2
+   🚛 CL 68B S 77 23: 0kg → camion 2
+   🚛 CL 41D S 78N 05: 0kg → camion 2
+   🚛 KR 98 16B 50: 0kg → camion 2
+   🚛 KR 78A 70 54: 0kg → camion 2
+   🚛 KR 92 146 02: 0kg → camion 2
+   🚛 CL 72 62 81: 0kg → camion 2
+   🚛 KR 13 40A 26: 0kg → camion 2
+   🚛 KR 24 12 32: 0kg → camion 2
+   🚛 AC 45A S 50A 10: 0kg → camion 2
+   🚛 KR 24 18 90 S: 0kg → camion 2
+   🚛 KR 39 10 08: 0kg → camion 2
+   🚛 KR 7 6A 12: 0kg → camion 2
+   🚛 CL 19 S 24C 51: 0kg → camion 2
+   🚛 DG 70 S 54 05: 0kg → camion 2
+   🚛 DG 23 69 00: 0kg → camion 2
+   🚛 CL 27 S 5 55: 0kg → camion 2
+   🚛 KR 20 22 31 S: 0kg → camion 2
+   🚛 KR 123 14A 11: 0kg → camion 2
+   🚛 AC 8 S 40 62: 0kg → camion 2
+   🚛 CL 7 # 6 - 54: 0kg → camion 2
+   🚛 KR 8 167D 88: 0kg → camion 2
+   🚛 AC 26 71A 16: 0kg → camion 2
+   🚛 CL 18 # 68D - 37: 0kg → camion 2
+   🚛 KR 5 15 50 Piso 3: 0kg → camion 2
+   🚛 KR 44 20 21: 0kg → camion 2
+   🚛 CL 34 14 52: 0kg → camion 2
+   🚛 CL 11A 34 50: 0kg → camion 2
+   🚛 KR 13 60 67: 0kg → camion 2
+   🚛 CL 7 6 70: 0kg → camion 2
+   🚛 CL 147 101 56: 0kg → camion 2
+   🚛 CL 51 74B 23: 0kg → camion 2
+   🚛 KR 11 82 01: 0kg → camion 2
+   🚛 KR 55B 79B 40: 0kg → camion 2
+   🚛 CL 37 13A 19: 0kg → camion 2
+   🚛 AC 9 65 09: 0kg → camion 2
+   🚛 KR 4 18 72: 0kg → camion 2
+   🚛 KR 24 15 04 S: 0kg → camion 2
+   🚛 AV 1 MAYO 18 - 03 SUR: 0kg → camion 2
+   🚛 AVENIDA USME KR 1 76 A- 22 SUR: 0kg → camion 2
+   🚛 KR 7 29 18: 0kg → camion 2
+   🚛 CL 175 # 22 - 13: 0kg → camion 2
+   🚛 KR 59A # 79 - 30: 0kg → camion 2
+   🚛 CL 38A Sur # 34D - 50: 0kg → camion 2
+   🚛 AC 26 51 50: 0kg → camion 2
+   🚛 Avenida Américas # 64 - 89: 0kg → camion 2
+   🚛 KR 10 80 01: 0kg → camion 2
+   🚛 KR 13 50 01: 0kg → camion 2
+   🚛 AC 61 Sur 20B 60: 0kg → camion 2
+   🚛 TV 26 57 29: 0kg → camion 2
+   🚛 TV 70 A 71 35 : 0kg → camion 2
+   🚛 KR 31A 7 67: 0kg → camion 2
+   🚛 TV 17 25 25: 0kg → camion 2
+   🚛 AK 9 110 50: 0kg → camion 2
+   🚛 CL 63 A # 16 A 55: 0kg → camion 2
+   🚛 KR 71B 69G 36: 0kg → camion 2
+   🚛 AC 26 66 63: 0kg → camion 2
+   🚛 AK 30 # 25 - 90: 0kg → camion 2
+   🚛 AC 26 69 01: 0kg → camion 2
+   🚛 AK 14 54 38: 0kg → camion 2
+   🚛 KR 3 ESTE 50 B 00: 0kg → camion 2
+   🚛 KR 76 75B 03: 0kg → camion 2
+   🚛 KR 84C 145 50: 0kg → camion 2
+   🚛 KR 8 9 83: 0kg → camion 2
+   🚛 KR 60 # 63A - 52: 0kg → camion 2
+   🚛 KR 69L 63A 52: 0kg → camion 2
+   🚛 CL 11 8 17: 0kg → camion 2
+   🚛 CL 52 13 64: 0kg → camion 2
+   🚛 KR 100 52 -24 SUR: 0kg → camion 2
+   🚛 CL 13 37 35: 0kg → camion 2
+   🚛 KR 32 12 81: 0kg → camion 2
+   🚛 KR 8 10 65: 0kg → camion 2
+   🚛 CL 53 10 60: 0kg → camion 2
+   🚛 KR 19 98 03: 0kg → camion 2
+   🚛 KR 98 16H 60: 0kg → camion 2
+   🚛 AK 7 - Cl 220: 0kg → camion 2
+   🚛 CL 15 31 42: 0kg → camion 2
+   🚛 KR 45 26 29: 0kg → camion 2
+   🚛 KR 7 67 28: 0kg → camion 2
+   🚛 KR 45A 130 34: 0kg → camion 2
+   🚛 CL 27 S 19 02: 0kg → camion 2
+   🚛 AK 20 89A 21: 0kg → camion 2
+   🚛 AC 145 92 30: 0kg → camion 2
+   🚛 CL 3 27 36: 0kg → camion 2
+   🚛 CL 1B 28 05: 0kg → camion 2
+   🚛 CL 65 S 78F 01: 0kg → camion 2
+   🚛 KR 7 56 29: 0kg → camion 2
+   🚛 KR 24 62 50: 0kg → camion 2
+   🚛 KR 82B 53B 06 S: 0kg → camion 2
+   🚛 KR 20 78 30: 0kg → camion 2
+   🚛 CL 35A S 78K 17: 0kg → camion 2
+   🚛 AC 127 70D 85: 0kg → camion 2
+   🚛 TV 21A 21A 34 S: 0kg → camion 2
+   🚛 KR 7 123 65: 0kg → camion 2
+   🚛 CL 77 69 Q 27: 0kg → camion 2
+   🚛 KR 46 13 95: 0kg → camion 2
+   🚛 CL 93B 13 47: 0kg → camion 2
+   🚛 AK 20 85A 21: 0kg → camion 2
+   🚛 CL 71B 75 66: 0kg → camion 2
+   🚛 CL 132 123A 22: 0kg → camion 2
+   🚛 KR 9A 8 21 Sur: 0kg → camion 2
+   🚛 KR 12A 83 29: 0kg → camion 2
+   🚛 CL 96 10 57: 0kg → camion 2
+   🚛 AV 127 20 35: 0kg → camion 2
+   🚛 CL 71 Sur 14G 63: 0kg → camion 2
+   🚛 KR 33 4A 23: 0kg → camion 2
+   🚛 CL 73 S 81B 10: 0kg → camion 2
+   🚛 KR 18C 66A 02 S: 0kg → camion 2
+   🚛 KR 27 47B 35 S: 0kg → camion 2
+   🚛 KR 18B 60 G 36 SUR: 0kg → camion 2
+   🚛 KR 5A 30D 19 S: 0kg → camion 2
+   🚛 KR 5A 30D 19 S: 0kg → camion 2
+   🚛 AC 57R S 72D 12: 0kg → camion 2
+   🚛 AK 30 25 90: 0kg → camion 2
+   🚛 AC 13 37 35: 0kg → camion 2
+   🚛 TV 113B 66 54: 0kg → camion 2
+   🚛 AC 145 103B 90: 0kg → camion 2
+   🚛 CL 46 S 81B 03: 0kg → camion 2
+   🚛 CL 26 51 80: 0kg → camion 2
+   🚛 KR 13 27 08 S: 0kg → camion 2
+   🚛 KR 18 84 35: 0kg → camion 2
+   🚛 CL 7 4 49 : 0kg → camion 2
+   🚛 AC 8O 100 51: 0kg → camion 2
+   🚛 KR 99 18A 25: 0kg → camion 2
+   🚛 CL 8 S 71C 19: 0kg → camion 2
+   🚛 KR 51 134A 52: 0kg → camion 2
+   🚛 CL 3 36 86: 0kg → camion 2
+   🚛 AC 72 90 00: 0kg → camion 2
+   🚛 CL 64 93 11: 0kg → camion 2
+   🚛 KR 74B 58 46 Sur: 0kg → camion 2
+   🚛 AK 72 76 08: 0kg → camion 2
+   🚛 TV 60 114A 55: 0kg → camion 2
+   🚛 CL 192 19 43: 0kg → camion 2
+   🚛 CL 57Q S 75F 82: 0kg → camion 2
+   🚛 DG 23 69 00: 0kg → camion 2
+   🚛 KR 9 73 44 piso 7: 0kg → camion 2
+   🚛 CL 23S 6 29: 0kg → camion 2
+   🚛 AC 72 20B 37: 0kg → camion 2
+   🚛 KR 70 21 15 Sur: 0kg → camion 2
+   🚛 CL 142 104 60: 0kg → camion 2
+   🚛 CL 156 7B 37: 0kg → camion 2
+   🚛 AK 68 94A 36: 0kg → camion 2
+   🚛 KR 70 71 25: 0kg → camion 2
+   🚛 KR 100 20 C 56: 0kg → camion 2
+   🚛 KR 81 72 38 Sur: 0kg → camion 2
+   🚛 CL 46 Sur 23 29: 0kg → camion 2
+   🚛 KR 24 6 33 sur: 0kg → camion 2
+   🚛 CL 145 94 D 60: 0kg → camion 2
+   🚛 AK 14 37 48 SUR: 0kg → camion 2
+   🚛 KR 14 L 87 35: 0kg → camion 2
+   🚛 CL 22C68F 20: 0kg → camion 2
+   🚛 KR 87B 6D 10: 0kg → camion 2
+   🚛 CL 23 4A 20: 0kg → camion 2
+   🚛 KR 77 G 60 17: 0kg → camion 2
+   🚛 KR 74 66B 28: 0kg → camion 2
+   🚛 KR 13 60 66: 0kg → camion 2
+   🚛 AK 72 31 25 Sur: 0kg → camion 2
+   🚛 CL 63 14 76: 0kg → camion 2
+   🚛 CL 100 49 29: 0kg → camion 2
+   🚛 KR 13 58 23: 0kg → camion 2
+   🚛 AK 7 47 50 LC 1: 0kg → camion 2
+   🚛 KR 15 96 23: 0kg → camion 2
+   🚛 TV 18 79 23: 0kg → camion 2
+   🚛 CL 100 17 13: 0kg → camion 2
+   🚛 CL 19 2A 10: 0kg → camion 2
+   🚛 AC 26 92 32: 0kg → camion 2
+   🚛 CL 139 103 C 73: 0kg → camion 2
+   🚛 AC 26 Sur 68 H 14 Loc 1: 0kg → camion 2
+   🚛 KR 27 31C 63 Sur: 0kg → camion 2
+   🚛 CL 22 Sur 18 38: 0kg → camion 2
+   🚛 AK 70 63 D 35: 0kg → camion 2
+   🚛 AC 72 69 C 24: 0kg → camion 2
+   🚛 KR 88 72A 36: 0kg → camion 2
+   🚛 KR 100 20 46: 0kg → camion 2
+   🚛 CL 17 97 32: 0kg → camion 2
+   🚛 CL 18 86 25: 0kg → camion 2
+   🚛 AC 53 21 21: 0kg → camion 2
+   🚛 KR 32 A 25 53: 0kg → camion 2
+   🚛 CL 2 83 64: 0kg → camion 2
+   🚛 DG 62 Sur 21A 60: 0kg → camion 2
+   🚛 CL 22 9 08: 0kg → camion 2
+   🚛 KR 72 95 23: 0kg → camion 2
+   🚛 DG 64 A Bis Sur 17 B 31/3: 0kg → camion 2
+   🚛 CL 47 Sur 17 20: 0kg → camion 2
+   🚛 DG 82 C 75 A 76: 0kg → camion 2
+   🚛 KR 92 147D 06: 0kg → camion 2
+   🚛 KR 82 23 A 57: 0kg → camion 2
+   🚛 CL 25G 73B 90: 0kg → camion 2
+   🚛 AC 53 71 43/03: 0kg → camion 2
+   🚛 KR 13 54 44: 0kg → camion 2
+   🚛 KR 100 24 27: 0kg → camion 2
+   🚛 CL 64 122 A 15: 0kg → camion 2
+   🚛 DIAG 62 G Sur 71 I 01: 0kg → camion 2
+   🚛 CL 74 15 38: 0kg → camion 2
+   🚛 AC 20 39 78: 0kg → camion 2
+   🚛 CL 84 Bis 92 16: 0kg → camion 2
+   🚛 KR 24 35 37 Sur: 0kg → camion 2
+   🚛 KR 19 17 25: 0kg → camion 2
+   🚛 CL 9 26 70: 0kg → camion 2
+   🚛 CL 17 A SUR 6 18 Este: 0kg → camion 2
+   🚛 KR 13 40B 74: 0kg → camion 2
+   🚛 AC 72 81A 20: 0kg → camion 2
+   🚛 AC 3 24 33: 0kg → camion 2
+   🚛 CL 13 13 13: 0kg → camion 2
+   🚛 CL 66 24 24: 0kg → camion 2
+   🚛 CL 49 Sur 78 66: 0kg → camion 2
+   🚛 TV 60 128A 58: 0kg → camion 2
+   🚛 CL 98A 68 35: 0kg → camion 2
+   🚛 AC 153 103B 76: 0kg → camion 2
+   🚛 KR 14 42 06: 0kg → camion 2
+   🚛 KR 69 31 46 SUR: 0kg → camion 2
+   🚛 KR 16 B 55 37 SUR: 0kg → camion 2
+   🚛 AK 19 139 02: 0kg → camion 2
+   🚛 CL 166 22 41: 0kg → camion 2
+   🚛 KR 30 22C 32: 0kg → camion 2
+   🚛 AK 10 15 54: 0kg → camion 2
+   🚛 KR 8 C 185B 06: 0kg → camion 2
+   🚛 CL 57 B Sur 69 15: 0kg → camion 2
+   🚛 KR 58 128 A 43: 0kg → camion 2
+   🚛 KR 55 73 35: 0kg → camion 2
+   🚛 CL 27 SUR 9 39: 0kg → camion 2
+   🚛 CL 66 21 46: 0kg → camion 2
+   🚛 CL 26 A 32 A 60: 0kg → camion 2
+   🚛 KR 13 23 56: 0kg → camion 2
+   🚛 CL 136 45 A 44: 0kg → camion 2
+   🚛 AK 24 72 30: 0kg → camion 2
+   🚛 KR 50 118 46: 0kg → camion 2
+   🚛 AK 9 EST 36 A SUR 12: 0kg → camion 2
+   🚛 CL 44 SUR 52 C 70: 0kg → camion 2
+   🚛 CL 158 7 B 69: 0kg → camion 2
+   🚛 AC 145 88 24: 0kg → camion 2
+   🚛 TV 77 162 12: 0kg → camion 2
+   🚛 AK 72 3A 38: 0kg → camion 2
+   🚛 KR 72 3 A 34: 0kg → camion 2
+   🚛 CL 98 A 60 92: 0kg → camion 2
+   🚛 KR 11 82 20: 0kg → camion 2
+   🚛 CL 82 16 A 24: 0kg → camion 2
+   🚛 AK 45 106 B 66: 0kg → camion 2
+   🚛 CL 144 45 16: 0kg → camion 2
+   🚛 AK 45 128C 61: 0kg → camion 2
+   🚛 KR 23 166 43: 0kg → camion 2
+   🚛 KR 85 A 78 60: 0kg → camion 2
+   🚛 KR 85 A 78 54: 0kg → camion 2
+   🚛 CL 72 A 20 12: 0kg → camion 2
+   🚛 CL 72 A 20 12: 0kg → camion 2
+   🚛 AC 24 80 B 49: 0kg → camion 2
+   🚛 KR 30 64 15: 0kg → camion 2
+   🚛 KR 19 34 11: 0kg → camion 2
+   🚛 AC 24 80B 23: 0kg → camion 2
+   🚛 AK 30 64 15: 0kg → camion 2
+   🚛 KR 70B 64B 24: 0kg → camion 2
+   🚛 KR 64 74 56: 0kg → camion 2
+   🚛 AK 45 123 75: 0kg → camion 2
+   🚛 CL 86 49 D 34: 0kg → camion 2
+   🚛 KR 17 52 50: 0kg → camion 2
+   🚛 CL 152 7 64: 0kg → camion 2
+   🚛 KR 7 A 140 37: 0kg → camion 2
+   🚛 KR 28 63B 51: 0kg → camion 2
+   🚛 KR 69 Q 74 B 25: 0kg → camion 2
+   🚛 KR 88 C 54 C SUR 87: 0kg → camion 2
+   🚛 KR 80 A 65 SUR 36: 0kg → camion 2
+   🚛 CL 80 SUR 79 A 6: 0kg → camion 2
+   🚛 KR 77 M 65 A SUR 45: 0kg → camion 2
+   🚛 KR 84 A 56 SUR 80: 0kg → camion 2
+   🚛 KR 110 71A 21: 0kg → camion 2
+   🚛 KR 98 136 64: 0kg → camion 2
+   🚛 AK 72 71A 69: 0kg → camion 2
+   🚛 CL 165 56 34: 0kg → camion 2
+   🚛 DG 6 SUR 1 51: 0kg → camion 2
+   🚛 CL 99 14 49 LOCALES 4, 5 Y 7: 0kg → camion 2
+   🚛 AC 100 50 64: 0kg → camion 2
+   🚛 CL 24 SUR 7 32: 0kg → camion 2
+   🚛 CL 53 10 46: 0kg → camion 2
+   🚛 KR 8 C 0 SUR 94: 0kg → camion 2
+   🚛 CL 108 15 12: 0kg → camion 2
+   🚛 KR 99 154 57: 0kg → camion 2
+   🚛 CL 57 24 33: 0kg → camion 2
+   🚛 KR 92 148 28: 0kg → camion 2
+   🚛 AC 68 SUR 46 A 10: 0kg → camion 2
+   🚛 CL 106 7 25: 0kg → camion 2
+   🚛 CL 17 12 68: 0kg → camion 2
+   🚛 KR 69 31 SUR 24: 0kg → camion 2
+   🚛 CL 36 SUR 72 M 51: 0kg → camion 2
+   🚛 CL 146 80 69: 0kg → camion 2
+   🚛 KR 9 a 192 60 Local 6: 0kg → camion 2
+   🚛 AK 50 94C 18: 0kg → camion 2
+   🚛 AK 72 7F 35: 0kg → camion 2
+   🚛 CL 140 12 B 90: 0kg → camion 2
+   🚛 CL 147 9 53: 0kg → camion 2
+   🚛 KR 8 21 39: 0kg → camion 2
+   🚛 CL 80C 90 26: 0kg → camion 2
+   🚛 CL 57 14 69: 0kg → camion 2
+   🚛 KR 4 67 87: 0kg → camion 2
+   🚛 KR 82 B 53 B SUR 32: 0kg → camion 2
+   🚛 AK 11 93A 65: 0kg → camion 2
+   🚛 CL 109 18 B 31: 0kg → camion 2
+   🚛 KR 14 6 46 SUR: 0kg → camion 2
+   🚛 AK 72 131 98: 0kg → camion 2
+   🚛 KR 10 13 SUR 64: 0kg → camion 2
+   🚛 DG 16 SUR 50 23: 0kg → camion 2
+   🚛 TV 26 A BIS 45 A SUR 50: 0kg → camion 2
+   🚛 KR 7 180 75: 0kg → camion 2
+   🚛 KR 30 49 A 64: 0kg → camion 2
+   🚛 CL 42 A SUR 94 B 3: 0kg → camion 2
+   🚛 KR 99 A 71 A 37: 0kg → camion 2
+   🚛 KR 100 16I 21: 0kg → camion 2
+   🚛 CL 3 19 A 36: 0kg → camion 2
+   🚛 KR 77 A 65 A 4: 0kg → camion 2
+   🚛 KR 34 25 91: 0kg → camion 2
+   🚛 CL 71 BIS 86A 16: 0kg → camion 2
+   🚛 KR 96 G 23 A 8: 0kg → camion 2
+   🚛 CL 64D 113 60: 0kg → camion 2
+   🚛 CL 64 120 45: 0kg → camion 2
+   🚛 CL 64 F 105 35: 0kg → camion 2
+   🚛 AC 13 16 40: 0kg → camion 2
+   🚛 KR 24 26 24: 0kg → camion 2
+   🚛 CL 73 69 54: 0kg → camion 2
+   🚛 CL 67 14A 10: 0kg → camion 2
+   🚛 KR 69 98 44: 0kg → camion 2
+   🚛 AC 145 145 10: 0kg → camion 2
+   🚛 KR 102 19 75: 0kg → camion 2
+   🚛 KR 102 19 75: 0kg → camion 2
+   🚛 KR 100 23 G 41: 0kg → camion 2
+   🚛 KR 110 19 A 21: 0kg → camion 2
+   🚛 CL 23 D 110 8: 0kg → camion 2
+   🚛 AK 27 9 26 Sur: 0kg → camion 2
+   🚛 KR 69C 24 76 Sur: 0kg → camion 2
+   🚛 KR 55 B 76 45: 0kg → camion 2
+   🚛 KR 127 132 30: 0kg → camion 2
+   🚛 CL 51 26 26: 0kg → camion 2
+   🚛 CL 22H 104B 61: 0kg → camion 2
+   🚛 CL 5 C 41 A 5: 0kg → camion 2
+   🚛 CL 78B 120A 56: 0kg → camion 2
+   🚛 KR 60 24 09: 0kg → camion 2
+   🚛 CL 77A 80A 44: 0kg → camion 2
+   🚛 TV 60 120 85: 0kg → camion 2
+   🚛 CL 129 57 78: 0kg → camion 2
+   🚛 AK 7 44 62: 0kg → camion 2
+   🚛 AC 147 14 85: 0kg → camion 2
+   🚛 KR 60 67 B 21: 0kg → camion 2
+   🚛 KR 78 K 39 SUR 4: 0kg → camion 2
+   🚛 TV 78 H 41 SUR 73: 0kg → camion 2
+   🚛 KR 15 93 57: 0kg → camion 2
+   🚛 KR 18 C 125 36: 0kg → camion 2
+   🚛 TV 72 D 43 A SUR 32: 0kg → camion 2
+   🚛 CL 44 50 62: 0kg → camion 2
+   🚛 DG 84 76 C 04: 0kg → camion 2
+   🚛 KR 75 57 R SUR 8: 0kg → camion 2
+   🚛 AK 72 67 92: 0kg → camion 2
+   🚛 KR 78 17 57: 0kg → camion 2
+   🚛 CL 68 91 20: 0kg → camion 2
+   🚛 CL 1 SUR 9 86: 0kg → camion 2
+   🚛 CL 22 H 104 B 61: 0kg → camion 2
+   🚛 KR 102A 129D 13: 0kg → camion 2
+   🚛 CL 79 77 B 83: 0kg → camion 2
+   🚛 KR 29A 71A 41: 0kg → camion 2
+   🚛 KR 10 2 48: 0kg → camion 2
+   🚛 KR 8 C 186 72: 0kg → camion 2
+   🚛 CL 68 53 58: 0kg → camion 2
+   🚛 CL 72A 87 18: 0kg → camion 2
+   🚛 KR 8 63 31: 0kg → camion 2
+   🚛 KR 19 150 41: 0kg → camion 2
+   🚛 CL 166 8 F 93: 0kg → camion 2
+   🚛 DG 3 SUR 81 C 3: 0kg → camion 2
+   🚛 CL 6A 70 44: 0kg → camion 2
+   🚛 CL 78 SUR 1 B 51: 0kg → camion 2
+   🚛 KR 75 24 D 49: 0kg → camion 2
+   🚛 KR 85K 46A 45: 0kg → camion 2
+   🚛 AK 70 98 16: 0kg → camion 2
+   🚛 CL 73A 111C 1: 0kg → camion 2
+   🚛 CL 119 12 36: 0kg → camion 2
+   🚛 KR 59 152 B 79: 0kg → camion 2
+   🚛 AK 91 129f 20: 0kg → camion 2
+   🚛 KR 7 10 SUR 29: 0kg → camion 2
+   🚛 AC 127 70D 27: 0kg → camion 2
+   🚛 CL 53 70 91: 0kg → camion 2
+   🚛 AC 53 73A 81: 0kg → camion 2
+   🚛 KR 30 64 A 49: 0kg → camion 2
+   🚛 CL 2 69F 6: 0kg → camion 2
+   🚛 CL 182 45 24: 0kg → camion 2
+   🚛 CL 161 16 D 35: 0kg → camion 2
+   🚛 CL 45 20 34: 0kg → camion 2
+   🚛 CL 22 25 14: 0kg → camion 2
+   🚛 KR 7 50 20: 0kg → camion 2
+   🚛 KR 45 103B 51: 0kg → camion 2
+   🚛 KR 86 40 B SUR 51: 0kg → camion 2
+   🚛 KR 18 114A 50: 0kg → camion 2
+   🚛 CL 64 SUR 71 F 77: 0kg → camion 2
+   🚛 TV 78C 6 39: 0kg → camion 2
+   🚛 CL 73 10 66: 0kg → camion 2
+   🚛 AC 80 24 37/45: 0kg → camion 2
+   🚛 AK 72 99 64: 0kg → camion 2
+   🚛 KR 15 72 33: 0kg → camion 2
+   🚛 KR 8 G 162 40: 0kg → camion 2
+   🚛 KR 51 131 51: 0kg → camion 2
+   🚛 CL 138 45 80: 0kg → camion 2
+   🚛 CL 129 53 26: 0kg → camion 2
+   🚛 AK 50 5C 76: 0kg → camion 2
+   🚛 KR 55 14 31: 0kg → camion 2
+   🚛 TV 59 A 114 36: 0kg → camion 2
+   🚛 AK 14 48 51: 0kg → camion 2
+   🚛 AC 24 48 50: 0kg → camion 2
+   🚛 KR 24 32 A SUR 21: 0kg → camion 2
+   🚛 KR 27 18 79 Sur: 0kg → camion 2
+   🚛 KR 18 16 39 Sur: 0kg → camion 2
+   🚛 AC 127 7 77: 0kg → camion 2
+   🚛 CL 93 60 A 36: 0kg → camion 2
+   🚛 CL 23A 96F 52: 0kg → camion 2
+   🚛 KR 13 33 58: 0kg → camion 2
+   🚛 KR 25 22 C 81: 0kg → camion 2
+   🚛 KR 23 10 11: 0kg → camion 2
+   🚛 CL 183 A 11 8: 0kg → camion 2
+   🚛 CL 57 SUR 19 43: 0kg → camion 2
+   🚛 KR 13 F 52 SUR 56: 0kg → camion 2
+   🚛 TV 138 139 35: 0kg → camion 2
+   🚛 CL 41 F SUR 80 H 26: 0kg → camion 2
+   🚛 CL 167 58 30: 0kg → camion 2
+   🚛 CL 167 58 30: 0kg → camion 2
+   🚛 CL 77 19 37: 0kg → camion 2
+   🚛 CL 72 64 62: 0kg → camion 2
+   🚛 CL 4 8 64: 0kg → camion 2
+   🚛 CL 32 SUR 7 A 39: 0kg → camion 2
+   🚛 KR 91 127 63: 0kg → camion 2
+   🚛 KR 18 136 A 14: 0kg → camion 2
+   🚛 CL 63 15 18: 0kg → camion 2
+   🚛 CL 116 70D 87: 0kg → camion 2
+   🚛 AK 19 106 12: 0kg → camion 2
+   🚛 CL 125 19 A 25: 0kg → camion 2
+   🚛 AK 9 121 50: 0kg → camion 2
+   🚛 DG 44 SUR 21 49: 0kg → camion 2
+   🚛 DG 79 A 72 11: 0kg → camion 2
+   🚛 AK 15 102 50: 0kg → camion 2
+   🚛 KR 29 B 77 48: 0kg → camion 2
+   🚛 KR 110 19A 21: 0kg → camion 2
+   🚛 KR 30 26 SUR 80: 0kg → camion 2
+   🚛 AK 86 74 A 26: 0kg → camion 2
+   🚛 TV 60 128A 14: 0kg → camion 2
+   🚛 CL 132 103 C 41: 0kg → camion 2
+   🚛 KR 99 154 57: 0kg → camion 2
+   🚛 KR 92 148 28: 0kg → camion 2
+   🚛 CL 128 98A 01: 0kg → camion 2
+   🚛 KR 129 132 30: 0kg → camion 2
+   🚛 KR 94 D 145 39: 0kg → camion 2
+   🚛 CL 132D 152 65: 0kg → camion 2
+   🚛 AK 104 140C 11: 0kg → camion 2
+   🚛 CL 147 90 54: 0kg → camion 2
+   🚛 KR 92 151B 98: 0kg → camion 2
+   🚛 CL 139 108 04: 0kg → camion 2
+   🚛 KR 91 127 63: 0kg → camion 2
+   🚛 KR 92 159A 6: 0kg → camion 2
+   🚛 AC 132 95 A 10: 0kg → camion 2
+   🚛 CL 139 103 C 02: 0kg → camion 2
+   🚛 KR 103B 152 41: 0kg → camion 2
+   🚛 KR 91 134 A 04: 0kg → camion 2
+   🚛 KR 46 129 31: 0kg → camion 2
+   🚛 CL 164 23 40: 0kg → camion 2
+   🚛 AC 72 82 57: 0kg → camion 2
+   🚛 CL 93 45 44: 0kg → camion 2
+   🚛 CL 43 14 9: 0kg → camion 2
+   🚛 KR 19 34 11: 0kg → camion 2
+   🚛 KR 36 4 28: 0kg → camion 2
+   🚛 CL 128 A 51 52: 0kg → camion 2
+   🚛 AC 80 69T 60: 0kg → camion 2
+   🚛 CL 164 16 A 49: 0kg → camion 2
+   🚛 CL 4 G 66 2: 0kg → camion 2
+   🚛 CL 139 103C 2: 0kg → camion 2
+   🚛 AK 15 118 34: 0kg → camion 2
+   🚛 KR 111 C 86 05 LC 1 34: 0kg → camion 2
+   🚛 CL 120 A 7 14: 0kg → camion 2
+   🚛 CL 8D 82B 20: 0kg → camion 2
+   🚛 DG 49 SUR 53 85: 0kg → camion 2
+   🚛 AK 30 4 A 43: 0kg → camion 2
+   🚛 CL 188 13 15: 0kg → camion 2
+   🚛 AK 45 149 29: 0kg → camion 2
+   🚛 KR 71F 12 81: 0kg → camion 2
+   🚛 CL 174 54 C 28: 0kg → camion 2
+   🚛 KR 91 134A 4: 0kg → camion 2
+   🚛 TV 85 64B 18: 0kg → camion 2
+   🚛 KR 68 38 C SUR 76: 0kg → camion 2
+   🚛 KR 58 131A 16: 0kg → camion 2
+   🚛 KR 96 G 17 B 49: 0kg → camion 2
+   🚛 CL 13 65 21: 0kg → camion 2
+   🚛 CL 85 14 5: 0kg → camion 2
+   🚛 AK 72 80 94: 0kg → camion 2
+   🚛 Cl 147c #101 98: 0kg → camion 2
+   🚛 KR 46 12 30: 0kg → camion 2
+   🚛 AC 127 # 20 - 79: 0kg → camion 2
+   🚛 AC 127 # 7 - 83: 0kg → camion 2
+   🚛 AC 116 # 70C - 49: 0kg → camion 2
+   🚛 AK 30 # 70 - 48: 0kg → camion 2
+   🚛 AK 30 # 78 - 20: 0kg → camion 2
+   🚛 AC 116 # 70C - 65: 0kg → camion 2
+   🚛 AK 15 # 106 - 72: 0kg → camion 2
+   🚛 KR 3 E 47 11 S: 0kg → camion 2
+   🚛 CL 222 54 30: 0kg → camion 2
+   🚛 KR 18B 60G 00 S: 0kg → camion 2
+   🚛 KR 27 47B 35 S: 0kg → camion 2
+   🚛 Calle 92 # 16-11: 0kg → camion 2
+   🚛 KR 10 No 17-72: 0kg → camion 2
+   🚛 CL 26 69D 91: 0kg → camion 2
+   🚛 CL 42 13 19: 0kg → camion 2
+   🚛 CL 94 23 43: 0kg → camion 2
+   🚛 AV 1 DE MAYO # 10 BIS 22 SUR: 0kg → camion 2
+   🚛 CL 139 94 55: 0kg → camion 2
+   🚛 KR 85D 46A 65: 0kg → camion 2
+   🚛 CL 39 29 75: 0kg → camion 2
+   🚛 CL 21 4 40: 0kg → camion 2
+   🚛 AC 222 55 09: 0kg → camion 2
+   🚛 KR 2 10 13: 0kg → camion 2
+   🚛 KR 5 59A 44: 0kg → camion 2
+   🚛 KR 7 179 03: 0kg → camion 2
+   🚛 KR 7BBIS 132 11: 0kg → camion 2
+   🚛 CL 22D S 1 38 E: 0kg → camion 2
+   🚛 CL 10 S 15 35: 0kg → camion 2
+   🚛 KR 7 40B 53: 0kg → camion 2
+   🚛 CL 79 11 10: 0kg → camion 2
+   🚛 KR 19 49 20: 0kg → camion 2
+   🚛 KR 1 12D 41: 0kg → camion 2
+   🚛 KR 71B 53 40: 0kg → camion 2
+   🚛 AV Circunvalar 60 00: 0kg → camion 2
+   🚛 KR 11 # 101-80: 0kg → camion 2
+   🚛 TV 3C 49 02: 0kg → camion 2
+   🚛 KR 37 52 34 S: 0kg → camion 2
+   🚛 KR 59 43 05: 0kg → camion 2
+   🚛 AK 30 45 03: 0kg → camion 2
+   🚛 AC 72 11 86: 0kg → camion 2
+   🚛 KR 9 72 90: 0kg → camion 2
+   🚛 KR 9 51 11: 0kg → camion 2
+   🚛 Autopista Norte, Av. los Arrayanes Km. 1.6: 0kg → camion 2
+   🚛 CL 21 4 40: 0kg → camion 2
+   🚛 KR 7 123 65: 0kg → camion 2
+   🚛 CL 77 7 11: 0kg → camion 2
+   🚛 KR 75B 61 60 S: 0kg → camion 2
+   🚛 KR 54 76 20: 0kg → camion 2
+   🚛 KR 67 4G 68: 0kg → camion 2
+   🚛 CL 82 S 44 09: 0kg → camion 2
+   🚛 KR 49 98A 18: 0kg → camion 2
+   🚛 TV 14 49 04 S: 0kg → camion 2
+   🚛 CL 16J 104 51: 0kg → camion 2
+   🚛 AC 80 89A 01: 0kg → camion 2
+   🚛 CL 27 S 21A 19: 0kg → camion 2
+   🚛 KR 88 139 21: 0kg → camion 2
+   🚛 CL 6D 4 42: 0kg → camion 2
+   🚛 KR 65B 18 28: 0kg → camion 2
+   🚛 KR 69 98A 28: 0kg → camion 2
+   🚛 KR 38B 16 45 Sur: 0kg → camion 2
+   🚛 KR 10 26 34 S: 0kg → camion 2
+   🚛 CL 30 Sur 50A 40: 0kg → camion 2
+   🚛 CL 100 8A 37: 0kg → camion 2
+   🚛 KR 106 15A 25: 0kg → camion 2
+🔄 Creando rutas para camion (1551 ubicaciones)...
+   ✅ 1 rutas camion creadas
+🎯 VRP Personalizado completado:
+   📊 Total rutas: 1
+   💰 Costo total: $350000.00
+   ⏱️ Tiempo total: 1608.2 min
+   📦 Peso total: 0.0 kg
+🔍 DEBUG - result: {
+  routes: [
+    {
+      vehicleType: 'camion',
+      vehicleName: 'camion',
+      vehicleCapacity: 2000,
+      vehicleCostPerTrip: 350000,
+      stops: [Array],
+      totalWeight: 0,
+      totalDistance: 804.0952555973297,
+      totalTime: 1608.1905111946594,
+      totalCost: 350000,
+      utilization: 0
+    }
+  ],
+  analysis: {
+    vehicleType: 'personalizado',
+    vehicleConfig: {
+      name: 'Vehículos Personalizados',
+      description: '3 vehículos configurados'
+    },
+    totalVehicles: 1,
+    totalWorkingDays: 4,
+    averageUtilization: 0,
+    feasibleRoutes: 1,
+    totalCost: 350000,
+    costPerTon: 0,
+    totalDistance: 804.0952555973297,
+    totalTime: 1608.1905111946594,
+    pesoTotal: 0,
+    vehicleBreakdown: { camion: [Object] }
+  }
+}
+📊 Peso total para análisis:
+   Calculado de locations: 0 kg
+   Obtenido del historial: 0 kg
+   Final usado: 0 kg
+✅ Usando subidaId: 30
+💾 Rutas guardadas en historial: ID undefined para subida 30
+🔍 DEBUG - useHybrid: false
+🔍 DEBUG - useCustomVehicles: true
+🔍 DEBUG - result.vehicleBreakdown: undefined
+🔍 DEBUG - Condición vehículos personalizados cumplida
+🔍 DEBUG - Condición vehículos personalizados cumplida
+🔍 DEBUG - Condición vehículos personalizados cumplida
+🔍 DEBUG - Condición vehículos personalizados cumplida
+🔍 DEBUG - Entrando en sección vehículos personalizados
+🔍 DEBUG - result.analysis.vehicleBreakdown: {
+  camion: {
+    count: 1,
+    totalWeight: 0,
+    totalDistance: 804.0952555973297,
+    totalCost: 350000,
+    averageUtilization: 0
+  }
+}
+🔍 Ruta 1: 1551 ubicaciones, totalWeight: 0
+⚠️ Ruta 1: Sin peso en ruta ni ubicaciones, buscando en BD...
+   ✅ CL 64 120 45: 0kg
+   ✅ CL 67 115A 30: 0kg
+   ✅ TV 113B 66 54: 0kg
+   ✅ CL 64D 113 60: 0kg
+   ✅ KR 112 64A 05: 0kg
+   ✅ CL 65 108 84: 0kg
+   ✅ KR 106A 66A 06: 0kg
+   ✅ CL 68 105F 16: 0kg
+   ✅ CL 69B 105F 39: 0kg
+   ✅ KR 107 70 58: 0kg
+   ✅ KR 110 71A 21: 0kg
+   ✅ AC 72 106A 06: 0kg
+   ✅ CL 75C 105F 09: 0kg
+   ✅ CL 74A 114A 30: 0kg
+   ✅ CL 73A 111C 1: 0kg
+   ✅ KR 112A 75A 03: 0kg
+   ✅ CL 78B # 114A - 62: 0kg
+   ✅ AK 114 79B 00: 0kg
+   ✅ AC 80 111C 98: 0kg
+   ✅ AC 80 111C 98: 0kg
+   ✅ KR 111C 86 05: 0kg
+   ✅ KR 111C 86 05: 0kg
+   ✅ KR 111 C 86 05 LC 1 34: 0kg
+   ✅ AC 8O 100 51: 0kg
+   ✅ TV 100A 80A 75: 0kg
+   ✅ AC 80 100 52: 0kg
+   ✅ KR 94K 80B 09: 0kg
+   ✅ CL 80C 90 26: 0kg
+   ✅ AC 80 89A 01: 0kg
+   ✅ KR 85 A 78 60: 0kg
+   ✅ KR 85 A 78 54: 0kg
+   ✅ AC 80 83 40: 0kg
+   ✅ AC 80 81 73: 0kg
+   ✅ CL 77A 80A 44: 0kg
+   ✅ CL 79 77 B 83: 0kg
+   ✅ CL 78 77B 86: 0kg
+   ✅ KR 76 75B 03: 0kg
+   ✅ KR 76 75B 03: 0kg
+   ✅ DG 79 A 72 11: 0kg
+   ✅ AK 72 76 08: 0kg
+   ✅ TV 70 A 71 35 : 0kg
+   ✅ AK 70 77A 03: 0kg
+   ✅ CL 77 69 Q 27: 0kg
+   ✅ KR 69 Q 74 B 25: 0kg
+   ✅ CL 75 69 H 05: 0kg
+   ✅ CL 75 69H 05: 0kg
+   ✅ CL 78 69 50: 0kg
+   ✅ KR 68 D 80 77: 0kg
+   ✅ AK 68 80 77: 0kg
+   ✅ AK 68 90 88: 0kg
+   ✅ AK 68 90 88: 0kg
+   ✅ AV 68 94 88: 0kg
+   ✅ CL 98A 68 35: 0kg
+   ✅ CL 98 68 64: 0kg
+   ✅ CL 98 68C 06: 0kg
+   ✅ KR 69 98A 28: 0kg
+   ✅ KR 69 98A 28: 0kg
+   ✅ KR 69 98 44: 0kg
+   ✅ AK 70 98 16: 0kg
+   ✅ CL 98 70 90: 0kg
+   ✅ CL 98 70 91: 0kg
+   ✅ AC 80 69T 60: 0kg
+   ✅ KR 70C 80 48: 0kg
+   ✅ KR 69T 80 25: 0kg
+   ✅ AC 80 # 69Q - 50: 0kg
+   ✅ DG 80 69Q 50: 0kg
+   ✅ AK 72 80 94: 0kg
+   ✅ AK 72 80 94: 0kg
+   ✅ AK 72 80 94: 0kg
+   ✅ AK 72 81B 13: 0kg
+   ✅ KR 72 95 23: 0kg
+   ✅ AK 72 98 54: 0kg
+   ✅ AK 72 99 64: 0kg
+   ✅ AC 116 71 21: 0kg
+   ✅ AC 116 70D 78: 0kg
+   ✅ CL 116 70D 87: 0kg
+   ✅ AC 116 # 70C - 65: 0kg
+   ✅ AC 116 70C 65: 0kg
+   ✅ AC 116 # 70C - 49: 0kg
+   ✅ DG 115A 70C 75: 0kg
+   ✅ DG 115A 70C 06: 0kg
+   ✅ AC 116 70C 12: 0kg
+   ✅ AC 116 # 60 - 19: 0kg
+   ✅ AC 116 60 19: 0kg
+   ✅ TV 60 114A 55: 0kg
+   ✅ TV 59 A 114 36: 0kg
+   ✅ AK 70 102 02: 0kg
+   ✅ KR 68A 100 10: 0kg
+   ✅ AK 68 94A 36: 0kg
+   ✅ TV 61 98A 06: 0kg
+   ✅ CL 98 A 60 92: 0kg
+   ✅ AC 100 60D 35: 0kg
+   ✅ AC 100 61 48: 0kg
+   ✅ TV 55 98 A 66: 0kg
+   ✅ TV 55 98A 66: 0kg
+   ✅ TV 55 # 97 - 65: 0kg
+   ✅ TV 55 97 35: 0kg
+   ✅ TV 55 95 66: 0kg
+   ✅ KR 51 96 11: 0kg
+   ✅ KR 49 98A 18: 0kg
+   ✅ AC 100 47A 79: 0kg
+   ✅ CL 100 49 29: 0kg
+   ✅ AC 100 49 45: 0kg
+   ✅ AC 100 50 64: 0kg
+   ✅ AC 100 45 81: 0kg
+   ✅ KR 45 97 80: 0kg
+   ✅ TV 23 97 73: 0kg
+   ✅ TV 23 97 73: 0kg
+   ✅ KR 21 98 81: 0kg
+   ✅ CL 100 19A 13: 0kg
+   ✅ CL 100 19 61: 0kg
+   ✅ CL 100 19 05: 0kg
+   ✅ KR 19 98 03: 0kg
+   ✅ CL 100 18A 30: 0kg
+   ✅ AC 100 18A 00: 0kg
+   ✅ CL 100 17A 36: 0kg
+   ✅ CL 100 17 13: 0kg
+   ✅ CL 98 17 20: 0kg
+   ✅ KR 18 96 38: 0kg
+   ✅ KR 16 95 70: 0kg
+   ✅ KR 15 96 23: 0kg
+   ✅ KR 15 97 25: 0kg
+   ✅ KR 14 98 51 Piso 2: 0kg
+   ✅ CL 99 # 14 - 49: 0kg
+   ✅ CL 99 14 49 LOCALES 4, 5 Y 7: 0kg
+   ✅ KR 14 99 33: 0kg
+   ✅ CL 100 13 21: 0kg
+   ✅ CL 99 11A 32: 0kg
+   ✅ CL 100 11 59: 0kg
+   ✅ CL 99 9A 54: 0kg
+   ✅ CL 99 9A 54: 0kg
+   ✅ CL 100 8A 37: 0kg
+   ✅ CL 102 7 11: 0kg
+   ✅ CL 106 7 25: 0kg
+   ✅ CL 106 7 25: 0kg
+   ✅ CL 106 # 8A - 19: 0kg
+   ✅ CL 110 9 25: 0kg
+   ✅ CL 110 9 25: 0kg
+   ✅ CL 110 9 25: 0kg
+   ✅ CL 110 9 60: 0kg
+   ✅ AK 9 110 50: 0kg
+   ✅ CL 113 7 21: 0kg
+   ✅ CL 113 7 21: 0kg
+   ✅ AK 9 113 52: 0kg
+   ✅ KR 7 115 60: 0kg
+   ✅ KR 7 116 50: 0kg
+   ✅ KR 7 118 38: 0kg
+   ✅ KR 7 119 14: 0kg
+   ✅ CL 120 A 7 14: 0kg
+   ✅ CL 120 A 7 14: 0kg
+   ✅ CL 121 6 37: 0kg
+   ✅ CL 121 6 46: 0kg
+   ✅ KR 7 123 65: 0kg
+   ✅ KR 7 123 65: 0kg
+   ✅ KR 7 124 15: 0kg
+   ✅ AK 7 # 126 - 41: 0kg
+   ✅ CL 126A 7 48: 0kg
+   ✅ AC 127 7 77: 0kg
+   ✅ AC 127 # 7 - 83: 0kg
+   ✅ AC 127 7A 47: 0kg
+   ✅ KR 8 127 18: 0kg
+   ✅ AC 127 11 20: 0kg
+   ✅ AC 127 13A 74: 0kg
+   ✅ AK 15 127 30: 0kg
+   ✅ AK 15 124 30: 0kg
+   ✅ AK 15 123 30: 0kg
+   ✅ KR 15 119 48: 0kg
+   ✅ AK 15 118 34: 0kg
+   ✅ AK 122 15 59: 0kg
+   ✅ AK 15 114A 33: 0kg
+   ✅ KR 15 114A 33: 0kg
+   ✅ KR 15B 112 58: 0kg
+   ✅ KR 15 108 09: 0kg
+   ✅ CL 108 15 12: 0kg
+   ✅ KR 15 106 73: 0kg
+   ✅ AK 15 # 106 - 73: 0kg
+   ✅ AK 15 106 72: 0kg
+   ✅ AK 15 # 106 - 72: 0kg
+   ✅ KR 15 106 18: 0kg
+   ✅ AK 15 102 50: 0kg
+   ✅ KR 9 101 67: 0kg
+   ✅ AK 19 102 68: 0kg
+   ✅ KR 19 103 98: 0kg
+   ✅ KR 19 104 37: 0kg
+   ✅ AK 19 106 12: 0kg
+   ✅ CL 109 18 B 31: 0kg
+   ✅ AC 116 19 36: 0kg
+   ✅ KR 18 114A 50: 0kg
+   ✅ CL 122 18C 56: 0kg
+   ✅ AK 19 122 49: 0kg
+   ✅ CL 125 19 A 25: 0kg
+   ✅ CL 125BIS 20 23: 0kg
+   ✅ AV 127 20 35: 0kg
+   ✅ AC 127 20 79: 0kg
+   ✅ AC 127 # 20 - 79: 0kg
+   ✅ AK 45 123 75: 0kg
+   ✅ AK 45 122 68: 0kg
+   ✅ AK 45 118 59: 0kg
+   ✅ AK 45 116 34: 0kg
+   ✅ AK 45 114 78: 0kg
+   ✅ CL 114A 45 78: 0kg
+   ✅ AUTOPISTA NORTE # 108 A- 50: 0kg
+   ✅ AK 45 106 B 66: 0kg
+   ✅ KR 45 103B 51: 0kg
+   ✅ AUTOPISTA NORTE 103B - 35: 0kg
+   ✅ AUTOPISTA NORTE 103B - 35: 0kg
+   ✅ KR 22 101 16: 0kg
+   ✅ Autopista NORTE 94-72: 0kg
+   ✅ CL 94 23 43: 0kg
+   ✅ CL 94 23 43: 0kg
+   ✅ TV 23 93 23: 0kg
+   ✅ CL 93 45 44: 0kg
+   ✅ KR 47 91 74: 0kg
+   ✅ KR 47 94 06: 0kg
+   ✅ AK 50 94C 18: 0kg
+   ✅ KR 58 94B 06: 0kg
+   ✅ CL 93 60 A 36: 0kg
+   ✅ CL 91 59 43: 0kg
+   ✅ KR 49D 91 56: 0kg
+   ✅ CL 86 49 D 34: 0kg
+   ✅ KR 28A 77 70: 0kg
+   ✅ CL 76 27A 04: 0kg
+   ✅ AC 80 24 37/45: 0kg
+   ✅ CL 77 19 37: 0kg
+   ✅ KR 20 78 30: 0kg
+   ✅ KR 20 78 42: 0kg
+   ✅ TV 18 79 23: 0kg
+   ✅ CL 82 16 A 24: 0kg
+   ✅ CL 83 16A 44: 0kg
+   ✅ KR 18 84 35: 0kg
+   ✅ AK 19 # 30 - 71: 0kg
+   ✅ CL 85 16A 29: 0kg
+   ✅ CL 85 15 00: 0kg
+   ✅ CL 85 14 5: 0kg
+   ✅ KR 12A 83 29: 0kg
+   ✅ KR 11 # 82 - 71: 0kg
+   ✅ KR 11 82 01: 0kg
+   ✅ KR 11 82 20: 0kg
+   ✅ CL 82 10 39: 0kg
+   ✅ KR 10 80 01: 0kg
+   ✅ CL 80 10 43: 0kg
+   ✅ CL 79 11 10: 0kg
+   ✅ KR 11 78 76: 0kg
+   ✅ KR 12A 77 34: 0kg
+   ✅ CL 77 13 35: 0kg
+   ✅ CL 76 13 52: 0kg
+   ✅ KR 15 77 05: 0kg
+   ✅ KR 15 78 02: 0kg
+   ✅ KR 15 78 33: 0kg
+   ✅ KR 14 79 71: 0kg
+   ✅ CL 81 13 05: 0kg
+   ✅ CL 82 11 75: 0kg
+   ✅ KR 11 84 09: 0kg
+   ✅ CL 85 11 54: 0kg
+   ✅ KR 15 80 88: 0kg
+   ✅ KR 11 76 19: 0kg
+   ✅ KR 9 74 99: 0kg
+   ✅ KR 9 73 44 piso 7: 0kg
+   ✅ CL 73 8 13: 0kg
+   ✅ KR 9 72 90: 0kg
+   ✅ CL 72 # 10 - 34: 0kg
+   ✅ CL 72 10 34: 0kg
+   ✅ CL 72 10 07: 0kg
+   ✅ CL 72 9 25: 0kg
+   ✅ CL 72 9 23: 0kg
+   ✅ CL 73 10 66: 0kg
+   ✅ CL 73 10 83: 0kg
+   ✅ CL 73 11 12: 0kg
+   ✅ AC 72 11 86: 0kg
+   ✅ CL 74 11 81: 0kg
+   ✅ KR 15 74 22: 0kg
+   ✅ KR 15 74 22: 0kg
+   ✅ CL 74 15 38: 0kg
+   ✅ CL 73 20 01: 0kg
+   ✅ CL 72 A 20 12: 0kg
+   ✅ CL 72 A 20 12: 0kg
+   ✅ KR 15 72 33: 0kg
+   ✅ KR 14 A 71 29: 0kg
+   ✅ AK 14 # 70A - 85: 0kg
+   ✅ KR 14A 69 35: 0kg
+   ✅ CL 67 14A 10: 0kg
+   ✅ CL 67 14A 46: 0kg
+   ✅ KR 14 66 24: 0kg
+   ✅ AvenidaCaracas 64-23 Sur: 0kg
+   ✅ CL 63 14 76: 0kg
+   ✅ CL 63 15 18: 0kg
+   ✅ AC 63 16 02: 0kg
+   ✅ AC 63 16A 21: 0kg
+   ✅ CL 63 18 19: 0kg
+   ✅ KR 21 62 47: 0kg
+   ✅ KR 24 62 50: 0kg
+   ✅ KR 24 63 55: 0kg
+   ✅ CL 63 24 45: 0kg
+   ✅ CL 63 24 45: 0kg
+   ✅ KR 24 63C 69: 0kg
+   ✅ CL 63F # 26 - 49: 0kg
+   ✅ CL 63F 26 41: 0kg
+   ✅ CL 66 24 24: 0kg
+   ✅ CL 66 21 46: 0kg
+   ✅ KR 21 70A 39: 0kg
+   ✅ AC 72 20B 37: 0kg
+   ✅ AK 24 72 30: 0kg
+   ✅ CL 72 25  14: 0kg
+   ✅ AC 72 25 28: 0kg
+   ✅ AC 72 # 28A - 28: 0kg
+   ✅ AC 72 28A 28: 0kg
+   ✅ KR 29A 71A 41: 0kg
+   ✅ CL 71C 29B 07: 0kg
+   ✅ AK 30 70 48: 0kg
+   ✅ AK 30 # 70 - 48: 0kg
+   ✅ CL 70 51 31: 0kg
+   ✅ CL 68 53 58: 0kg
+   ✅ KR 52 67A 30: 0kg
+   ✅ KR 30 64 A 49: 0kg
+   ✅ KR 30 64 15: 0kg
+   ✅ AK 30 64 15: 0kg
+   ✅ AK 30 63C 72: 0kg
+   ✅ AK 30 63A 51: 0kg
+   ✅ KR 28 63B 51: 0kg
+   ✅ TV 26 57 29: 0kg
+   ✅ CL 57 24 33: 0kg
+   ✅ TV 24 53 22: 0kg
+   ✅ CL 53 25 30 : 0kg
+   ✅ CL 53B 25 21: 0kg
+   ✅ TV 27A 53B 13: 0kg
+   ✅ KR 27A 52 14: 0kg
+   ✅ CL 51 26 26: 0kg
+   ✅ KR 30 49 A 64: 0kg
+   ✅ AK 30 48 51: 0kg
+   ✅ AK 30 45 03: 0kg
+   ✅ AK 30 45 03: 0kg
+   ✅ KR 28 42 42: 0kg
+   ✅ KR 27 43 39: 0kg
+   ✅ AV 24 41 33: 0kg
+   ✅ KR 24 39B 23: 0kg
+   ✅ KR 25 39A 75: 0kg
+   ✅ CL 40 20 38: 0kg
+   ✅ DG 42A 20 11: 0kg
+   ✅ CL 45 20 34: 0kg
+   ✅ KR 19 45 04: 0kg
+   ✅ CL 45C 22 02: 0kg
+   ✅ CL 45C 22 59: 0kg
+   ✅ KR 19 49 20: 0kg
+   ✅ AC 53 20 08: 0kg
+   ✅ AC 53 21 21: 0kg
+   ✅ KR 17 52 50: 0kg
+   ✅ CL 53 13 64: 0kg
+   ✅ CL 53 10 60: 0kg
+   ✅ CL 53 10 39: 0kg
+   ✅ CL 53 10 46: 0kg
+   ✅ CL 52 13 64: 0kg
+   ✅ CL 52 13 70: 0kg
+   ✅ KR 13 51 57: 0kg
+   ✅ KR 13 50 01: 0kg
+   ✅ KR 13 49 55: 0kg
+   ✅ KR 7 50 20: 0kg
+   ✅ KR 9 51 11: 0kg
+   ✅ KR 7 52 48: 0kg
+   ✅ KR 7 52 48: 0kg
+   ✅ TV 3C 49 02: 0kg
+   ✅ TV 3C 49 02: 0kg
+   ✅ TV 3C 49 02: 0kg
+   ✅ AK 7 47 50 LC 1: 0kg
+   ✅ KR 9 47 04: 0kg
+   ✅ CL 46 13 04: 0kg
+   ✅ AK 14 48 51: 0kg
+   ✅ CL 48 14 90: 0kg
+   ✅ CL 43 14 9: 0kg
+   ✅ KR 14 42 06: 0kg
+   ✅ CL 42 13 19: 0kg
+   ✅ KR 13 40B 74: 0kg
+   ✅ KR 13 40A 26: 0kg
+   ✅ KR 13 38 41: 0kg
+   ✅ CL 38 8 61: 0kg
+   ✅ CL 37 13A 19: 0kg
+   ✅ CL 34 14 52: 0kg
+   ✅ AK 32 79: 0kg
+   ✅ AC 32 15 31: 0kg
+   ✅ KR 16 31A 30: 0kg
+   ✅ CL 31 13A 51: 0kg
+   ✅ CL 28 13A 00: 0kg
+   ✅ CL 28 13A 00: 0kg
+   ✅ CL 28 13A 00: 0kg
+   ✅ KR 7 29 18: 0kg
+   ✅ KR 7 28 66: 0kg
+   ✅ KR 10 # 27 - 27: 0kg
+   ✅ KR 13 # 27 - 0: 0kg
+   ✅ KR 10 # 27 - 51: 0kg
+   ✅ KR 10A: 0kg
+   ✅ KR 10 23 66: 0kg
+   ✅ KR 13 23 56: 0kg
+   ✅ CL 22 9 08: 0kg
+   ✅ KR 7 22 47: 0kg
+   ✅ KR 7 21 52: 0kg
+   ✅ KR 8 21 39: 0kg
+   ✅ KR 8 20 39: 0kg
+   ✅ CL 21 5 74: 0kg
+   ✅ CL 21 4 40: 0kg
+   ✅ CL 21 4 40: 0kg
+   ✅ KR 4 18 72: 0kg
+   ✅ KR 4 18 42: 0kg
+   ✅ KR 3 18 32: 0kg
+   ✅ CL 19 2A 20: 0kg
+   ✅ CL 19 2A 10: 0kg
+   ✅ KR 3 19 10: 0kg
+   ✅ CL 18 1 07: 0kg
+   ✅ KR 1 12D 41: 0kg
+   ✅ KR 3 12B 86: 0kg
+   ✅ KR 5 15 50 Piso 3: 0kg
+   ✅ KR 6 15 32: 0kg
+   ✅ CL 16 6 66: 0kg
+   ✅ CL 16 6 66: 0kg
+   ✅ KR 8 15 46: 0kg
+   ✅ KR 9 16 21: 0kg
+   ✅ AK 10 15 54: 0kg
+   ✅ CL 17 12 68: 0kg
+   ✅ KR 10 No 17-72: 0kg
+   ✅ KR 9 17 84: 0kg
+   ✅ CL 23 5 93: 0kg
+   ✅ CL 23 4A 20: 0kg
+   ✅ CL 30C 3A 36: 0kg
+   ✅ KR 4BISA 32 19: 0kg
+   ✅ KR 13 32 76: 0kg
+   ✅ KR 13 33 58: 0kg
+   ✅ KR 7 34 86: 0kg
+   ✅ No registra: 0kg
+   ✅ KR 7 40B 45: 0kg
+   ✅ KR 7 40B 53: 0kg
+   ✅ AK 7 44 62: 0kg
+   ✅ KR 7 45 10: 0kg
+   ✅ KR 6 45 09: 0kg
+   ✅ CL 55 10 03: 0kg
+   ✅ KR 13 54 44: 0kg
+   ✅ AK 14 54 38: 0kg
+   ✅ CL 57 14 69: 0kg
+   ✅ KR 13 58 23: 0kg
+   ✅ CL 60 13A 19: 0kg
+   ✅ KR 13 60 67: 0kg
+   ✅ KR 13 60 66: 0kg
+   ✅ CL 61 7 78: 0kg
+   ✅ CL 63 7 09: 0kg
+   ✅ CL 63 7 09: 0kg
+   ✅ KR 7 63 44: 0kg
+   ✅ KR 8 63 31: 0kg
+   ✅ KR 10 64 28: 0kg
+   ✅ CL 64 11 10: 0kg
+   ✅ CL 67 10A 02: 0kg
+   ✅ CL 67 10A 02: 0kg
+   ✅ CL 67 10 06: 0kg
+   ✅ KR 11 67 32: 0kg
+   ✅ KR 10A 70 37: 0kg
+   ✅ KR 10A 70 37: 0kg
+   ✅ KR 7 71 21: 0kg
+   ✅ CL 72 5 38: 0kg
+   ✅ KR 7 74 09: 0kg
+   ✅ CL 77 7 11: 0kg
+   ✅ KR 7 78 96: 0kg
+   ✅ KR 7 82 62: 0kg
+   ✅ KR 11 91 16: 0kg
+   ✅ KR 11A 90 16: 0kg
+   ✅ CL 90 11A 40: 0kg
+   ✅ CL 93 13 20: 0kg
+   ✅ CL 93 13 71: 0kg
+   ✅ CL 93 14 50: 0kg
+   ✅ KR 15 93 57: 0kg
+   ✅ KR 14 93A 36: 0kg
+   ✅ CL 93B 13 47: 0kg
+   ✅ KR 14 94 49: 0kg
+   ✅ KR 14 94 65: 0kg
+   ✅ KR 15 94 72: 0kg
+   ✅ KR 15 94 07: 0kg
+   ✅ CL 94 15 45: 0kg
+   ✅ CL 93B 15 31: 0kg
+   ✅ CL 93B 16 31: 0kg
+   ✅ CL 93 16 20: 0kg
+   ✅ Calle 92 # 16-11: 0kg
+   ✅ CL 90 15 51: 0kg
+   ✅ KR 16 86B 65: 0kg
+   ✅ CL 86 19A 21: 0kg
+   ✅ AK 20 85A 21: 0kg
+   ✅ AUTOPISTA NORTE 86 47: 0kg
+   ✅ KR 14 L 87 35: 0kg
+   ✅ AK 20 89A 21: 0kg
+   ✅ CL 93A 11 30: 0kg
+   ✅ AK 11 93A 65: 0kg
+   ✅ CL 96 10 57: 0kg
+   ✅ KR 11 # 101-80: 0kg
+   ✅ KR 7 112 32: 0kg
+   ✅ AK 9 121 50: 0kg
+   ✅ CL 119 12 36: 0kg
+   ✅ AC 127 17A 19: 0kg
+   ✅ KR 18 C 125 36: 0kg
+   ✅ KR 47 123A 33: 0kg
+   ✅ KR 50 118 46: 0kg
+   ✅ CL 108 51 45: 0kg
+   ✅ CL 127A 53A 45: 0kg
+   ✅ CL 127A 53A 45: 0kg
+   ✅ CL 128 A 51 52: 0kg
+   ✅ CL 128 A 51 52: 0kg
+   ✅ CL 129 53 26: 0kg
+   ✅ KR 51 131 51: 0kg
+   ✅ KR 49 132 2: 0kg
+   ✅ KR 51 134A 52: 0kg
+   ✅ CL 136 45 A 44: 0kg
+   ✅ CL 138 45 80: 0kg
+   ✅ CL 144 45 16: 0kg
+   ✅ AUTOPISTA NORTE 146 - 48: 0kg
+   ✅ AK 45 149 29: 0kg
+   ✅ KR 46 152 46: 0kg
+   ✅ CL 150 50 37: 0kg
+   ✅ CL 147A 54 72: 0kg
+   ✅ CL 152 54 39: 0kg
+   ✅ CL 159 54 42: 0kg
+   ✅ CL 163B 50 80: 0kg
+   ✅ CL 167 48 55: 0kg
+   ✅ KR 23 166 43: 0kg
+   ✅ CL 166 22 41: 0kg
+   ✅ CL 164 23 40: 0kg
+   ✅ AK 45 168 30: 0kg
+   ✅ KR 21 169 62: 0kg
+   ✅ KR 19B 168 16: 0kg
+   ✅ KR 19B 168 16: 0kg
+   ✅ CL 172A 21A 18: 0kg
+   ✅ CL175 B 23-73: 0kg
+   ✅ CL 175 # 22 - 13: 0kg
+   ✅ CL 175 22 13: 0kg
+   ✅ CL 175 22 13: 0kg
+   ✅ CL 45 174 B 45: 0kg
+   ✅ AK 145 175 50: 0kg
+   ✅ CL 174A 45 24: 0kg
+   ✅ KR 45 176 31: 0kg
+   ✅ AK 45 176 31: 0kg
+   ✅ DG 182 20 91: 0kg
+   ✅ AK 45 183A 86: 0kg
+   ✅ AC 183 45 01: 0kg
+   ✅ CL 182 45 24: 0kg
+   ✅ CL 185 43 05: 0kg
+   ✅ CL 185 45 03: 0kg
+   ✅ CL 185 45 03: 0kg
+   ✅ AK 45 192 18: 0kg
+   ✅ CL 192 19 43: 0kg
+   ✅ KR 21 195 08: 0kg
+   ✅ KR 20 194 78: 0kg
+   ✅ AK 45 198 40: 0kg
+   ✅ AK 45 205 59: 0kg
+   ✅ CL 202 56 50: 0kg
+   ✅ AC 201 67 12: 0kg
+   ✅ Autopista Norte, Av. los Arrayanes Km. 1.6: 0kg
+   ✅ AC 222 55 09: 0kg
+   ✅ AC 222 55 09: 0kg
+   ✅ CL 222 54 30: 0kg
+   ✅ AK 45 232 35: 0kg
+   ✅ AK 7 - Cl 220: 0kg
+   ✅ AK 45 245 01: 0kg
+   ✅ KR 45 246 A 45: 0kg
+   ✅ AK 45 245 15: 0kg
+   ✅ Guaymaral lote 2 puente el otoño la lomita: 0kg
+   ✅ Av. Guaymaral: 0kg
+   ✅ Aeropuerto Guaymaral, Costado Sur Occidental: 0kg
+   ✅ CL 170 69 47: 0kg
+   ✅ CL 170 69 47: 0kg
+   ✅ KR 69 170 15: 0kg
+   ✅ AC 170 67 51: 0kg
+   ✅ AK 58 169A 55: 0kg
+   ✅ CL 167 58 30: 0kg
+   ✅ CL 167 58 30: 0kg
+   ✅ CL 165 56 34: 0kg
+   ✅ KR 62 162A 20: 0kg
+   ✅ KR 59 152 B 79: 0kg
+   ✅ AK 72 152B 60: 0kg
+   ✅ AK 72 152B 60: 0kg
+   ✅ AV Boyacá 142 A 55: 0kg
+   ✅ AK 72 146B 00: 0kg
+   ✅ AV BOYACA # 142 A - 55: 0kg
+   ✅ KR 59A # 79 - 30: 0kg
+   ✅ KR 58D 145 51 : 0kg
+   ✅ AC 138 59A 98: 0kg
+   ✅ Av. Boyaca 142 A - 55: 0kg
+   ✅ AC 138 58 74: 0kg
+   ✅ AK 58 137B 01: 0kg
+   ✅ CL 138 55 53: 0kg
+   ✅ AC 134 55 32: 0kg
+   ✅ KR 58 131A 16: 0kg
+   ✅ CL 129 57 78: 0kg
+   ✅ KR 58 128 A 43: 0kg
+   ✅ TV 60 128A 14: 0kg
+   ✅ TV 60 128A 58: 0kg
+   ✅ CL 128B 60 57: 0kg
+   ✅ TV 76 131 90: 0kg
+   ✅ AK 72 131 98: 0kg
+   ✅ CL 134 72 31: 0kg
+   ✅ TV 60 127D 09: 0kg
+   ✅ AC 127 60 26: 0kg
+   ✅ KR 70 D 127 48: 0kg
+   ✅ AC 127 70D 27: 0kg
+   ✅ AC 127 70D 85: 0kg
+   ✅ AK 58 127 59: 0kg
+   ✅ AK 58 127 59: 0kg
+   ✅ TV 60 122 03: 0kg
+   ✅ TV 60 120 85: 0kg
+   ✅ KR 76 89B 19: 0kg
+   ✅ DG 84 76 C 04: 0kg
+   ✅ DG 84A 82 56: 0kg
+   ✅ DG 82 C 75 A 76: 0kg
+   ✅ TV 73A 82 61: 0kg
+   ✅ TV 74 81C 05: 0kg
+   ✅ AK 72 73 A 31: 0kg
+   ✅ AC 72 72 43: 0kg
+   ✅ AK 72 71A 69: 0kg
+   ✅ KR 73A 70 18: 0kg
+   ✅ KR 73A 70 18: 0kg
+   ✅ Boyacá # 68 B 71: 0kg
+   ✅ AK 72 67 92: 0kg
+   ✅ KR 71B 69G 36: 0kg
+   ✅ KR 70B 64B 24: 0kg
+   ✅ AK 70 63 D 35: 0kg
+   ✅ KR 69L 63A 52: 0kg
+   ✅ KR 60 # 63A - 52: 0kg
+   ✅ KR 69F 63 01: 0kg
+   ✅ AV 63 68 95: 0kg
+   ✅ CL 53 70 91: 0kg
+   ✅ AC 53 71 43/03: 0kg
+   ✅ KR 71B 53 40: 0kg
+   ✅ AVENIDA BOYACÁ 53 - 12: 0kg
+   ✅ CL 53 72 49: 0kg
+   ✅ AC 53 73A 81: 0kg
+   ✅ CL 63 77 73: 0kg
+   ✅ KR 85D 46A 65: 0kg
+   ✅ CL 46A 85A 51: 0kg
+   ✅ AC 26 85B 09: 0kg
+   ✅ AC 26 # 85D - 55: 0kg
+   ✅ AC 26 90 10: 0kg
+   ✅ CL 26 92 32: 0kg
+   ✅ AC 26 92 32: 0kg
+   ✅ AK 86 # 55A - 75: 0kg
+   ✅ KR 89A 64C 30: 0kg
+   ✅ TV 93 53 48: 0kg
+   ✅ TV 93 63 76: 0kg
+   ✅ CL 64 93 11: 0kg
+   ✅ CL 64 93 11: 0kg
+   ✅ CL 66A 97 38: 0kg
+   ✅ KR 94 69A 08: 0kg
+   ✅ AK 96 70A 00: 0kg
+   ✅ AK 96 70A 89: 0kg
+   ✅ TV 99 70A 89 : 0kg
+   ✅ KR 99 A 71 A 37: 0kg
+   ✅ KR 101 71B 40: 0kg
+   ✅ CL 70 101 00: 0kg
+   ✅ CL 70 101 21: 0kg
+   ✅ CL 64 F 105 35: 0kg
+   ✅ KR 105 64D 05: 0kg
+   ✅ KR 103 26 - 92: 0kg
+   ✅ CL 26 102 20: 0kg
+   ✅ AC 26 100 Bis 70: 0kg
+   ✅ DG 24C 96B 65: 0kg
+   ✅ KR 100 24 27: 0kg
+   ✅ KR 100 23 G 41: 0kg
+   ✅ KR 96 G 23 A 8: 0kg
+   ✅ CL 23A 96F 52: 0kg
+   ✅ AK 97 22A 52: 0kg
+   ✅ KR 100 20 C 56: 0kg
+   ✅ KR 100 20 46: 0kg
+   ✅ KR 102 19 75: 0kg
+   ✅ KR 102 19 75: 0kg
+   ✅ KR 99 18A 25: 0kg
+   ✅ CL 18 99 38: 0kg
+   ✅ CL 17 97 32: 0kg
+   ✅ CL 17 98 05: 0kg
+   ✅ KR 98 16H 60: 0kg
+   ✅ KR 100 16I 21: 0kg
+   ✅ CL 17 # 100 - 57: 0kg
+   ✅ CL 16J 104 51: 0kg
+   ✅ KR 110 19A 21: 0kg
+   ✅ KR 110 19 A 21: 0kg
+   ✅ CL 22F 112 09: 0kg
+   ✅ CL 22F 112 09: 0kg
+   ✅ CL 22F 112 09: 0kg
+   ✅ CL 19A 114 14: 0kg
+   ✅ CL 19A 114 12: 0kg
+   ✅ KR 116 19A 51: 0kg
+   ✅ AK 116 22H 31: 0kg
+   ✅ CL 23G 111 16: 0kg
+   ✅ CL 23 D 110 8: 0kg
+   ✅ AC 26 # 106 - 74: 0kg
+   ✅ KR 104B 22J 15: 0kg
+   ✅ CL 22 H 104 B 61: 0kg
+   ✅ CL 22H 104B 61: 0kg
+   ✅ KR 107 22 F 25: 0kg
+   ✅ CL 22F 103 09: 0kg
+   ✅ CL 22F 103 09: 0kg
+   ✅ CL 22F 103 09: 0kg
+   ✅ CL 22F 103 09: 0kg
+   ✅ KR 96 G 17 B 49: 0kg
+   ✅ CL 20C 96C 51: 0kg
+   ✅ KR 98 16B 50: 0kg
+   ✅ DG 16 96I 78: 0kg
+   ✅ Av Centenario # 106-104: 0kg
+   ✅ KR 106 15A 25: 0kg
+   ✅ KR 106 15A 25: 0kg
+   ✅ KR 106 15A 25: 0kg
+   ✅ Avenida Centenario # 116 - 40: 0kg
+   ✅ CL 17 120 60: 0kg
+   ✅ CL 17F 126 70: 0kg
+   ✅ CL 17F 126 70: 0kg
+   ✅ AK 129 22B 57: 0kg
+   ✅ AK 129 22B 57: 0kg
+   ✅ KR 123 14A 11: 0kg
+   ✅ CL 26 S 93D 01: 0kg
+   ✅ CL 26 S 93D 12: 0kg
+   ✅ CL 38 S 94C 01: 0kg
+   ✅ CL 42 A SUR 94 B 3: 0kg
+   ✅ CL 42A S 88F 12: 0kg
+   ✅ AK 86 86 43 SUR: 0kg
+   ✅ AK 86 42B 01 S: 0kg
+   ✅ KR 86 40 B SUR 51: 0kg
+   ✅ DG 3 SUR 81 C 3: 0kg
+   ✅ CL 41 F SUR 80 H 26: 0kg
+   ✅ KR 79 42C 00 S: 0kg
+   ✅ KR 78p 42c 66sur : 0kg
+   ✅ AV P1 DE MAYO # 42C-10 SUR: 0kg
+   ✅ TV 78H 42C 10 S: 0kg
+   ✅ TV 78 # 41C-48: 0kg
+   ✅ TV 78H 42A 29 S: 0kg
+   ✅ TV 78 H 41 SUR 73: 0kg
+   ✅ TV 78J 41 70 S: 0kg
+   ✅ TV 78K 41A 04 S: 0kg
+   ✅ CL 41D S 78N 05: 0kg
+   ✅ KR 78 K 39 SUR 4: 0kg
+   ✅ CL 37 S 78J 21: 0kg
+   ✅ CL 35 # 80 - 35: 0kg
+   ✅ CL 35A S 78K 17: 0kg
+   ✅ KR 79B 35B 38 Sur: 0kg
+   ✅ AK 80 2 51: 0kg
+   ✅ TV 81 34A 53 S: 0kg
+   ✅ CL 2 83 64: 0kg
+   ✅ AK 86 26 48 S: 0kg
+   ✅ AV. CIUDAD DE CALI KR 86 37 - 08 SUR: 0kg
+   ✅ AK 86 6 37: 0kg
+   ✅ AK 86 6C 09: 0kg
+   ✅ KR 87B 6D 10: 0kg
+   ✅ KR 82A 6B 74: 0kg
+   ✅ KR 81 8A 49: 0kg
+   ✅ CL 8D 82B 20: 0kg
+   ✅ CL 10 86 58: 0kg
+   ✅ KR 7 128 40 Barrio Bella Suiza: 0kg
+   ✅ CL 10 86 58 : 0kg
+   ✅ KR 94 6C 30: 0kg
+   ✅ AC 12 79A 25: 0kg
+   ✅ CL 12 79A 25: 0kg
+   ✅ AK 72 12D 60: 0kg
+   ✅ AK 72 12D 60: 0kg
+   ✅ AV Boyacá 15 - 98: 0kg
+   ✅ CL 12B 71D 61: 0kg
+   ✅ CL 12B 71D 31: 0kg
+   ✅ KR 71F 12 81: 0kg
+   ✅ AC 13 69 64: 0kg
+   ✅ CL 15A 69 73: 0kg
+   ✅ AC 13 68F 25: 0kg
+   ✅ KR 68D 15 26: 0kg
+   ✅ CL 18 # 68D - 37: 0kg
+   ✅ CL 18 68D 72: 0kg
+   ✅ CL 19 68B 50: 0kg
+   ✅ CL 19 68A 45: 0kg
+   ✅ AK 68 19 81: 0kg
+   ✅ KR 65B 18 28: 0kg
+   ✅ KR 65B 17 59: 0kg
+   ✅ AK 68 17 64: 0kg
+   ✅ AV 68 16 A 07: 0kg
+   ✅ KR 65B 13 13: 0kg
+   ✅ CL 13 65 21: 0kg
+   ✅ AC 13 62 96: 0kg
+   ✅ CL 14 65 08: 0kg
+   ✅ KR 65 11 50: 0kg
+   ✅ KR 65 11 50 : 0kg
+   ✅ KR 65B 10 77: 0kg
+   ✅ CL 10 65 28: 0kg
+   ✅ CL 10 65 28: 0kg
+   ✅ CL 10 65 28: 0kg
+   ✅ AC 9 # 62 - 84: 0kg
+   ✅ AV. AMERICAS 62 84: 0kg
+   ✅ KR 60 10 76: 0kg
+   ✅ KR 58 9 81: 0kg
+   ✅ KR 55 14 31: 0kg
+   ✅ AC 13 53 16: 0kg
+   ✅ Av. de las Amércias 51-39: 0kg
+   ✅ AC 9 50 15: 0kg
+   ✅ AC 9 50 15: 0kg
+   ✅ AC 9 # 50 - 15: 0kg
+   ✅ CL 13 47 67: 0kg
+   ✅ KR 46 13 95: 0kg
+   ✅ KR 44 20 21: 0kg
+   ✅ KR 44 20A 42: 0kg
+   ✅ KR 43A 20B 07: 0kg
+   ✅ KR 44 20C 73: 0kg
+   ✅ CL 21 42 81: 0kg
+   ✅ AC 20 39 78: 0kg
+   ✅ AV Américas 39A 11: 0kg
+   ✅ KR 37 22 70: 0kg
+   ✅ AC 24 37 15: 0kg
+   ✅ KR 34 25 91: 0kg
+   ✅ KR 32 A 25 53: 0kg
+   ✅ KR 32 25B 90: 0kg
+   ✅ KR 32A 26A 10: 0kg
+   ✅ CL 26 A 32 A 60: 0kg
+   ✅ AK 30 25 90: 0kg
+   ✅ AK 30 25 90: 0kg
+   ✅ AK 30 25 90: 0kg
+   ✅ AK 30 # 25 - 90: 0kg
+   ✅ CL 39 29 75: 0kg
+   ✅ CL 36 # 28A - 41: 0kg
+   ✅ KR 27 26 31: 0kg
+   ✅ CL 26 24 34: 0kg
+   ✅ KR 24 26 24: 0kg
+   ✅ AC 26 25 07: 0kg
+   ✅ CL 24A 24 34: 0kg
+   ✅ CL 24 26 44: 0kg
+   ✅ KR 25 22 C 81: 0kg
+   ✅ KR 20 # 194 - 78: 0kg
+   ✅ AK 19 22C 07: 0kg
+   ✅ KR 19 17 25: 0kg
+   ✅ CL 16 16 68: 0kg
+   ✅ AC 13 16 40: 0kg
+   ✅ Av. Caracas 9-48: 0kg
+   ✅ KR 10 9 37: 0kg
+   ✅ CL 9 8 79: 0kg
+   ✅ KR 8 9 83: 0kg
+   ✅ KR 8 10 65: 0kg
+   ✅ CL 11 8 17: 0kg
+   ✅ KR 7 8 68: 0kg
+   ✅ KR 6 9 46: 0kg
+   ✅ CL 7 4 49 : 0kg
+   ✅ CL 6D 4 42: 0kg
+   ✅ CL 6D 4 42: 0kg
+   ✅ CL 7 6 70: 0kg
+   ✅ KR 7 6C 54: 0kg
+   ✅ CL 7 # 6 - 54: 0kg
+   ✅ KR 8 6C 38: 0kg
+   ✅ KR 7 6A 12: 0kg
+   ✅ KR 8 6 25: 0kg
+   ✅ KR 10 2 48: 0kg
+   ✅ CL 1 9 50: 0kg
+   ✅ CL 4 8 64: 0kg
+   ✅ KR 8 C 0 SUR 94: 0kg
+   ✅ KR 8 1C 50 SUR: 0kg
+   ✅ CL 7 Sur 10 86: 0kg
+   ✅ KR 9A 8 21 Sur: 0kg
+   ✅ KR 10 11 34 S: 0kg
+   ✅ KR 10 11 34 S: 0kg
+   ✅ KR 10 13 SUR 64: 0kg
+   ✅ KR 7 10 SUR 29: 0kg
+   ✅ DG 6 SUR 1 51: 0kg
+   ✅ KR 7 1D 12: 0kg
+   ✅ KR 3A BIS 3A 49: 0kg
+   ✅ KR 2 10 13: 0kg
+   ✅ KR 11 4 79: 0kg
+   ✅ KR 12 6 25: 0kg
+   ✅ CL 4 16 64: 0kg
+   ✅ CL 3 19 A 36: 0kg
+   ✅ AC 3 24 33: 0kg
+   ✅ CL 3 27 36: 0kg
+   ✅ AK 30 2B 53: 0kg
+   ✅ AK 30 2B 53: 0kg
+   ✅ AK 30 4 A 43: 0kg
+   ✅ CL 5B 31 52: 0kg
+   ✅ KR 31D 4 43: 0kg
+   ✅ CL 4 31D 30: 0kg
+   ✅ KR 33 4A 23: 0kg
+   ✅ KR 36 4 28: 0kg
+   ✅ CL 3 36 86: 0kg
+   ✅ KR 40 1H 24: 0kg
+   ✅ AC 8 S 40 62: 0kg
+   ✅ DG 16 SUR 50 23: 0kg
+   ✅ AK 50 18 06 S: 0kg
+   ✅ AK 50 18 06 S: 0kg
+   ✅ AK 50 18 06 S: 0kg
+   ✅ CL 30 Sur 50A 40: 0kg
+   ✅ CL 36 Sur 51 90: 0kg
+   ✅ KR 50C 38 08 SUR: 0kg
+   ✅ AC 45A S 50A 10: 0kg
+   ✅ AC 45A S 51B 24: 0kg
+   ✅ AUTOPISTA SUR # 51 D- 03: 0kg
+   ✅ CL 44 SUR 52 C 70: 0kg
+   ✅ Dg 45 c Sur 51 90: 0kg
+   ✅ CL 44A S 68B 30: 0kg
+   ✅ AV BOYACÁ 43A 62: 0kg
+   ✅ TV 72 D 43 A SUR 32: 0kg
+   ✅ CL 49 S 72C 30: 0kg
+   ✅ DG 57C Sur 62 60: 0kg
+   ✅ KR 63 57G 00 S: 0kg
+   ✅ KR 63 57G 74 S: 0kg
+   ✅ DG 57C Sur 64b 17: 0kg
+   ✅ AC 57R S 67 59: 0kg
+   ✅ CL 60 S 68B 23: 0kg
+   ✅ CL 57 B Sur 69 15: 0kg
+   ✅ Autopista Sur 77A 18: 0kg
+   ✅ AC 57R S 72D 12: 0kg
+   ✅ AUTOPISTA SUR 73: 0kg
+   ✅ Autopista Sur # 71 - 75: 0kg
+   ✅ DIAG 62 G Sur 71 I 01: 0kg
+   ✅ CL 64 SUR 71 F 77: 0kg
+   ✅ DG 62G S 72B 51: 0kg
+   ✅ KR 75A 62D 30 Sur: 0kg
+   ✅ KR 75B 61 60 S: 0kg
+   ✅ KR 74B 58 46 Sur: 0kg
+   ✅ KR 75 57 R SUR 8: 0kg
+   ✅ CL 57Q S 75F 82: 0kg
+   ✅ CL 65J S 64 12 S: 0kg
+   ✅ KR 77 M 65 A SUR 45: 0kg
+   ✅ CL 65 S 78F 01: 0kg
+   ✅ CL 65 S 78H 50: 0kg
+   ✅ CL 65 S 78H 51: 0kg
+   ✅ CL 65 S 78H 51: 0kg
+   ✅ CL 65 S 78L 65: 0kg
+   ✅ CL 65 S 80 05: 0kg
+   ✅ KR 80 A 65 SUR 36: 0kg
+   ✅ CL 65 S 80A 27: 0kg
+   ✅ KR 80I 61 05 S: 0kg
+   ✅ KR 80K 61 28 S: 0kg
+   ✅ CL 57B S 80D 22: 0kg
+   ✅ AC 55 S 79G 09: 0kg
+   ✅ KR 80 53 20 S: 0kg
+   ✅ KR 81H 53 21 S: 0kg
+   ✅ CL 50 82 55: 0kg
+   ✅ KR 82B 53B 06 S: 0kg
+   ✅ KR 82 B 53 B SUR 32: 0kg
+   ✅ AV.CIUDAD DE CALI 53-80 SUR: 0kg
+   ✅ CL 53 S 86C 06: 0kg
+   ✅ KR 87 49 12 S: 0kg
+   ✅ KR 88 C 54 C SUR 87: 0kg
+   ✅ CL 54F S 93C 45: 0kg
+   ✅ CL 54F SUR 94 18: 0kg
+   ✅ CL 54C Sur 98B 6: 0kg
+   ✅ CL 52 S 97C 35: 0kg
+   ✅ CL 52 SUR # 97 - 68: 0kg
+   ✅ CL 52 Sur 95A 10: 0kg
+   ✅ KR 95A 49C 80 S: 0kg
+   ✅ KR 100 52 -24 SUR: 0kg
+   ✅ CL 56F Sur 106 22: 0kg
+   ✅ KR 92 60 90 S: 0kg
+   ✅ KR 97 C 69 A - 08 SUR: 0kg
+   ✅ KR 98B 71 49 Sur: 0kg
+   ✅ CL 69 Sur 87B 42: 0kg
+   ✅ TV 86B 60 58 S: 0kg
+   ✅ KR 84 A 56 SUR 80: 0kg
+   ✅ CL 58BIS S 79 30: 0kg
+   ✅ CL 58BIS S 79 30: 0kg
+   ✅ CL 58BIS S 79 30: 0kg
+   ✅ CL 58BIS S 79 30: 0kg
+   ✅ CL 57A SUR 77K 91: 0kg
+   ✅ CL 49 Sur 78 66: 0kg
+   ✅ KR 74 42G 52 S: 0kg
+   ✅ KR 74 42G 52 S: 0kg
+   ✅ TV 73D 39A 95 S: 0kg
+   ✅ CL 40 S 77A 72: 0kg
+   ✅ KR 74 38 10 S: 0kg
+   ✅ CL 36 S 74 31: 0kg
+   ✅ CL 36 SUR 72 M 51: 0kg
+   ✅ AK 72 31 25 Sur: 0kg
+   ✅ TV 71D 6 94 S: 0kg
+   ✅ CL 8 S 71C 19: 0kg
+   ✅ TV 64 A 26 50 Sur: 0kg
+   ✅ KR 69C 24 76 Sur: 0kg
+   ✅ KR 69 31 SUR 24: 0kg
+   ✅ KR 69 31 46 SUR: 0kg
+   ✅ AC 26 Sur 68 H 14 Loc 1: 0kg
+   ✅ KR 69B 35 06 S: 0kg
+   ✅ CL 37B S 68F 17: 0kg
+   ✅ KR 68 38 C SUR 76: 0kg
+   ✅ AK 68 37 37 S: 0kg
+   ✅ AV 68 # 16 - 55: 0kg
+   ✅ CL 33 S 52A 77: 0kg
+   ✅ CL 33 S 52A 77: 0kg
+   ✅ AV 68 # 37 B - 31 SUR: 0kg
+   ✅ KR 52C 47A 16 S: 0kg
+   ✅ DG 49 S 53 39: 0kg
+   ✅ DG 49 SUR 53 85: 0kg
+   ✅ KR 53 50 02 S: 0kg
+   ✅ KR 54 50A 26 S: 0kg
+   ✅ DG 47A S 53B 27: 0kg
+   ✅ Av. Boyacá # 49 a sur 44: 0kg
+   ✅ CL 56A S 36A 09: 0kg
+   ✅ AV 56A Sur 33 09: 0kg
+   ✅ DG 58 S 29 54: 0kg
+   ✅ DG 52A S 27 11: 0kg
+   ✅ CL 48B S 27 05: 0kg
+   ✅ KR 27 47B 35 S: 0kg
+   ✅ KR 27 47B 35 S: 0kg
+   ✅ TV 26 A BIS 45 A SUR 50: 0kg
+   ✅ KR 24C # 48 - 94 Sur: 0kg
+   ✅ CL 42 Sur 24B 25: 0kg
+   ✅ CL 40A S 24B 31: 0kg
+   ✅ KR 24 35 37 Sur: 0kg
+   ✅ KR 24 32 A SUR 21: 0kg
+   ✅ CL 31C S 23C 07: 0kg
+   ✅ CL 32 S 23 62: 0kg
+   ✅ CL 30 S 21 32: 0kg
+   ✅ CL 27 S 21A 19: 0kg
+   ✅ CL 27 S 22 37: 0kg
+   ✅ KR 19C 26A 15 S: 0kg
+   ✅ CL 27 S 19 02: 0kg
+   ✅ CL 27A S 13 51: 0kg
+   ✅ KR 13 27 08 S: 0kg
+   ✅ KR 13 27 08 S: 0kg
+   ✅ KR 21 22 64 S: 0kg
+   ✅ KR 20 22 31 S: 0kg
+   ✅ KR 20 22 00 S: 0kg
+   ✅ TV 21A 21A 34 S: 0kg
+   ✅ TV 21A 19 59 S: 0kg
+   ✅ KR 24 18 90 S: 0kg
+   ✅ CL 18 S 18 20: 0kg
+   ✅ KR 18 17 27 S: 0kg
+   ✅ KR 18 16 39 Sur: 0kg
+   ✅ KR 17 14 18 Sur: 0kg
+   ✅ CL 16 S 16 03: 0kg
+   ✅ KR 19 14 17 S: 0kg
+   ✅ KR 24 15 04 S: 0kg
+   ✅ CL 19 S 24C 51: 0kg
+   ✅ CL 22 Sur 18 38: 0kg
+   ✅ AV 1 MAYO 18 - 03 SUR: 0kg
+   ✅ KR 12D 22 80 S: 0kg
+   ✅ KR 12C 19 11 Sur: 0kg
+   ✅ CL 19 S 10 73: 0kg
+   ✅ AV 1 DE MAYO # 10 BIS 22 SUR: 0kg
+   ✅ CL 24 SUR 7 32: 0kg
+   ✅ CL 23S 6 29: 0kg
+   ✅ CL 22A S 5A 34: 0kg
+   ✅ AV 1 de mayo 1 90 este: 0kg
+   ✅ CL 22 S 1 40 E: 0kg
+   ✅ CL 22D S 1 38 E: 0kg
+   ✅ TV 5 E 19 50 S: 0kg
+   ✅ KR 10 E 17B 46 S: 0kg
+   ✅ CL 17 A SUR 6 18 Este: 0kg
+   ✅ CL 27 S 5 72: 0kg
+   ✅ CL 27 S 5 55: 0kg
+   ✅ KR 5 29 01 S: 0kg
+   ✅ KR 5A 30D 19 S: 0kg
+   ✅ KR 5A 30D 19 S: 0kg
+   ✅ CL 32 SUR 7 A 39: 0kg
+   ✅ KR 10 31 29 S: 0kg
+   ✅ KR 10 30B 20 S: 0kg
+   ✅ KR 10 27 05 S: 0kg
+   ✅ KR 10 27 05 S: 0kg
+   ✅ KR 10 26 34 S: 0kg
+   ✅ CL 27 SUR 9 39: 0kg
+   ✅ KR 12D  26A - 62 Sur: 0kg
+   ✅ KR 13 31F 02 S: 0kg
+   ✅ KR 13B 31G 40 S: 0kg
+   ✅ AK 14 37 48 SUR: 0kg
+   ✅ KR 13B 42 89 S: 0kg
+   ✅ TV 14 49 04 S: 0kg
+   ✅ TV 14 49 04 S: 0kg
+   ✅ KR 13 F 52 SUR 56: 0kg
+   ✅ KR 16 B 55 37 SUR: 0kg
+   ✅ CL 47 Sur 17 20: 0kg
+   ✅ CL 57 SUR 19 43: 0kg
+   ✅ KR 18B 60G 00 S: 0kg
+   ✅ KR 18B 60 G 36 SUR: 0kg
+   ✅ Avenida Boyaca # 62 - 30 sur: 0kg
+   ✅ DG 64 A Bis Sur 17 B 31/3: 0kg
+   ✅ KR 17D BIS 4A 54 SUR: 0kg
+   ✅ KR 17G 67A 51 S: 0kg
+   ✅ KR 18C 66A 02 S: 0kg
+   ✅ TV 18JBISB 71 75 S: 0kg
+   ✅ KR 19 76A 5 Sur: 0kg
+   ✅ KR 19 76A 23 Sur: 0kg
+   ✅ KR 14 63 13 S: 0kg
+   ✅ CL 53 D sur 5 A 36: 0kg
+   ✅ 5 d 32 Cl 51 Sur: 0kg
+   ✅ CL 78 SUR 1 B 51: 0kg
+   ✅ KR 3 E 47 11 S: 0kg
+   ✅ KR 3 ESTE 50 B 00: 0kg
+   ✅ Carrera 3 Este No. 50 - 00 Sur: 0kg
+   ✅ CL 42B Sur 7 32 Este: 0kg
+   ✅ CL 37BISB S 2 81 E: 0kg
+   ✅ CL 30C Sur 1 52 Este: 0kg
+   ✅ CL 30C Sur 1 52 Este: 0kg
+   ✅ CL 36 S 4B 30: 0kg
+   ✅ CL 1 SUR 9 86: 0kg
+   ✅ CL 46 S 21 56: 0kg
+   ✅ CL 46 Sur 23 29: 0kg
+   ✅ DG 44 SUR 21 49: 0kg
+   ✅ CL 47B SUR 24B 33: 0kg
+   ✅ KR 24C 48 94 SUR: 0kg
+   ✅ CL 48C S 21 13: 0kg
+   ✅ KR 33 48C 02 S: 0kg
+   ✅ KR 33 48C 02 S: 0kg
+   ✅ KR 35 50 40 Sur: 0kg
+   ✅ KR 37 52 02 S: 0kg
+   ✅ KR 37 52 34 S: 0kg
+   ✅ KR 38A 34D 50 SUR: 0kg
+   ✅ CL 38A Sur # 34D - 50: 0kg
+   ✅ CL 38 A SUR 34 D 51: 0kg
+   ✅ Autopista Sur Calle 38 A Sur 07: 0kg
+   ✅ CL 38 A SUR 34D 51 : 0kg
+   ✅ AUTOPISTA SUR CON 38 A SUR: 0kg
+   ✅ AVENIDA KR 27 38A-83 SUR: 0kg
+   ✅ KR 27 31C 63 Sur: 0kg
+   ✅ CL 32 SUR 26 F 27: 0kg
+   ✅ KR 30 26 SUR 80: 0kg
+   ✅ CL 22 S 28 70: 0kg
+   ✅ KR 27 18 79 Sur: 0kg
+   ✅ CL 22 S 29A 50: 0kg
+   ✅ KR 29C 18 45 Sur: 0kg
+   ✅ DG 26 S 35 31: 0kg
+   ✅ KR 38B 16 45 Sur: 0kg
+   ✅ AC 8 S 36 21: 0kg
+   ✅ AC 8 S 36 21: 0kg
+   ✅ CL 8 S 32B 20: 0kg
+   ✅ CL 1F 33 65: 0kg
+   ✅ KR 32A 1H 06: 0kg
+   ✅ CL 1B 28 05: 0kg
+   ✅ AK 27 9 26 Sur: 0kg
+   ✅ CL 14 S 28 16: 0kg
+   ✅ CL 1F 27 08: 0kg
+   ✅ KR 24 6 33 sur: 0kg
+   ✅ CL 10 S 15 35: 0kg
+   ✅ KR 14 10 45 S: 0kg
+   ✅ CL 10 S 12B 31: 0kg
+   ✅ KR 14 6 46 SUR: 0kg
+   ✅ KR 14 6 04 S: 0kg
+   ✅ KR 13 2 56 S: 0kg
+   ✅ KR 14 1 85 S: 0kg
+   ✅ KR 14B 0 61 S: 0kg
+   ✅ CL 9 20 29: 0kg
+   ✅ KR 23 10 11: 0kg
+   ✅ KR 25A 10 78: 0kg
+   ✅ CL 9 26 70: 0kg
+   ✅ CL 10 27 56: 0kg
+   ✅ KR 28 8 96: 0kg
+   ✅ KR 30 8 74: 0kg
+   ✅ KR 30 10 77: 0kg
+   ✅ KR 31A 7 67: 0kg
+   ✅ CL 9 32 84: 0kg
+   ✅ CL 11A 34 50: 0kg
+   ✅ AK 36 11A 54: 0kg
+   ✅ CL 12B 36 81: 0kg
+   ✅ CL 13 37 35: 0kg
+   ✅ AC 13 37 35: 0kg
+   ✅ CL 13 42 10: 0kg
+   ✅ CL 17 42 09: 0kg
+   ✅ AK 39 19 68: 0kg
+   ✅ KR 34 17B 13: 0kg
+   ✅ CL 17 34 64: 0kg
+   ✅ KR 32 17 09: 0kg
+   ✅ CL 15 31 42: 0kg
+   ✅ AK 30 # 15 - 82: 0kg
+   ✅ AK 30 15 82: 0kg
+   ✅ CL 18A 28A 43: 0kg
+   ✅ CL 18A 28A 43: 0kg
+   ✅ AC 19 28 80: 0kg
+   ✅ CL 19 28 80: 0kg
+   ✅ CL 22 27 49: 0kg
+   ✅ CL 22 25 14: 0kg
+   ✅ AK 30 22C 10: 0kg
+   ✅ KR 30 22C 32: 0kg
+   ✅ CL 22B 30 32: 0kg
+   ✅ KR 33 19 60: 0kg
+   ✅ KR 32 17B 04: 0kg
+   ✅ KR 32 17B 04: 0kg
+   ✅ KR 32 17B 04: 0kg
+   ✅ KR 32 12 81: 0kg
+   ✅ AC 13 27: 0kg
+   ✅ AK 27 13 50: 0kg
+   ✅ CL 12B 26 50: 0kg
+   ✅ CL 12B 26 50: 0kg
+   ✅ KR 24 12 32: 0kg
+   ✅ CL 10 # 18 - 75: 0kg
+   ✅ CL 13 13 13: 0kg
+   ✅ KR 13 12 19: 0kg
+   ✅ KR 17 25 25: 0kg
+   ✅ TV 17 25 25: 0kg
+   ✅ CL 28A 15 09: 0kg
+   ✅ AC 28 19B 11: 0kg
+   ✅ AC 28 # 19B - 11: 0kg
+   ✅ KR 19 34 11: 0kg
+   ✅ KR 19 34 11: 0kg
+   ✅ KR 30 CL 57 LC 9: 0kg
+   ✅ KR 16 59 54: 0kg
+   ✅ CL 63 A # 16 A 55: 0kg
+   ✅ CL 67 7 35: 0kg
+   ✅ KR 7 67 28: 0kg
+   ✅ CL 67 5 27: 0kg
+   ✅ KR 4 67 87: 0kg
+   ✅ KR 2 E 61 05: 0kg
+   ✅ AV Circunvalar 60 00: 0kg
+   ✅ KR 4ABIS E 57 51: 0kg
+   ✅ KR 2 56 40: 0kg
+   ✅ KR 7 56 29: 0kg
+   ✅ KR 5 59A 44: 0kg
+   ✅ KR 16A 75 29: 0kg
+   ✅ KR 29 B 77 48: 0kg
+   ✅ AK 30 # 78 - 20: 0kg
+   ✅ AK 30 78 20: 0kg
+   ✅ KR 54 76 20: 0kg
+   ✅ KR 55 75 40: 0kg
+   ✅ KR 55 B 76 45: 0kg
+   ✅ KR 55B 79B 40: 0kg
+   ✅ CLL 80 58 00: 0kg
+   ✅ KR 77 G 60 17: 0kg
+   ✅ KR 64 74 56: 0kg
+   ✅ CL 72 62 81: 0kg
+   ✅ CL 72 64 62: 0kg
+   ✅ KR 60 67 B 21: 0kg
+   ✅ KR 56B 65 63: 0kg
+   ✅ AK 60 63 81: 0kg
+   ✅ Avenida KR 68 con CL 66: 0kg
+   ✅ CL 72 68H 19: 0kg
+   ✅ CL 73 69 54: 0kg
+   ✅ AC 72 69 C 24: 0kg
+   ✅ KR 69J 73 02: 0kg
+   ✅ AC 72 69K 06: 0kg
+   ✅ KR 70 71 25: 0kg
+   ✅ KR 74 66B 28: 0kg
+   ✅ KR 77 A 65 A 4: 0kg
+   ✅ KR 77A 64I 39: 0kg
+   ✅ TV 85 64B 18: 0kg
+   ✅ CL 68 91 20: 0kg
+   ✅ CL 71 BIS 86A 16: 0kg
+   ✅ CL 72A 87 18: 0kg
+   ✅ KR 88 72A 36: 0kg
+   ✅ AC 72 90 00: 0kg
+   ✅ AK 86 74 A 26: 0kg
+   ✅ AC 72 82 57: 0kg
+   ✅ AC 72 81A 20: 0kg
+   ✅ KR 78A 70 54: 0kg
+   ✅ CL 70 77C 05: 0kg
+   ✅ CL 71B 75 66: 0kg
+   ✅ CL 84 Bis 92 16: 0kg
+   ✅ KR 91 127 63: 0kg
+   ✅ KR 91 127 63: 0kg
+   ✅ DG 127 87 51: 0kg
+   ✅ AK 91 129f 20: 0kg
+   ✅ CL 129B 92B 11: 0kg
+   ✅ AC 132 95 A 10: 0kg
+   ✅ KR 98 136 64: 0kg
+   ✅ CL 139 94 55: 0kg
+   ✅ CL 139 94 55: 0kg
+   ✅ CL 145 91 - 19: 0kg
+   ✅ AC 145 91 19: 0kg
+   ✅ AC 145 92 30: 0kg
+   ✅ Calle 145 #91-34: 0kg
+   ✅ CL 145B 91 35: 0kg
+   ✅ KR 92 146 02: 0kg
+   ✅ CL 146B 91 44: 0kg
+   ✅ KR 92 146C 24: 0kg
+   ✅ CL 147 90 54: 0kg
+   ✅ CL 146CBIS 90 57: 0kg
+   ✅ CL 146A 94A 05: 0kg
+   ✅ KR 94 D 145 39: 0kg
+   ✅ AC 145 94D 30: 0kg
+   ✅ CL 145 94 D 60: 0kg
+   ✅ KR 92 147C 02: 0kg
+   ✅ KR 92 147D 06: 0kg
+   ✅ KR 92 148 28: 0kg
+   ✅ KR 92 148 28: 0kg
+   ✅ KR 92 151B 98: 0kg
+   ✅ CL 154A 94 91: 0kg
+   ✅ KR 99 154 57: 0kg
+   ✅ KR 99 154 57: 0kg
+   ✅ KR 99 155D 70: 0kg
+   ✅ KR 92 159A 6: 0kg
+   ✅ TV 77 162 12: 0kg
+   ✅ CL 167 73 02: 0kg
+   ✅ AC 170 54A 10: 0kg
+   ✅ CL 174 54 C 28: 0kg
+   ✅ CL 183 A 11 8: 0kg
+   ✅ CL 188 13 15: 0kg
+   ✅ CL 188BIS 8C 15: 0kg
+   ✅ KR 8 C 186 72: 0kg
+   ✅ KR 8 C 185B 06: 0kg
+   ✅ KR 9 a 192 60 Local 6: 0kg
+   ✅ KR 7 180 75: 0kg
+   ✅ KR 7 179 03: 0kg
+   ✅ KR 8 167D 88: 0kg
+   ✅ CL 165 7 52: 0kg
+   ✅ CL 165 8A 43: 0kg
+   ✅ CL 166 8 F 93: 0kg
+   ✅ CL 163 8F 57: 0kg
+   ✅ KR 8 G 162 40: 0kg
+   ✅ CL 163A 13B 60: 0kg
+   ✅ KR 14B 160 42: 0kg
+   ✅ KR 16A 160 42: 0kg
+   ✅ CL 161 16 D 35: 0kg
+   ✅ KR 17 163A 23: 0kg
+   ✅ CL 164 16 A 49: 0kg
+   ✅ AV BOYACÁ # 163 - 31: 0kg
+   ✅ KR 17 151 44: 0kg
+   ✅ CL 150 16 56: 0kg
+   ✅ KR 19 150 41: 0kg
+   ✅ KR 18B 145 62: 0kg
+   ✅ KR 19 143A 38: 0kg
+   ✅ KR 18 143 39: 0kg
+   ✅ CL 140 18A 70: 0kg
+   ✅ AK 19 139 02: 0kg
+   ✅ KR 18 136 A 14: 0kg
+   ✅ CL 134 bis 19 05: 0kg
+   ✅ KR 14 134A 65: 0kg
+   ✅ CL 140 13 27: 0kg
+   ✅ CL 140 12 B 90: 0kg
+   ✅ CL 140 12B 61: 0kg
+   ✅ KR 11 140 29: 0kg
+   ✅ KR 11 140 04: 0kg
+   ✅ CL 140 10A 71: 0kg
+   ✅ KR 11 138 18: 0kg
+   ✅ KR 9 139 47: 0kg
+   ✅ CL 140 7C 50: 0kg
+   ✅ KR 7 A 140 37: 0kg
+   ✅ KR 7 138 33: 0kg
+   ✅ KR 7BBIS 132 11: 0kg
+   ✅ AC 134 7B 83: 0kg
+   ✅ AC 134 7B 83: 0kg
+   ✅ AC 134 9 51: 0kg
+   ✅ KR 7 128 40: 0kg
+   ✅ AC 147 7 70: 0kg
+   ✅ CL 148 7B 65: 0kg
+   ✅ CL 151 7B 02: 0kg
+   ✅ KR 7A 151 05: 0kg
+   ✅ KR 7A 151 80: 0kg
+   ✅ CL 152 7 64: 0kg
+   ✅ CL 156 7B 37: 0kg
+   ✅ KR 7B BIS 155A 45: 0kg
+   ✅ CL 158 7 B 69: 0kg
+   ✅ KR 7 156 10: 0kg
+   ✅ AK 7 155C 20: 0kg
+   ✅ KR 7 155C 20: 0kg
+   ✅ KR 7 155C 22 piso 37 y 38: 0kg
+   ✅ CL 152 9 08: 0kg
+   ✅ CL 147 9 53: 0kg
+   ✅ CL 156 8F 40: 0kg
+   ✅ AC 147 14 85: 0kg
+   ✅ KR 45A 130 34: 0kg
+   ✅ KR 46 129 31: 0kg
+   ✅ AK 45 128C 61: 0kg
+   ✅ CL 127D 45 81: 0kg
+   ✅ CL 146 80 69: 0kg
+   ✅ KR 84C 145 50: 0kg
+   ✅ KR 84C 145 50: 0kg
+   ✅ KR 88 139 21: 0kg
+   ✅ AC 145 88 24: 0kg
+   ✅ KR 91 136 04: 0kg
+   ✅ TV 91 135 56: 0kg
+   ✅ KR 91 134A 4: 0kg
+   ✅ KR 91 134 A 04: 0kg
+   ✅ CL 134A 91 03: 0kg
+   ✅ CL 132 103 C 41: 0kg
+   ✅ KR 106 131 57: 0kg
+   ✅ CL 130A 104 06: 0kg
+   ✅ KR 102A 129D 13: 0kg
+   ✅ CL 128 98A 01: 0kg
+   ✅ CL 139 103 C 73: 0kg
+   ✅ CL 139 103C 2: 0kg
+   ✅ CL 139 103 C 02: 0kg
+   ✅ AK 104 140C 11: 0kg
+   ✅ CL 142 104 60: 0kg
+   ✅ CL 142 104 60: 0kg
+   ✅ AC 145 103B 69: 0kg
+   ✅ AC 145 103B 90: 0kg
+   ✅ AC 145 104 00: 0kg
+   ✅ AC 145 104: 0kg
+   ✅ AK 104 148 07: 0kg
+   ✅ CL 150C 103F 37: 0kg
+   ✅ KR 103C 150C 07: 0kg
+   ✅ KR 103C 150C 07: 0kg
+   ✅ KR 103B 152 41: 0kg
+   ✅ AC 153 103B 76: 0kg
+   ✅ Cl 147c #101 98: 0kg
+   ✅ CL 147 101 56: 0kg
+   ✅ CL 139 108 04: 0kg
+   ✅ KR 111 143A 28: 0kg
+   ✅ KR 114D 145 24: 0kg
+   ✅ AC 146A 106 20: 0kg
+   ✅ AC 145 145 10: 0kg
+   ✅ TV 138 139 35: 0kg
+   ✅ KR 129 132 30: 0kg
+   ✅ KR 127 132 30: 0kg
+   ✅ KR 136 131B 05: 0kg
+   ✅ KR 136 131B 05: 0kg
+   ✅ CL 132D 152 65: 0kg
+   ✅ TV 127 137 16: 0kg
+   ✅ CL 139 126: 0kg
+   ✅ CL 132 123A 22: 0kg
+   ✅ CL 132 123A 12: 0kg
+   ✅ CL 78B 120A 56: 0kg
+   ✅ CL 77B 120A 51: 0kg
+   ✅ CL 70B 111 85: 0kg
+   ✅ KR 90 23J 22: 0kg
+   ✅ CL 23 83 94: 0kg
+   ✅ KR 82 23 A 57: 0kg
+   ✅ AC 24 80 B 49: 0kg
+   ✅ AC 24 80B 23: 0kg
+   ✅ KR 75 A 23 F - 30: 0kg
+   ✅ KR 74 24A 02: 0kg
+   ✅ KR 75 24 D 49: 0kg
+   ✅ CL 25G 74B 51: 0kg
+   ✅ CL 25G 73B 90: 0kg
+   ✅ Avenida Boyacá # 48 A 76: 0kg
+   ✅ AK 72 # 48A - 76: 0kg
+   ✅ AC 26 71A 16: 0kg
+   ✅ CL 26 69D 91: 0kg
+   ✅ CL 26 69C 03: 0kg
+   ✅ AC 26 69B 53: 0kg
+   ✅ AC 26 69 63: 0kg
+   ✅ AC 26 69 01: 0kg
+   ✅ AC 26 69 01: 0kg
+   ✅ AC 26 69 01: 0kg
+   ✅ CL 26 68C 61: 0kg
+   ✅ AC 26 59 70: 0kg
+   ✅ KR 68 B BIS # 44 - 58: 0kg
+   ✅ AC 26 68B 01: 0kg
+   ✅ KR 68B 25B 80: 0kg
+   ✅ KR 68D 24A 51: 0kg
+   ✅ KR 68B 24 39: 0kg
+   ✅ AK 68D 23B 12: 0kg
+   ✅ CL 22C68F 20: 0kg
+   ✅ DG 23 69 00: 0kg
+   ✅ DG 23 69 00: 0kg
+   ✅ DG 23 69 00: 0kg
+   ✅ CL 19 A 72 57 : 0kg
+   ✅ AV Boyaca 17A 23: 0kg
+   ✅ KR 71 17A 11: 0kg
+   ✅ KR 78 17 57: 0kg
+   ✅ KR 78 17 57: 0kg
+   ✅ CL 20 82 52 : 0kg
+   ✅ CL 20 82 52: 0kg
+   ✅ AK 86 19A 50: 0kg
+   ✅ CL 18 86 25: 0kg
+   ✅ AC 17 86 75: 0kg
+   ✅ KR 75 8B 89: 0kg
+   ✅ AK 72 7F 35: 0kg
+   ✅ KR 71G 6D 22: 0kg
+   ✅ AC 6 71C 29: 0kg
+   ✅ AK 72 3A 38: 0kg
+   ✅ KR 72 3 A 34: 0kg
+   ✅ KR 71D 1 14 S: 0kg
+   ✅ CL 2 69F 6: 0kg
+   ✅ CL 19 S 69C 17: 0kg
+   ✅ KR 70 21 15 Sur: 0kg
+   ✅ CL 8 S 68B 60: 0kg
+   ✅ CL 4 S 68A 03: 0kg
+   ✅ CL 4 S 68A 03: 0kg
+   ✅ KR 56 4B 84: 0kg
+   ✅ CL 5C 53D 05: 0kg
+   ✅ AK 50 5C 76: 0kg
+   ✅ KR 46 12 30: 0kg
+   ✅ AK 50 17 15: 0kg
+   ✅ CL 22 55 30: 0kg
+   ✅ KR 5 # 22 - 41: 0kg
+   ✅ AC 24 48 50: 0kg
+   ✅ AC 24 51 40: 0kg
+   ✅ AC 26 51 53: 0kg
+   ✅ AC 26 51 20: 0kg
+   ✅ AC 26 51 50: 0kg
+   ✅ CL 26 51 80: 0kg
+   ✅ KR 54 26 25: 0kg
+   ✅ CL 43 57 14: 0kg
+   ✅ KR 59 43 05: 0kg
+   ✅ CL 45 # 54 - 91: 0kg
+   ✅ KR 54 44 21: 0kg
+   ✅ CL 44 53 37: 0kg
+   ✅ CL 44 50 62: 0kg
+   ✅ CL 44 50 52: 0kg
+   ✅ CL 44 50 51: 0kg
+   ✅ CL 44 50 51: 0kg
+   ✅ KR 45 26 85: 0kg
+   ✅ KR 45 26 29: 0kg
+   ✅ AC 26 59 00: 0kg
+   ✅ AC 26 59 00: 0kg
+   ✅ AC 26 59 51: 0kg
+   ✅ KR 22 62 49: 0kg
+   ✅ AC 26 66 63: 0kg
+   ✅ AC 26 66 63: 0kg
+   ✅ AC 26 66A 48: 0kg
+   ✅ KR 67A 42 28: 0kg
+   ✅ KR 60 24 09: 0kg
+   ✅ AC24 #60-50: 0kg
+   ✅ AC 24 59 20: 0kg
+   ✅ AV 68 49A 47: 0kg
+   ✅ AV 68 49A 47: 0kg
+   ✅ AK 60 57 60: 0kg
+   ✅ AK 60 57 60: 0kg
+   ✅ KR 55 73 35: 0kg
+   ✅ AK 68 75A 50: 0kg
+   ✅ DG 47 77A 09: 0kg
+   ✅ CL 51 74B 23: 0kg
+   ✅ Avenida Américas # 64 - 89: 0kg
+   ✅ AC 9 65 09: 0kg
+   ✅ AC 9 65 09: 0kg
+   ✅ KR 67 4G 68: 0kg
+   ✅ KR 67 4G 31: 0kg
+   ✅ CL 4 G 66 2: 0kg
+   ✅ AV AMERICAS 8 86: 0kg
+   ✅ AC 6 # 68A - 94: 0kg
+   ✅ CL 6A 70 44: 0kg
+   ✅ CL 9D 69B 63: 0kg
+   ✅ CL 6A 78A 68: 0kg
+   ✅ TV 78C 6 39: 0kg
+   ✅ Cl 6 A #78-68: 0kg
+   ✅ CL 5C 78H 03: 0kg
+   ✅ KR 80 43 43 S: 0kg
+   ✅ CL 46 S 81B 03: 0kg
+   ✅ CL 68 S 78H 37: 0kg
+   ✅ CL 65J S 77K 24: 0kg
+   ✅ CL 70A S 80I 15: 0kg
+   ✅ KR 81 72 38 Sur: 0kg
+   ✅ CL 73 S 81B 10: 0kg
+   ✅ CL 80 SUR 79 A 6: 0kg
+   ✅ KR 78B 76A 4 Sur: 0kg
+   ✅ CL 68B S 77 23: 0kg
+   ✅ KR 85K 46A 45: 0kg
+   ✅ CL 82 S 44 09: 0kg
+   ✅ CL 75 S 34 05: 0kg
+   ✅ KR 46 73A 48: 0kg
+   ✅ TV 53 70 40 Sur: 0kg
+   ✅ DG 70 S 54 05: 0kg
+   ✅ TV 50 70 01 S: 0kg
+   ✅ AC 68 SUR 46 A 10: 0kg
+   ✅ CL 59B S 49B 23: 0kg
+   ✅ CL 58D S 51 10: 0kg
+   ✅ CL 59C S 51 21: 0kg
+   ✅ CL 59 C Sur 81 21: 0kg
+   ✅ DG 68D Sur 70C 31: 0kg
+   ✅ CL 70A S 44 20: 0kg
+   ✅ TV 36 59B 59 S: 0kg
+   ✅ AC 61 Sur 20B 60: 0kg
+   ✅ DG 62 Sur 21A 60: 0kg
+   ✅ Autopista Sur 66 78: 0kg
+   ✅ KR 34 6 57: 0kg
+   ✅ CL 7 36 05: 0kg
+   ✅ DG 7 38 37: 0kg
+   ✅ DG 7 # 38 - 37: 0kg
+   ✅ CL 9 39 46: 0kg
+   ✅ KR 39 10 08: 0kg
+   ✅ KR 38 9 32: 0kg
+   ✅ CL 5 C 41 A 5: 0kg
+   ✅ KR 7 E 5 57: 0kg
+   ✅ AK 9 EST 36 A SUR 12: 0kg
+   ✅ KR 11C ESTE 72 01 SUR: 0kg
+   ✅ KR 68 B 12 A 20: 0kg
+   ✅ CL 71 Sur 14G 63: 0kg
+   ✅ DG 76 B 1C 40 sur: 0kg
+   ✅ AV KR 1A # 76 A 04 SUR: 0kg
+   ✅ AVENIDA USME KR 1 76 A- 22 SUR: 0kg
+   ✅ CL 97 A Sur 8 70: 0kg
+   ✅ AV usme 96a 97 sur: 0kg
+   ✅ KR 3D 100 45 S: 0kg
+   ✅ CL 90C S 0 03: 0kg
+   ✅ KR 6 65D 58 S: 0kg
+   ✅ KR 6 65D 58 S: 0kg
+   ✅ k.m. 7 Vía San Juan de Sumapaz: 0kg

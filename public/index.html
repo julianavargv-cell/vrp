@@ -1,0 +1,3228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECONECTA - Optimización de Rutas VRP</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c5530 0%, #27ae60 50%, #2ecc71 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Estilos para logos SVG */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px 0;
+            border-bottom: 2px solid #27ae60;
+        }
+
+        .main-logo {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .logo-image {
+            max-width: 200px;
+            height: auto;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .system-info {
+            flex: 1;
+            text-align: center;
+        }
+
+        .system-info h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .system-info p {
+            color: #34495e;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .system-info p:last-child {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        /* Responsive para logos */
+        @media (max-width: 768px) {
+            .main-logo {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .logo-image {
+                max-width: 150px;
+            }
+            
+            .system-info {
+                text-align: center;
+            }
+            
+            .system-info h1 {
+                font-size: 1.8em;
+            }
+            
+            .system-info p {
+                font-size: 1em;
+            }
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #34495e;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: stretch; /* Hace que ambas columnas tengan la misma altura */
+            min-height: 600px; /* Altura mínima para que se vea bien */
+        }
+
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 50%;
+            flex: 1;
+            min-height: 100%; /* Asegura que ocupe toda la altura disponible */
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            flex: 1;
+            gap: 20px;
+            min-height: 100%; /* Asegura que ocupe toda la altura disponible */
+        }
+
+        .map-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0; /* Permite que el mapa se ajuste */
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-section h2 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .map-section #map {
+            flex: 1;
+            min-height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .calculate-routes-button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculate-routes-button-container .btn {
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 768px) {
+            .calculate-routes-button-container > div {
+                flex-direction: column !important;
+            }
+            
+            .calculate-routes-button-container .btn {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+        
+        /* Responsive: En pantallas pequeñas, volver a vertical */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .left-column,
+            .right-column {
+                width: 100%;
+            }
+            
+            .map-section #map {
+                min-height: 400px;
+            }
+        }
+
+        .upload-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-section h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.6em;
+        }
+
+        .file-upload {
+            border: 2px dashed #3498db;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: #f8f9fa;
+        }
+
+        .file-upload:hover {
+            border-color: #2980b9;
+            background: #e3f2fd;
+        }
+
+        .file-upload.dragover {
+            border-color: #27ae60;
+            background: #e8f5e8;
+        }
+
+        .file-upload i {
+            font-size: 1.5em;
+            color: #3498db;
+            margin-bottom: 8px;
+        }
+
+        .file-upload p {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .file-upload .btn {
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #2c5530, #27ae60);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 85, 48, 0.4);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #2c5530, #27ae60);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+        }
+
+        .btn-success:hover {
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #d4a574, #c49660);
+        }
+
+        .btn-warning:hover {
+            box-shadow: 0 5px 15px rgba(212, 165, 116, 0.4);
+        }
+
+        .map-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            min-height: 400px;
+        }
+
+        /* Estilos personalizados para clusters de marcadores */
+        .marker-cluster {
+            background-color: rgba(46, 204, 113, 0.6);
+            border-radius: 50%;
+            border: 3px solid #27ae60;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .marker-cluster:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .marker-cluster-small {
+            background-color: rgba(46, 204, 113, 0.6);
+            width: 40px;
+            height: 40px;
+            font-size: 14px;
+        }
+
+        .marker-cluster-medium {
+            background-color: rgba(52, 152, 219, 0.6);
+            border-color: #3498db;
+            width: 50px;
+            height: 50px;
+            font-size: 16px;
+        }
+
+        .marker-cluster-large {
+            background-color: rgba(241, 196, 15, 0.6);
+            border-color: #f39c12;
+            width: 60px;
+            height: 60px;
+            font-size: 18px;
+        }
+
+        .marker-cluster div {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .marker-cluster span {
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .controls-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .controls-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading i {
+            font-size: 2em;
+            color: #3498db;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Estilos para barra de progreso */
+        .progress-container {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .progress-bar-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 25px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            border-radius: 15px;
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 2px 8px rgba(46, 204, 113, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-text {
+            font-weight: bold;
+            color: #2c3e50;
+            min-width: 45px;
+            text-align: right;
+            font-size: 0.9em;
+        }
+
+        .progress-label {
+            margin: 0;
+            color: #7f8c8d;
+            font-size: 0.85em;
+            text-align: center;
+        }
+
+        /* Estilos para indicadores del ruteo */
+        .routing-indicators {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .indicator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .indicator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .indicator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .indicator-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+
+        .indicator-content {
+            flex: 1;
+        }
+
+        .indicator-content h3 {
+            margin: 0 0 8px 0;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .indicator-value {
+            margin: 0;
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .residue-percentages {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .residue-percentages h3 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .route-plan-preview {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .route-plan-preview h3 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+            overflow-x: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .route-plan-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        .route-plan-table thead {
+            position: sticky;
+            top: 0;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            z-index: 10;
+        }
+
+        .route-plan-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+            border-bottom: 2px solid #229954;
+        }
+
+        .route-plan-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .route-plan-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .route-plan-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .route-plan-table tbody tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        .route-plan-table tbody tr:nth-child(even):hover {
+            background-color: #f0f0f0;
+        }
+
+        .residue-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .residue-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 10px;
+            border-left: 5px solid #27ae60;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .residue-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .residue-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .residue-item .residue-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.95em;
+            flex: 1;
+        }
+
+        .residue-item .residue-percentage {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #27ae60;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .residue-bar-container {
+            width: 100%;
+            height: 25px;
+            background: #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .residue-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            border-radius: 12px;
+            transition: width 0.8s ease;
+            box-shadow: 0 2px 4px rgba(46, 204, 113, 0.3);
+        }
+
+        .route-info {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .route-info h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .route-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .stat-card .label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+
+        /* Estilos para tabla de historial */
+        .historial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .historial-table th {
+            background: linear-gradient(45deg, #2c5530, #27ae60);
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .historial-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.85em;
+        }
+
+        .historial-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .historial-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Estilos para menú de tres puntos */
+        .actions-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .menu-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 1.2em;
+            color: #7f8c8d;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .menu-toggle:hover {
+            background: #f0f0f0;
+            color: #2c3e50;
+        }
+
+        .menu-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 180px;
+            z-index: 1000;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .menu-dropdown.show {
+            display: block;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            border: none;
+            width: 100%;
+            text-align: left;
+            background: white;
+            font-size: 0.85em;
+        }
+
+        .menu-item:hover {
+            background: #f8f9fa;
+        }
+
+        .menu-item i {
+            margin-right: 8px;
+            width: 18px;
+            text-align: center;
+        }
+
+        .menu-item.view {
+            color: #3498db;
+        }
+
+        .menu-item.delete {
+            color: #e74c3c;
+        }
+
+        .menu-item.delete:hover {
+            background: #fee;
+        }
+
+        /* Estilos para análisis detallado */
+        .analysis-detail {
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .analysis-detail h4 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .analysis-item {
+            margin: 8px 0;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .analysis-item strong {
+            color: #34495e;
+        }
+
+        /* Estilos para la leyenda de colores */
+        .legend-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .legend-panel h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .legend-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .legend-section {
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+
+        .legend-section h4 {
+            color: #34495e;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .legend-item span {
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        /* Estilos para gestión de vehículos */
+        .vehicle-management-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .vehicle-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .current-vehicles h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .vehicles-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .vehicle-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .vehicle-card:hover {
+            border-color: #27ae60;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.2);
+        }
+
+        .vehicle-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .vehicle-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.9em;
+        }
+
+        .vehicle-info span {
+            color: #7f8c8d;
+        }
+
+        .vehicle-info strong {
+            color: #2c3e50;
+        }
+
+        .no-vehicles {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 20px;
+            grid-column: 1 / -1;
+        }
+
+        /* Estilos para modales */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            border-bottom: 2px solid #e9ecef;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.4em;
+        }
+
+        .close {
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #e74c3c;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            padding: 20px 30px;
+            border-top: 2px solid #e9ecef;
+            background: #f8f9fa;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #27ae60;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+        }
+
+        .vehicles-edit-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .vehicle-edit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+        }
+
+        .vehicle-edit-info {
+            flex: 1;
+        }
+
+        .vehicle-edit-info h4 {
+            margin: 0 0 5px 0;
+            color: #2c3e50;
+        }
+
+        .vehicle-edit-info p {
+            margin: 0;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        .vehicle-edit-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-edit:hover {
+            background: linear-gradient(135deg, #2980b9, #21618c);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .vehicle-edit-form {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .vehicle-edit-display {
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+
+        .btn-delete:hover {
+            background: #c0392b;
+        }
+
+        /* Responsive para logos */
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .colec-text {
+                font-size: 2.5em;
+            }
+            
+            .reconecta-logo {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <!-- Logo Grupo Colec -->
+                <div class="main-logo">
+                    <img src="grupo-colec-logo.png" alt="Grupo Colec" class="logo-image">
+                    <div class="system-info">
+                        <h1><i class="fas fa-route"></i> Sistema de Optimización de Rutas VRP</h1>
+                        <p>Administramos para la Corporación Reconecta su sistema colectivo para la gestión de RAEE</p>
+                        <p><strong>Proyecto de Grado - Ingeniería Industrial</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="left-column">
+                <!-- Sección de Gestión de Vehículos -->
+                <div class="vehicle-management-section">
+                    <h2><i class="fas fa-truck"></i> Gestión de Vehículos</h2>
+                    <div class="vehicle-controls">
+                        <button class="btn btn-primary" onclick="showAddVehicleModal()">
+                            <i class="fas fa-plus"></i> Añadir Vehículo
+                        </button>
+                        <button class="btn btn-warning" onclick="showEditVehiclesModal()">
+                            <i class="fas fa-edit"></i> Editar Vehículos
+                        </button>
+                    </div>
+                    <div class="current-vehicles" id="currentVehicles">
+                        <h3>Vehículos Configurados:</h3>
+                        <div class="vehicles-list" id="vehiclesList">
+                            <p class="no-vehicles">No hay vehículos configurados. Añade al menos uno para comenzar.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upload-section">
+                    <h2><i class="fas fa-upload"></i> Subir Archivo CSV</h2>
+                    <div class="file-upload" id="fileUpload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Arrastra tu archivo CSV aquí o haz clic para seleccionar</p>
+                        <input type="file" id="csvFile" class="file-input" accept=".csv" />
+                        <button class="btn" onclick="document.getElementById('csvFile').click()">
+                            <i class="fas fa-folder-open"></i> Seleccionar Archivo
+                        </button>
+                    </div>
+                    
+                    <div id="uploadStatus"></div>
+                    
+                    <!-- Barra de progreso -->
+                    <div class="progress-container" id="progressContainer" style="display: none;">
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar" id="progressBar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <span class="progress-text" id="progressText">0%</span>
+                        </div>
+                        <p class="progress-label" id="progressLabel">Preparando archivo...</p>
+                    </div>
+                    
+                    <div class="loading" id="uploadLoading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Procesando archivo...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="map-section">
+                    <h2><i class="fas fa-map-marked-alt"></i> Mapa de Rutas</h2>
+                    <div id="map"></div>
+                </div>
+                
+                <!-- Botones de acción (debajo del mapa) -->
+                <div class="calculate-routes-button-container" id="calculateRoutesButtonContainer" style="display: none;">
+                    <div style="display: flex; gap: 15px; width: 100%; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn btn-success" onclick="calculateRoutes()" style="font-size: 1.1em; padding: 15px 30px; flex: 1; min-width: 200px; max-width: 300px;">
+                            <i class="fas fa-route"></i> Calcular Rutas Optimizadas
+                        </button>
+                        <button class="btn btn-warning" onclick="clearMap()" style="font-size: 1.1em; padding: 15px 30px; flex: 1; min-width: 200px; max-width: 300px;">
+                            <i class="fas fa-trash"></i> Limpiar Mapa
+                        </button>
+                    </div>
+                    <p style="margin-top: 10px; color: #7f8c8d; font-size: 0.9em; text-align: center;">
+                        Haz clic para calcular las rutas con los datos subidos
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nueva sección: Resumen del Ruteo -->
+        <div class="controls-section" id="routingSummarySection" style="display: none;">
+            <h2><i class="fas fa-chart-line"></i> Resumen del Ruteo</h2>
+            
+            <div class="action-buttons" style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;">
+                <button class="btn" id="downloadRoutePlanBtn" onclick="downloadRoutePlan()" style="display: none; background: linear-gradient(45deg, #3498db, #2980b9);">
+                    <i class="fas fa-download"></i> Descargar Plan de Rutas por Día
+                </button>
+            </div>
+            
+            <!-- Indicadores del Ruteo -->
+            <div class="routing-indicators">
+                <div class="indicator-grid">
+                    <div class="indicator-card">
+                        <div class="indicator-icon" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <div class="indicator-content">
+                            <h3>Kilómetros Recorridos</h3>
+                            <p class="indicator-value" id="totalKilometersDisplay">0 km</p>
+                        </div>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <div class="indicator-icon" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="indicator-content">
+                            <h3>Cantidad de Recogidas</h3>
+                            <p class="indicator-value" id="totalPickupsDisplay">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <div class="indicator-icon" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                            <i class="fas fa-weight"></i>
+                        </div>
+                        <div class="indicator-content">
+                            <h3>Peso Total</h3>
+                            <p class="indicator-value" id="totalWeightDisplay">0 kg</p>
+                        </div>
+                    </div>
+                    
+                    <div class="indicator-card">
+                        <div class="indicator-icon" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="indicator-content">
+                            <h3>Días Estimados</h3>
+                            <p class="indicator-value" id="estimatedDaysDisplay">0 días</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vista previa del plan de rutas por día -->
+                <div class="route-plan-preview" id="routePlanPreviewContainer" style="display: none;">
+                    <h3><i class="fas fa-calendar-alt"></i> Vista Previa del Plan de Rutas por Día</h3>
+                    <div class="table-container">
+                        <table class="route-plan-table" id="routePlanPreviewTable">
+                            <thead>
+                                <tr>
+                                    <th>Día</th>
+                                    <th>Recogida</th>
+                                    <th>Dirección</th>
+                                    <th>Peso (kg)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="routePlanPreviewBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <h2><i class="fas fa-history"></i> Historial de Rutas</h2>
+            
+            <div class="action-buttons" style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+                <button class="btn" onclick="loadHistorial()" style="background: linear-gradient(45deg, #2c5530, #27ae60);">
+                    <i class="fas fa-refresh"></i> Actualizar Historial
+                </button>
+            </div>
+            
+            <div class="loading" id="calculationLoading">
+                <i class="fas fa-spinner"></i>
+                <p id="calculationStatus">Calculando rutas optimizadas...</p>
+                <div id="calculationLogs" style="margin-top: 10px; font-size: 12px; color: #666; max-height: 100px; overflow-y: auto; text-align: left;">
+                    <div>🔄 Iniciando cálculo VRP...</div>
+                </div>
+            </div>
+            
+            <div id="historialTableContainer" style="display: none;">
+                <table id="historialTable" class="historial-table">
+                    <thead>
+                        <tr>
+                            <th>Archivo</th>
+                            <th>Fecha</th>
+                            <th>Registros</th>
+                            <th>Peso (ton)</th>
+                            <th>Ubicaciones</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historialTableBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="historialInfo" style="display: none; margin-top: 15px;">
+                <div class="status info">
+                    <strong>Información de la Subida:</strong><br>
+                    <span id="historialDetails"></span>
+                </div>
+            </div>
+        </div>
+
+
+
+    <!-- Modal para Añadir Vehículo -->
+    <div id="addVehicleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-truck"></i> Añadir Nuevo Vehículo</h3>
+                <span class="close" onclick="closeAddVehicleModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="addVehicleForm">
+                    <div class="form-group">
+                        <label for="vehicleName">Nombre del Vehículo:</label>
+                        <input type="text" id="vehicleName" name="vehicleName" placeholder="Ej: Camión Pequeño, Moto de Carga" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicleType">Tipo de Vehículo:</label>
+                        <select id="vehicleType" name="vehicleType" required>
+                            <option value="">Selecciona un tipo</option>
+                            <option value="camion">Camión</option>
+                            <option value="moto">Moto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicleCapacity">Capacidad (kg):</label>
+                        <input type="number" id="vehicleCapacity" name="vehicleCapacity" min="1" max="10000" placeholder="Ej: 1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicleCost">Costo por viaje (COP):</label>
+                        <input type="number" id="vehicleCost" name="vehicleCost" min="1000" step="1000" placeholder="Ej: 50000" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeAddVehicleModal()">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="addVehicle()">Añadir Vehículo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Vehículos -->
+    <div id="editVehiclesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Editar Vehículos</h3>
+                <span class="close" onclick="closeEditVehiclesModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="vehicles-edit-list" id="vehiclesEditList">
+                    <!-- Los vehículos se cargarán aquí dinámicamente -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeEditVehiclesModal()">Cerrar</button>
+                <button type="button" class="btn btn-danger" onclick="clearAllVehicles()">Limpiar Todos</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script>
+        let map;
+        let markers = [];
+        let markerClusterGroup = null; // Grupo de clusters
+        let routeLayers = [];
+        let currentData = [];
+        let currentSubidaId = null;
+        let historialData = [];
+        let currentSubidaInfo = null;
+        let customVehicles = [];
+        let defaultVehicleConfigs = {
+            camion: null,
+            moto: null
+        };
+
+        // Cargar vehículos guardados al iniciar
+        loadCustomVehicles();
+        loadDefaultVehicleConfigs();
+
+        // Gestión de vehículos personalizados
+        function loadCustomVehicles() {
+            const saved = localStorage.getItem('customVehicles');
+            if (saved) {
+                customVehicles = JSON.parse(saved);
+                updateVehiclesDisplay();
+            }
+        }
+
+        function saveCustomVehicles() {
+            localStorage.setItem('customVehicles', JSON.stringify(customVehicles));
+            updateVehiclesDisplay();
+        }
+
+        function updateVehiclesDisplay() {
+            const vehiclesList = document.getElementById('vehiclesList');
+            
+            if (customVehicles.length === 0) {
+                vehiclesList.innerHTML = '<p class="no-vehicles">No hay vehículos configurados. Añade al menos uno para comenzar.</p>';
+                return;
+            }
+
+            vehiclesList.innerHTML = customVehicles.map(vehicle => `
+                <div class="vehicle-card">
+                    <h4>${vehicle.name}</h4>
+                    <div class="vehicle-info">
+                        <span>Tipo:</span><strong>${vehicle.type}</strong>
+                        <span>Capacidad:</span><strong>${vehicle.capacity} kg</strong>
+                        <span>Costo/viaje:</span><strong>$${vehicle.costPerTrip.toLocaleString()} COP</strong>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showAddVehicleModal() {
+            document.getElementById('addVehicleModal').style.display = 'block';
+            document.getElementById('addVehicleForm').reset();
+        }
+
+        function closeAddVehicleModal() {
+            document.getElementById('addVehicleModal').style.display = 'none';
+        }
+
+        function addVehicle() {
+            const form = document.getElementById('addVehicleForm');
+            const formData = new FormData(form);
+            
+            const vehicle = {
+                id: Date.now(),
+                name: formData.get('vehicleName'),
+                type: formData.get('vehicleType'),
+                capacity: parseFloat(formData.get('vehicleCapacity')),
+                costPerTrip: parseFloat(formData.get('vehicleCost'))
+            };
+
+            // Validar que no exista un vehículo con el mismo nombre
+            if (customVehicles.some(v => v.name.toLowerCase() === vehicle.name.toLowerCase())) {
+                alert('Ya existe un vehículo con ese nombre. Por favor, elige otro nombre.');
+                return;
+            }
+
+            customVehicles.push(vehicle);
+            saveCustomVehicles();
+            
+            // Si es un vehículo predeterminado (camión o moto), actualizar su configuración
+            if (vehicle.type === 'camion' || vehicle.type === 'moto') {
+                updateDefaultVehicleConfig(vehicle.type, vehicle.capacity, vehicle.costPerTrip);
+            }
+            
+            closeAddVehicleModal();
+            
+            showStatus('success', `Vehículo "${vehicle.name}" añadido exitosamente.`);
+        }
+
+        function showEditVehiclesModal() {
+            const modal = document.getElementById('editVehiclesModal');
+            const editList = document.getElementById('vehiclesEditList');
+            
+            if (customVehicles.length === 0) {
+                editList.innerHTML = '<p class="no-vehicles">No hay vehículos para editar.</p>';
+            } else {
+                editList.innerHTML = customVehicles.map(vehicle => `
+                    <div class="vehicle-edit-item" id="vehicle-edit-${vehicle.id}">
+                        <div class="vehicle-edit-info">
+                            <div class="vehicle-edit-form" style="display: none;" id="edit-form-${vehicle.id}">
+                                <input type="text" id="edit-name-${vehicle.id}" value="${vehicle.name}" placeholder="Nombre del vehículo" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                                <select id="edit-type-${vehicle.id}" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                                    <option value="camion" ${vehicle.type === 'camion' ? 'selected' : ''}>Camión</option>
+                                    <option value="moto" ${vehicle.type === 'moto' ? 'selected' : ''}>Moto</option>
+                                </select>
+                                <input type="number" id="edit-capacity-${vehicle.id}" value="${vehicle.capacity}" min="1" max="100000" placeholder="Capacidad (kg)" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                                <input type="number" id="edit-cost-${vehicle.id}" value="${vehicle.costPerTrip}" min="1000" step="1000" placeholder="Costo por viaje (COP)" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                    <button class="btn btn-success" onclick="saveVehicleEdit(${vehicle.id})" style="flex: 1;">
+                                        <i class="fas fa-check"></i> Guardar
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="cancelVehicleEdit(${vehicle.id})" style="flex: 1;">
+                                        <i class="fas fa-times"></i> Cancelar
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vehicle-edit-display" id="edit-display-${vehicle.id}">
+                                <h4>${vehicle.name}</h4>
+                                <p>${vehicle.type} • ${vehicle.capacity}kg • $${vehicle.costPerTrip.toLocaleString()} COP/viaje</p>
+                            </div>
+                        </div>
+                        <div class="vehicle-edit-actions">
+                            <button class="btn-edit" onclick="editVehicle(${vehicle.id})" id="edit-btn-${vehicle.id}">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="btn-delete" onclick="deleteVehicle(${vehicle.id})">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function editVehicle(vehicleId) {
+            const form = document.getElementById(`edit-form-${vehicleId}`);
+            const display = document.getElementById(`edit-display-${vehicleId}`);
+            const editBtn = document.getElementById(`edit-btn-${vehicleId}`);
+            
+            if (form && display) {
+                form.style.display = 'block';
+                display.style.display = 'none';
+                editBtn.style.display = 'none';
+            }
+        }
+
+        function cancelVehicleEdit(vehicleId) {
+            const form = document.getElementById(`edit-form-${vehicleId}`);
+            const display = document.getElementById(`edit-display-${vehicleId}`);
+            const editBtn = document.getElementById(`edit-btn-${vehicleId}`);
+            
+            if (form && display) {
+                form.style.display = 'none';
+                display.style.display = 'block';
+                editBtn.style.display = 'inline-block';
+            }
+        }
+
+        function saveVehicleEdit(vehicleId) {
+            const vehicleIndex = customVehicles.findIndex(v => v.id === vehicleId);
+            if (vehicleIndex === -1) {
+                showStatus('error', 'Vehículo no encontrado');
+                return;
+            }
+            
+            const name = document.getElementById(`edit-name-${vehicleId}`).value.trim();
+            const type = document.getElementById(`edit-type-${vehicleId}`).value;
+            const capacity = parseFloat(document.getElementById(`edit-capacity-${vehicleId}`).value);
+            const costPerTrip = parseFloat(document.getElementById(`edit-cost-${vehicleId}`).value);
+            
+            // Validaciones
+            if (!name) {
+                showStatus('error', 'El nombre del vehículo es requerido');
+                return;
+            }
+            
+            if (isNaN(capacity) || capacity <= 0) {
+                showStatus('error', 'La capacidad debe ser un número mayor a 0');
+                return;
+            }
+            
+            if (isNaN(costPerTrip) || costPerTrip <= 0) {
+                showStatus('error', 'El costo por viaje debe ser un número mayor a 0');
+                return;
+            }
+            
+            // Verificar que no exista otro vehículo con el mismo nombre (excepto el actual)
+            const duplicateName = customVehicles.some((v, idx) => 
+                idx !== vehicleIndex && v.name.toLowerCase() === name.toLowerCase()
+            );
+            
+            if (duplicateName) {
+                showStatus('error', 'Ya existe un vehículo con ese nombre');
+                return;
+            }
+            
+            // Actualizar vehículo
+            customVehicles[vehicleIndex] = {
+                ...customVehicles[vehicleIndex],
+                name: name,
+                type: type,
+                capacity: capacity,
+                costPerTrip: costPerTrip
+            };
+            
+            saveCustomVehicles();
+            
+            // Si es un vehículo predeterminado (camión o moto), actualizar su configuración
+            if (type === 'camion' || type === 'moto') {
+                updateDefaultVehicleConfig(type, capacity, costPerTrip);
+            }
+            
+            // Recargar el modal
+            showEditVehiclesModal();
+            
+            showStatus('success', `Vehículo "${name}" actualizado exitosamente.`);
+        }
+
+        function closeEditVehiclesModal() {
+            document.getElementById('editVehiclesModal').style.display = 'none';
+        }
+
+        function deleteVehicle(vehicleId) {
+            if (confirm('¿Estás seguro de que quieres eliminar este vehículo?')) {
+                customVehicles = customVehicles.filter(v => v.id !== vehicleId);
+                saveCustomVehicles();
+                showEditVehiclesModal(); // Recargar la lista
+                showStatus('info', 'Vehículo eliminado exitosamente.');
+            }
+        }
+
+        function clearAllVehicles() {
+            if (confirm('¿Estás seguro de que quieres eliminar TODOS los vehículos? Esta acción no se puede deshacer.')) {
+                customVehicles = [];
+                saveCustomVehicles();
+                closeEditVehiclesModal();
+                showStatus('info', 'Todos los vehículos han sido eliminados.');
+            }
+        }
+
+        // Gestión de configuraciones de vehículos predeterminados
+        function loadDefaultVehicleConfigs() {
+            const saved = localStorage.getItem('defaultVehicleConfigs');
+            if (saved) {
+                defaultVehicleConfigs = JSON.parse(saved);
+            }
+        }
+
+        function saveDefaultVehicleConfigs() {
+            localStorage.setItem('defaultVehicleConfigs', JSON.stringify(defaultVehicleConfigs));
+        }
+
+        // Función para actualizar configuración de vehículo predeterminado cuando se añade un vehículo personalizado
+        function updateDefaultVehicleConfig(type, capacity, costPerTrip) {
+            if (type === 'camion' || type === 'moto') {
+                defaultVehicleConfigs[type] = {
+                    capacityKg: capacity,
+                    costPerHour: (costPerTrip / 8) * 60, // Aproximar costo por hora
+                    fuelCostPerKm: type === 'camion' ? 0.15 : 0.05,
+                    averageSpeedKmH: type === 'camion' ? 25 : 35,
+                    serviceTimePerLocationMin: type === 'camion' ? 15 : 10,
+                    depotServiceTimeMin: type === 'camion' ? 30 : 15,
+                    name: type === 'camion' ? 'Camión' : 'Moto',
+                    capacityM3: type === 'moto' ? 1.0 : null
+                };
+                saveDefaultVehicleConfigs();
+            }
+        }
+
+        // Cerrar modales al hacer clic fuera de ellos
+        window.onclick = function(event) {
+            const addModal = document.getElementById('addVehicleModal');
+            const editModal = document.getElementById('editVehiclesModal');
+            
+            if (event.target === addModal) {
+                closeAddVehicleModal();
+            }
+            if (event.target === editModal) {
+                closeEditVehiclesModal();
+            }
+        }
+
+        // Inicializar mapa
+        function initMap() {
+            // Esperar un poco para que el layout se estabilice
+            setTimeout(() => {
+                try {
+                    map = L.map('map').setView([4.6097, -74.0817], 10); // Bogotá como centro
+                    
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors'
+                    }).addTo(map);
+                    
+                    console.log('Mapa inicializado correctamente');
+                    
+                    // Forzar el resize del mapa después de un momento
+                    setTimeout(() => {
+                        if (map) {
+                            map.invalidateSize();
+                            console.log('Mapa redimensionado');
+                        }
+                    }, 500);
+                } catch (error) {
+                    console.error('Error al inicializar el mapa:', error);
+                }
+            }, 500);
+        }
+
+        // Manejo de subida de archivos
+        const fileUpload = document.getElementById('fileUpload');
+        const csvFile = document.getElementById('csvFile');
+        const uploadStatus = document.getElementById('uploadStatus');
+        const uploadLoading = document.getElementById('uploadLoading');
+
+        fileUpload.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUpload.classList.add('dragover');
+        });
+
+        fileUpload.addEventListener('dragleave', () => {
+            fileUpload.classList.remove('dragover');
+        });
+
+        fileUpload.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUpload.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileUpload(files[0]);
+            }
+        });
+
+        csvFile.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileUpload(e.target.files[0]);
+            }
+        });
+
+        function handleFileUpload(file) {
+            if (!file.name.toLowerCase().endsWith('.csv')) {
+                showStatus('error', 'Por favor selecciona un archivo CSV válido');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('csvFile', file);
+
+            // Ocultar loading anterior y mostrar barra de progreso
+            uploadLoading.style.display = 'none';
+            uploadStatus.innerHTML = '';
+            
+            const progressContainer = document.getElementById('progressContainer');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const progressLabel = document.getElementById('progressLabel');
+            
+            progressContainer.style.display = 'block';
+            updateProgress(0, 'Iniciando carga del archivo...');
+
+            // Usar XMLHttpRequest para tener progreso de carga
+            const xhr = new XMLHttpRequest();
+
+            // Progreso de carga del archivo (0-40%)
+            xhr.upload.addEventListener('progress', (e) => {
+                if (e.lengthComputable) {
+                    const uploadPercent = Math.round((e.loaded / e.total) * 40); // 0-40% para carga
+                    updateProgress(uploadPercent, `Subiendo archivo... ${uploadPercent}%`);
+                }
+            });
+
+            // Cuando se complete la carga (40%), simulamos procesamiento
+            xhr.upload.addEventListener('load', () => {
+                updateProgress(40, 'Archivo recibido, procesando datos...');
+                // Simular progreso del procesamiento
+                simulateProcessingProgress();
+            });
+
+            xhr.addEventListener('load', () => {
+                if (xhr.status === 200) {
+                    try {
+                        const data = JSON.parse(xhr.responseText);
+                        updateProgress(100, '¡Completado!');
+                        
+                        setTimeout(() => {
+                            progressContainer.style.display = 'none';
+                            if (data.error) {
+                                showStatus('error', data.error);
+                            } else {
+                                showStatus('success', `Archivo procesado exitosamente. ${data.recordsProcessed} registros cargados.`);
+                                // Guardar el subidaId para usarlo en el cálculo de rutas
+                                currentSubidaId = data.subidaId;
+                                console.log('📝 SubidaId guardado:', currentSubidaId);
+                                
+                                // Mostrar botón para calcular rutas
+                                document.getElementById('calculateRoutesButtonContainer').style.display = 'block';
+                                
+                                // Mostrar sección de resumen del ruteo
+                                document.getElementById('routingSummarySection').style.display = 'block';
+                                
+                                // Cargar y mostrar los datos inmediatamente en el mapa
+                                clearMap();
+                                fetch(`/api/data?subidaId=${currentSubidaId}`)
+                                    .then(response => response.json())
+                                    .then(locationData => {
+                                        if (locationData && locationData.length > 0) {
+                                            currentData = locationData;
+                                            displayLocations(locationData);
+                                            showStatus('success', `✅ ${locationData.length} puntos mostrados en el mapa usando coordenadas del CSV`);
+                                        } else {
+                                            showStatus('info', '⚠️ No se encontraron datos para mostrar');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error cargando datos:', error);
+                                        showStatus('error', 'Error al cargar datos del mapa');
+                                    });
+                                
+                                // También actualizar el historial
+                                loadHistorial();
+                            }
+                        }, 500);
+                    } catch (error) {
+                        progressContainer.style.display = 'none';
+                        showStatus('error', 'Error al procesar la respuesta del servidor');
+                    }
+                } else {
+                    progressContainer.style.display = 'none';
+                    try {
+                        const errorData = JSON.parse(xhr.responseText);
+                        showStatus('error', errorData.error || 'Error al procesar el archivo');
+                    } catch (e) {
+                        showStatus('error', 'Error al procesar el archivo');
+                    }
+                }
+            });
+
+            xhr.addEventListener('error', () => {
+                progressContainer.style.display = 'none';
+                showStatus('error', 'Error de conexión al procesar el archivo');
+            });
+
+            xhr.addEventListener('abort', () => {
+                progressContainer.style.display = 'none';
+                showStatus('error', 'Carga cancelada');
+            });
+
+            xhr.open('POST', '/upload');
+            xhr.send(formData);
+        }
+
+        function updateProgress(percent, label) {
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const progressLabel = document.getElementById('progressLabel');
+            
+            progressFill.style.width = percent + '%';
+            progressText.textContent = percent + '%';
+            progressLabel.textContent = label;
+        }
+
+        function simulateProcessingProgress() {
+            // Simular progreso del procesamiento (40% -> 95%)
+            let currentProgress = 40;
+            const stages = [
+                { progress: 50, label: 'Leyendo archivo CSV...' },
+                { progress: 60, label: 'Procesando registros...' },
+                { progress: 70, label: 'Agrupando direcciones únicas...' },
+                { progress: 75, label: 'Geocodificando direcciones (esto puede tardar)...' },
+                { progress: 80, label: 'Geocodificando direcciones...' },
+                { progress: 90, label: 'Guardando en base de datos...' },
+                { progress: 95, label: 'Finalizando...' }
+            ];
+            
+            let stageIndex = 0;
+            const interval = setInterval(() => {
+                if (stageIndex < stages.length) {
+                    const stage = stages[stageIndex];
+                    currentProgress = stage.progress;
+                    updateProgress(currentProgress, stage.label);
+                    stageIndex++;
+                    
+                    // Si está en geocodificación, mantener más tiempo
+                    if (stage.label.includes('Geocodificando')) {
+                        // Continuar mostrando progreso mientras geocodifica
+                        setTimeout(() => {
+                            if (stageIndex < stages.length - 1) {
+                                const nextStage = stages[stageIndex];
+                                updateProgress(nextStage.progress, nextStage.label);
+                                stageIndex++;
+                            }
+                        }, 2000); // Esperar 2 segundos adicionales en geocodificación
+                    }
+                } else {
+                    clearInterval(interval);
+                }
+            }, 1500); // Actualizar cada 1.5 segundos para dar más tiempo
+        }
+
+        function showStatus(type, message) {
+            uploadStatus.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+
+        // Actualizar resumen del ruteo
+        function updateRoutingSummary(data) {
+            const summarySection = document.getElementById('routingSummarySection');
+            const analysis = data.analysis || {};
+            
+            // Mostrar la sección
+            summarySection.style.display = 'block';
+            
+            // Actualizar indicadores
+            const totalDistance = analysis.totalDistance || 0;
+            
+            // Calcular peso total - PRIORIDAD: usar del análisis, luego calcular
+            let totalWeight = 0;
+            if (analysis.pesoTotal && analysis.pesoTotal > 0) {
+                totalWeight = analysis.pesoTotal;
+                console.log('✅ Usando pesoTotal del análisis:', totalWeight);
+            } else if (analysis.totalWeight && analysis.totalWeight > 0) {
+                totalWeight = analysis.totalWeight;
+                console.log('✅ Usando totalWeight del análisis:', totalWeight);
+            } else {
+                // Calcular desde las rutas
+                totalWeight = data.routes ? data.routes.reduce((sum, route) => {
+                    return sum + (route.totalWeight || 0);
+                }, 0) : 0;
+                console.log('✅ Usando pesoTotal calculado de rutas:', totalWeight);
+            }
+            
+            // Si aún es 0, intentar obtener del total de ubicaciones
+            if (totalWeight === 0 && data.routes && data.routes.length > 0) {
+                totalWeight = data.routes.reduce((sum, route) => {
+                    const locations = route.locations || route.stops || [];
+                    const routeWeight = locations.reduce((locSum, loc) => {
+                        return locSum + (loc.peso || 0);
+                    }, 0);
+                    return sum + routeWeight;
+                }, 0);
+                console.log('✅ Usando pesoTotal calculado de locations:', totalWeight);
+            }
+            
+            console.log('🔍 DEBUG updateRoutingSummary - totalWeight final:', totalWeight);
+            console.log('🔍 DEBUG updateRoutingSummary - analysis:', analysis);
+            
+            const totalPickups = data.routes ? data.routes.reduce((sum, route) => {
+                const locations = route.locations || route.stops || [];
+                return sum + Math.max(0, locations.length - 2); // Excluir depósitos
+            }, 0) : 0;
+            const estimatedDays = analysis.totalWorkingDays || 0;
+            
+            document.getElementById('totalKilometersDisplay').textContent = totalDistance.toFixed(2) + ' km';
+            document.getElementById('totalPickupsDisplay').textContent = totalPickups;
+            document.getElementById('totalWeightDisplay').textContent = totalWeight > 0 ? (totalWeight / 1000).toFixed(2) + ' ton' : '0.00 ton';
+            document.getElementById('estimatedDaysDisplay').textContent = estimatedDays + ' días';
+            
+            // Mostrar botón de descarga
+            document.getElementById('downloadRoutePlanBtn').style.display = 'inline-block';
+            
+            // Cargar vista previa del plan de rutas
+            if (currentSubidaId) {
+                loadRoutePlanPreview(currentSubidaId);
+            }
+        }
+        
+        // Cargar vista previa del plan de rutas por día
+        function loadRoutePlanPreview(subidaId) {
+            fetch(`/api/route-plan-preview/${subidaId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.preview && data.preview.length > 0) {
+                    const container = document.getElementById('routePlanPreviewContainer');
+                    const tbody = document.getElementById('routePlanPreviewBody');
+                    
+                    tbody.innerHTML = '';
+                    
+                    // Limitar a las primeras 5 filas para vista previa
+                    const displayData = data.preview.slice(0, 5);
+                    
+                    displayData.forEach(item => {
+                        const row = document.createElement('tr');
+                        const peso = item.peso || 0;
+                        row.innerHTML = `
+                            <td><strong>${item.dia}</strong></td>
+                            <td>${item.recogida}</td>
+                            <td>${item.direccion || 'N/A'}</td>
+                            <td>${peso > 0 ? peso.toFixed(2) : '0.00'}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                    
+                    // Si hay más de 5 filas, mostrar mensaje
+                    if (data.preview.length > 5) {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td colspan="4" style="text-align: center; padding: 15px; color: #7f8c8d; font-style: italic;">
+                                Mostrando 5 de ${data.preview.length} recogidas. Descarga el archivo completo para ver todos los datos.
+                            </td>
+                        `;
+                        tbody.appendChild(row);
+                    }
+                    
+                    container.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error cargando vista previa del plan:', error);
+            });
+        }
+        
+        // Cargar porcentajes de tipos de residuo (solo top 5)
+        function loadResiduePercentages(subidaId) {
+            fetch(`/api/residue-percentages/${subidaId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.percentages && Object.keys(data.percentages).length > 0) {
+                    const container = document.getElementById('residuePercentagesContainer');
+                    const chart = document.getElementById('residuePercentagesChart');
+                    
+                    chart.innerHTML = '';
+                    
+                    // Obtener top 5 tipos de residuo ordenados por porcentaje
+                    const sortedResidues = Object.entries(data.percentages)
+                        .sort((a, b) => b[1] - a[1])  // Ordenar descendente por porcentaje
+                        .slice(0, 5);  // Tomar solo los primeros 5
+                    
+                    if (sortedResidues.length === 0) {
+                        container.style.display = 'none';
+                        return;
+                    }
+                    
+                    // Encontrar el máximo para normalizar las barras
+                    const maxPercentage = sortedResidues[0][1];
+                    
+                    sortedResidues.forEach(([name, percentage], index) => {
+                        // Truncar nombres muy largos
+                        const displayName = name.length > 50 ? name.substring(0, 47) + '...' : name;
+                        
+                        // Colores diferentes para cada barra (gradiente verde)
+                        const colorIntensity = 1 - (index * 0.15); // De 1.0 a 0.55
+                        const barColor = `rgba(46, 204, 113, ${colorIntensity})`;
+                        
+                        const item = document.createElement('div');
+                        item.className = 'residue-item';
+                        item.innerHTML = `
+                            <div class="residue-item-header">
+                                <span class="residue-name">${displayName}</span>
+                                <span class="residue-percentage">${percentage.toFixed(1)}%</span>
+                            </div>
+                            <div class="residue-bar-container">
+                                <div class="residue-bar" style="width: ${(percentage / maxPercentage * 100)}%; background: linear-gradient(90deg, rgba(46, 204, 113, ${colorIntensity}), rgba(46, 204, 113, ${colorIntensity * 0.8}));">
+                                </div>
+                            </div>
+                        `;
+                        chart.appendChild(item);
+                        
+                        // Animación de la barra después de insertar
+                        setTimeout(() => {
+                            const bar = item.querySelector('.residue-bar');
+                            bar.style.width = `${(percentage / maxPercentage * 100)}%`;
+                        }, 100 * (index + 1));
+                    });
+                    
+                    container.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error cargando porcentajes de residuos:', error);
+            });
+        }
+        
+        // Descargar plan de rutas por día
+        function downloadRoutePlan() {
+            if (!currentSubidaId) {
+                showStatus('error', 'No hay una subida seleccionada');
+                return;
+            }
+            
+            window.location.href = `/api/download-route-plan/${currentSubidaId}`;
+        }
+
+        // Cargar historial de subidas
+        function loadHistorial() {
+            fetch('/api/historial')
+            .then(response => response.json())
+            .then(data => {
+                historialData = data;
+                updateHistorialTable(data);
+                showStatus('info', `Historial cargado: ${data.length} subidas encontradas`);
+            })
+            .catch(error => {
+                showStatus('error', 'Error al cargar historial: ' + error.message);
+            });
+        }
+
+        // Actualizar tabla de historial
+        function updateHistorialTable(historial) {
+            const tableContainer = document.getElementById('historialTableContainer');
+            const tableBody = document.getElementById('historialTableBody');
+            
+            if (historial.length === 0) {
+                tableContainer.style.display = 'none';
+                return;
+            }
+            
+            tableBody.innerHTML = '';
+            
+            historial.forEach(subida => {
+                const row = document.createElement('tr');
+                const fecha = new Date(subida.fecha_subida).toLocaleDateString();
+                const peso = subida.peso_total ? `${(subida.peso_total/1000).toFixed(2)}` : 'N/A';
+                
+                row.innerHTML = `
+                    <td>${subida.nombre_archivo}</td>
+                    <td>${fecha}</td>
+                    <td>${subida.registros_procesados || 0}</td>
+                    <td>${peso}</td>
+                    <td>${subida.ubicaciones_unicas || 0}</td>
+                    <td>
+                        <div class="actions-menu">
+                            <button class="menu-toggle" onclick="toggleMenu(${subida.id}, event)">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="menu-dropdown" id="menu-${subida.id}">
+                                <button class="menu-item view" onclick="viewHistorialDetail(${subida.id})">
+                                    <i class="fas fa-eye"></i> Ver Registro
+                                </button>
+                                <button class="menu-item delete" onclick="deleteHistorialRecord(${subida.id})">
+                                    <i class="fas fa-trash"></i> Borrar Registro
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            tableContainer.style.display = 'block';
+        }
+
+        // Toggle del menú de acciones
+        function toggleMenu(subidaId, event) {
+            event.stopPropagation();
+            
+            // Cerrar todos los demás menús
+            document.querySelectorAll('.menu-dropdown').forEach(menu => {
+                if (menu.id !== `menu-${subidaId}`) {
+                    menu.classList.remove('show');
+                }
+            });
+            
+            // Toggle del menú actual
+            const menu = document.getElementById(`menu-${subidaId}`);
+            menu.classList.toggle('show');
+            
+            // Cerrar al hacer clic fuera
+            if (menu.classList.contains('show')) {
+                setTimeout(() => {
+                    document.addEventListener('click', function closeMenu(e) {
+                        if (!menu.contains(e.target) && !event.target.closest('.menu-toggle')) {
+                            menu.classList.remove('show');
+                            document.removeEventListener('click', closeMenu);
+                        }
+                    }, { once: true });
+                }, 0);
+            }
+        }
+
+        // Borrar registro del historial
+        function deleteHistorialRecord(subidaId) {
+            // Cerrar el menú primero
+            document.querySelectorAll('.menu-dropdown').forEach(menu => {
+                menu.classList.remove('show');
+            });
+            
+            if (!confirm('¿Estás seguro de que deseas eliminar este registro? Esta acción no se puede deshacer.')) {
+                return;
+            }
+            
+            fetch(`/api/historial/${subidaId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showStatus('success', 'Registro eliminado exitosamente');
+                    loadHistorial(); // Recargar la tabla
+                } else {
+                    showStatus('error', data.error || 'Error al eliminar el registro');
+                }
+            })
+            .catch(error => {
+                showStatus('error', 'Error al eliminar el registro: ' + error.message);
+            });
+        }
+
+        // Ver detalle de una subida del historial
+        function viewHistorialDetail(subidaId) {
+            // Cerrar el menú
+            document.querySelectorAll('.menu-dropdown').forEach(menu => {
+                menu.classList.remove('show');
+            });
+            
+            // Limpiar mapa primero
+            clearMap();
+            
+            // Cargar información de la subida
+            fetch(`/api/subida/${subidaId}`)
+            .then(response => response.json())
+            .then(subidaInfo => {
+                currentSubidaInfo = subidaInfo;
+                currentSubidaId = subidaId;
+                
+                // Mostrar información de la subida
+                const detalles = `
+                    Archivo: ${subidaInfo.nombre_archivo}<br>
+                    Fecha: ${new Date(subidaInfo.fecha_subida).toLocaleString()}<br>
+                    Registros: ${subidaInfo.registros_procesados || 0}<br>
+                    Peso Total: ${subidaInfo.pesoTotalToneladas} toneladas<br>
+                    Ubicaciones: ${subidaInfo.ubicaciones_unicas || 0}<br>
+                    <strong>Capacidad Recomendada: ${subidaInfo.capacidadRecomendadaToneladas} toneladas</strong>
+                `;
+                
+                document.getElementById('historialDetails').innerHTML = detalles;
+                document.getElementById('historialInfo').style.display = 'block';
+                
+                // Mostrar sección de resumen del ruteo y botón de calcular rutas
+                const calculateRoutesContainer = document.getElementById('calculateRoutesButtonContainer');
+                const routingSummarySection = document.getElementById('routingSummarySection');
+                
+                if (calculateRoutesContainer) {
+                    calculateRoutesContainer.style.display = 'block';
+                }
+                if (routingSummarySection) {
+                    routingSummarySection.style.display = 'block';
+                }
+                
+                // Actualizar capacidad del vehículo (convertir de toneladas a kg)
+                const capacidadKg = subidaInfo.capacidadRecomendadaToneladas * 1000;
+                const vehicleCapacityInput = document.getElementById('vehicleCapacity');
+                if (vehicleCapacityInput) {
+                    vehicleCapacityInput.value = capacidadKg;
+                }
+                updateCapacityInfo();
+                
+                // Cargar datos para el mapa
+                return fetch(`/api/data?subidaId=${subidaId}`);
+            })
+            .then(response => response.json())
+            .then(data => {
+                currentData = data;
+                showStatus('info', `${data.length} ubicaciones cargadas del historial`);
+                displayLocations(data);
+            })
+            .catch(error => {
+                showStatus('error', 'Error al cargar datos del historial: ' + error.message);
+            });
+        }
+
+        // Actualizar información de capacidad
+        function updateCapacityInfo() {
+            const vehicleTypeSelect = document.getElementById('vehicleType');
+            const vehicleCapacityInput = document.getElementById('vehicleCapacity');
+            const capacityInfo = document.getElementById('capacityInfo');
+            
+            // Verificar que los elementos existan
+            if (!vehicleTypeSelect || !vehicleCapacityInput || !capacityInfo) {
+                return; // Salir silenciosamente si los elementos no existen
+            }
+            
+            const vehicleType = vehicleTypeSelect.value;
+            const vehicleConfig = VEHICLE_TYPES[vehicleType];
+            const capacity = parseFloat(vehicleCapacityInput.value) || 0;
+            
+            // Actualizar información de capacidad según el tipo de vehículo
+            // Verificar que vehicleConfig existe antes de acceder a sus propiedades
+            if (vehicleConfig && vehicleConfig.capacityM3 !== null && vehicleConfig.capacityM3 !== undefined) {
+                capacityInfo.textContent = `Capacidad: ${capacity} kg / ${vehicleConfig.capacityM3} m³`;
+            } else {
+                capacityInfo.textContent = `Capacidad: ${capacity} kg`;
+            }
+            
+            // Verificar si hay datos de subida para mostrar análisis
+            if (currentSubidaInfo && currentSubidaInfo.pesoTotalToneladas) {
+                const pesoTotalKg = parseFloat(currentSubidaInfo.pesoTotalToneladas) * 1000; // Convertir a kg
+                
+                if (capacity >= pesoTotalKg) {
+                    capacityInfo.textContent += ` ✅ Suficiente para ${(pesoTotalKg/1000).toFixed(1)} toneladas de residuos`;
+                    capacityInfo.style.color = '#27ae60';
+                } else {
+                    capacityInfo.textContent += ` ⚠️ Insuficiente para ${(pesoTotalKg/1000).toFixed(1)} toneladas de residuos`;
+                    capacityInfo.style.color = '#e74c3c';
+                }
+            } else {
+                capacityInfo.style.color = '#7f8c8d';
+            }
+        }
+
+        // Cargar datos desde la base de datos (inicialmente vacío)
+        function loadData() {
+            console.log('🔄 Iniciando carga de datos...');
+            loadHistorial();
+            clearMap(); // Empezar con mapa limpio
+            
+            // Mostrar botón y sección de resumen si hay una subida activa
+            if (currentSubidaId) {
+                document.getElementById('calculateRoutesButtonContainer').style.display = 'block';
+                document.getElementById('routingSummarySection').style.display = 'block';
+                showStatus('success', '📁 Archivo procesado. Haz clic en "Calcular Rutas Optimizadas" para ver los resultados.');
+            } else {
+                showStatus('info', '📁 Selecciona un archivo del historial o sube uno nuevo.');
+            }
+        }
+
+        // Mostrar ubicaciones en el mapa - REHECHO COMPLETAMENTE
+        // Usa SOLO latitud y longitud del CSV cargado
+        function displayLocations(locations) {
+            console.log('🗺️ Mostrando ubicaciones en el mapa:', locations.length, 'puntos');
+            
+            // Limpiar todos los marcadores existentes
+            if (markerClusterGroup) {
+                map.removeLayer(markerClusterGroup);
+                markerClusterGroup = null;
+            }
+            markers.forEach(marker => {
+                map.removeLayer(marker);
+            });
+            markers = [];
+
+            // Validar que tenemos ubicaciones
+            if (!locations || locations.length === 0) {
+                console.log('⚠️ No hay ubicaciones para mostrar');
+                return;
+            }
+
+            // Crear grupo de marcadores sin clustering - todos los puntos individuales
+            markerClusterGroup = L.markerClusterGroup({
+                maxClusterRadius: 0, // Radio 0 = NO agrupar, mostrar todos los puntos individualmente
+                chunkedLoading: false
+            });
+
+            // Obtener capacidad del vehículo
+            const vehicleCapacityInput = document.getElementById('vehicleCapacity');
+            const vehicleCapacityKg = vehicleCapacityInput ? parseFloat(vehicleCapacityInput.value) || 5500 : 5500;
+
+            // Crear marcadores usando SOLO latitud y longitud del CSV
+            let marcadoresValidos = 0;
+            locations.forEach((location, index) => {
+                // Validar que tenga latitud y longitud válidas
+                const lat = parseFloat(location.lat);
+                const lon = parseFloat(location.lon);
+                
+                if (isNaN(lat) || isNaN(lon) || lat === 0 || lon === 0) {
+                    console.warn(`⚠️ Ubicación ${index} ignorada: coordenadas inválidas`, location);
+                    return;
+                }
+
+                // Determinar color del icono basado en peso
+                const peso = parseFloat(location.peso) || 0;
+                const exceedsCapacity = peso > vehicleCapacityKg;
+                let iconColor = '#2ecc71'; // Verde por defecto
+                let borderColor = 'white';
+                let borderWidth = '2px';
+                
+                if (exceedsCapacity) {
+                    iconColor = '#e74c3c'; // Rojo si excede capacidad
+                    borderColor = '#c0392b';
+                    borderWidth = '3px';
+                } else if (peso > vehicleCapacityKg * 0.8) {
+                    iconColor = '#f39c12'; // Naranja si está cerca del límite
+                    borderColor = '#e67e22';
+                }
+                
+                // Tamaño del icono basado en peso
+                const iconSize = Math.max(20, Math.min(50, peso / 100));
+                
+                // Crear icono personalizado
+                const customIcon = L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div style="background: ${iconColor}; color: white; border-radius: 50%; width: ${iconSize}px; height: ${iconSize}px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: ${Math.max(10, iconSize/4)}px; border: ${borderWidth} solid ${borderColor}; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">${Math.round(peso/100)}</div>`,
+                    iconSize: [iconSize, iconSize],
+                    iconAnchor: [iconSize/2, iconSize/2]
+                });
+                
+                // Crear marcador usando latitud y longitud del CSV
+                const marker = L.marker([lat, lon], { icon: customIcon })
+                    .bindPopup(`
+                        <div style="min-width: 250px;">
+                            <strong>📍 ${location.direccion || 'N/A'}</strong><br>
+                            <strong>🏢 Empresas:</strong> ${location.empresas || 'N/A'}<br>
+                            <strong>🏙️ Ciudad:</strong> ${location.ciudad || 'N/A'}<br>
+                            <strong>⚖️ Peso Total:</strong> ${peso.toFixed(1)} kg<br>
+                            <strong>📦 Residuos:</strong> ${location.cantidad_residuos || 'N/A'} tipos<br>
+                            <strong>🗑️ Tipos:</strong> ${(location.tipos_residuo || 'N/A').substring(0, 100)}${(location.tipos_residuo || '').length > 100 ? '...' : ''}<br>
+                            <strong>📍 Coordenadas:</strong> ${lat.toFixed(6)}, ${lon.toFixed(6)}<br>
+                            ${exceedsCapacity ? 
+                                `<div style="color: #e74c3c; font-weight: bold; margin-top: 5px;">
+                                    ⚠️ EXCEDE CAPACIDAD DEL VEHÍCULO (${vehicleCapacityKg} kg)
+                                </div>` : 
+                                `<div style="color: #27ae60; font-size: 0.9em; margin-top: 5px;">
+                                    ✅ Dentro de capacidad (${vehicleCapacityKg} kg)
+                                </div>`
+                            }
+                        </div>
+                    `);
+                
+                markerClusterGroup.addLayer(marker);
+                markers.push(marker);
+                marcadoresValidos++;
+            });
+
+            // Agregar el grupo de marcadores al mapa
+            markerClusterGroup.addTo(map);
+            console.log(`✅ ${marcadoresValidos} marcadores agregados al mapa usando coordenadas lat/lon del CSV`);
+
+            // Ajustar vista del mapa para mostrar todos los marcadores
+            if (marcadoresValidos > 0) {
+                const bounds = markerClusterGroup.getBounds();
+                if (bounds.isValid()) {
+                    map.fitBounds(bounds.pad(0.1));
+                    console.log('✅ Vista del mapa ajustada para mostrar todos los puntos');
+                } else {
+                    // Fallback: usar featureGroup
+                    const group = new L.featureGroup(markers);
+                    map.fitBounds(group.getBounds().pad(0.1));
+                }
+            } else {
+                console.log('⚠️ No se pudo crear ningún marcador válido');
+            }
+        }
+
+        // Configuración de vehículos
+        const VEHICLE_TYPES = {
+            hibrido: {
+                name: 'Híbrido Multi-Vehículo',
+                capacityKg: null,
+                capacityM3: null,
+                description: 'Sistema inteligente que combina camión y moto para máxima eficiencia'
+            },
+            camion: {
+                name: 'Camión',
+                capacityKg: 5500,
+                capacityM3: null,
+                description: 'Camión de carga pesada para residuos voluminosos'
+            },
+            moto: {
+                name: 'Moto',
+                capacityKg: 150,
+                capacityM3: 1.0,
+                description: 'Moto para entregas ligeras y rápidas'
+            }
+        };
+
+        // Actualizar información del vehículo seleccionado
+        function updateVehicleInfo() {
+            const vehicleTypeSelect = document.getElementById('vehicleType');
+            if (!vehicleTypeSelect) return; // Elemento no existe
+            
+            const vehicleType = vehicleTypeSelect.value;
+            if (!vehicleType) return; // No hay tipo seleccionado
+            
+            const vehicleConfig = VEHICLE_TYPES[vehicleType];
+            if (!vehicleConfig) {
+                console.warn(`⚠️ Tipo de vehículo no encontrado: ${vehicleType}`);
+                return; // Tipo de vehículo no existe
+            }
+            
+            const vehicleCapacityInput = document.getElementById('vehicleCapacity');
+            const vehicleInfo = document.getElementById('vehicleInfo');
+            const capacityInfo = document.getElementById('capacityInfo');
+            
+            if (!vehicleCapacityInput || !vehicleInfo || !capacityInfo) {
+                console.warn('⚠️ Elementos del DOM no encontrados para updateVehicleInfo');
+                return;
+            }
+            
+            if (vehicleType === 'hibrido') {
+                vehicleCapacityInput.style.display = 'none';
+                if (vehicleCapacityInput.previousElementSibling) {
+                    vehicleCapacityInput.previousElementSibling.style.display = 'none';
+                }
+                vehicleInfo.textContent = vehicleConfig.description || 'Sistema híbrido';
+                capacityInfo.textContent = 'Capacidad combinada: Camión (5.5 ton) + Moto (150 kg)';
+                capacityInfo.style.color = '#3498db';
+            } else {
+                vehicleCapacityInput.style.display = 'block';
+                if (vehicleCapacityInput.previousElementSibling) {
+                    vehicleCapacityInput.previousElementSibling.style.display = 'block';
+                }
+                vehicleCapacityInput.value = vehicleConfig.capacityKg || 0;
+                vehicleInfo.textContent = vehicleConfig.description || 'Vehículo';
+                
+                if (vehicleConfig.capacityM3) {
+                    capacityInfo.textContent = `Capacidad: ${vehicleConfig.capacityKg || 0} kg / ${vehicleConfig.capacityM3} m³`;
+                } else {
+                    capacityInfo.textContent = `Capacidad: ${vehicleConfig.capacityKg || 0} kg`;
+                }
+                capacityInfo.style.color = '#7f8c8d';
+            }
+            
+            console.log(`🚛 Vehículo seleccionado: ${vehicleConfig.name || vehicleType}`);
+        }
+
+        // Calcular rutas VRP
+        function calculateRoutes() {
+            // Usar algoritmo híbrido por defecto, o vehículos personalizados si están disponibles
+            const vehicleType = customVehicles && customVehicles.length > 0 ? 'personalizado' : 'hibrido';
+            console.log(`🚛 Tipo de vehículo seleccionado: ${vehicleType}`);
+            console.log(`📊 Vehículos personalizados disponibles: ${customVehicles ? customVehicles.length : 0}`);
+            const vehicleCapacityInput = document.getElementById('vehicleCapacity');
+            const vehicleCapacityKg = vehicleCapacityInput && vehicleCapacityInput.style.display !== 'none' 
+                ? parseFloat(vehicleCapacityInput.value) 
+                : null;
+            const calculationLoading = document.getElementById('calculationLoading');
+            const calculationStatus = document.getElementById('calculationStatus');
+            const calculationLogs = document.getElementById('calculationLogs');
+            
+            // Mostrar indicador de carga con logs
+            calculationLoading.style.display = 'block';
+            calculationStatus.textContent = 'Calculando rutas optimizadas...';
+            calculationLogs.innerHTML = '<div>🔄 Iniciando cálculo VRP...</div>';
+            
+            // Simular logs en tiempo real
+            const logMessages = [
+                '🔄 Iniciando cálculo VRP...',
+                '📍 Obteniendo ubicaciones de la base de datos...',
+                '🗺️ Procesando coordenadas geográficas...',
+                '🚛 Aplicando algoritmo Nearest Neighbor...',
+                '⏱️ Calculando tiempos de viaje...',
+                '💰 Estimando costos de combustible...',
+                '📊 Generando análisis de resultados...',
+                '✅ Cálculo completado exitosamente!'
+            ];
+            
+            let logIndex = 0;
+            const logInterval = setInterval(() => {
+                if (logIndex < logMessages.length - 1) {
+                    logIndex++;
+                    calculationLogs.innerHTML += `<div>${logMessages[logIndex]}</div>`;
+                    calculationLogs.scrollTop = calculationLogs.scrollHeight;
+                }
+            }, 800);
+
+            // Primero cargar el historial si no está disponible
+            let historialPromise = Promise.resolve();
+            if (!historialData || historialData.length === 0) {
+                console.log('📡 Cargando historial...');
+                historialPromise = fetch('/api/historial')
+                    .then(response => response.json())
+                    .then(data => {
+                        historialData = data;
+                        console.log('✅ Historial cargado:', data.length, 'subidas');
+                        return data;
+                    });
+            }
+
+            // Luego cargar los datos de ubicaciones
+            historialPromise.then(() => {
+                console.log('📡 Cargando datos de ubicaciones...');
+                return fetch('/api/data');
+            })
+                .then(response => {
+                    console.log('📡 Respuesta de datos recibida:', response.status);
+                    return response.json();
+                })
+                .then(locationData => {
+                    console.log('📊 Datos de ubicaciones recibidos:', locationData);
+                    
+                    if (locationData && locationData.length > 0) {
+                        currentData = locationData;
+                        displayLocations(locationData);
+                        console.log('✅ Ubicaciones mostradas en el mapa');
+                        
+                        // Ahora calcular las rutas
+                        console.log('🔍 DEBUG: currentSubidaId =', currentSubidaId);
+                        console.log('🔍 DEBUG: typeof currentSubidaId =', typeof currentSubidaId);
+                        
+                        // Si no hay currentSubidaId, obtener el más reciente del historial
+                        let subidaIdToUse = currentSubidaId;
+                        if (!subidaIdToUse && historialData && historialData.length > 0) {
+                            subidaIdToUse = historialData[0].id; // El más reciente
+                            console.log('🔄 Usando subidaId más reciente del historial:', subidaIdToUse);
+                        }
+                        
+                        // Preparar configuraciones de vehículos predeterminados si existen
+                        let vehicleConfigs = null;
+                        if (defaultVehicleConfigs.camion || defaultVehicleConfigs.moto) {
+                            vehicleConfigs = {};
+                            if (defaultVehicleConfigs.camion) {
+                                vehicleConfigs.camion = defaultVehicleConfigs.camion;
+                            }
+                            if (defaultVehicleConfigs.moto) {
+                                vehicleConfigs.moto = defaultVehicleConfigs.moto;
+                            }
+                        }
+                        
+                        const requestBody = { 
+                            vehicleType: vehicleType,
+                            subidaId: subidaIdToUse,
+                            customVehicles: customVehicles,
+                            vehicleConfigs: vehicleConfigs
+                        };
+
+                        console.log('🚛 Iniciando cálculo de rutas VRP...');
+                        console.log('📊 Datos enviados:', requestBody);
+
+                        return fetch('/api/calculate-routes', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(requestBody)
+                        });
+                    } else {
+                        throw new Error('No hay datos de ubicaciones disponibles');
+                    }
+                })
+                .then(response => {
+                    console.log('📡 Respuesta de rutas recibida:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    clearInterval(logInterval);
+                    calculationLoading.style.display = 'none';
+                    
+                    console.log('📊 Datos de rutas recibidos:', data);
+                    console.log('🔍 DEBUG - data.analysis:', data.analysis);
+                    console.log('🔍 DEBUG - data.analysis.feasibleRoutes:', data.analysis?.feasibleRoutes);
+                    
+                    if (data.error) {
+                        console.error('❌ Error en cálculo:', data.error);
+                        showStatus('error', data.error);
+                    } else {
+                        console.log('✅ Rutas calculadas exitosamente');
+                        
+                        // Verificar que data.analysis existe
+                        if (!data.analysis) {
+                            console.error('❌ Error: data.analysis es undefined');
+                            showStatus('error', 'Error: No se recibieron datos de análisis del servidor');
+                            return;
+                        }
+                        
+                        // Filtrar rutas vacías (solo depósito)
+                        // Verificar que data.routes existe y es un array
+                        console.log('🔍 DEBUG - data.routes:', data.routes);
+                        console.log('🔍 DEBUG - data.routes es array?', Array.isArray(data.routes));
+                        console.log('🔍 DEBUG - data.routes.length:', data.routes ? data.routes.length : 'undefined');
+                        
+                        const validRoutes = (data.routes && Array.isArray(data.routes)) ? data.routes.filter((route, idx) => {
+                            // Verificar tanto locations como stops (para vehículos personalizados)
+                            const locations = route.locations || route.stops || [];
+                            
+                            // Una ruta válida debe tener al menos el depot inicio + 1 ubicación + depot fin = 3 ubicaciones
+                            // O si no tiene depot explícito, al menos 1 ubicación con peso
+                            const hasEnoughLocations = locations.length >= 2; // Al menos depot + 1 ubicación (o 2 ubicaciones si no hay depot explícito)
+                            const hasWeight = (route.totalWeight || 0) > 0;
+                            
+                            // Si tiene depot, necesita al menos 3 ubicaciones (depot_inicio + ubicaciones + depot_fin)
+                            // Si no tiene depot explícito, necesita al menos 2 ubicaciones
+                            const hasDepot = locations.some(loc => {
+                                if (!loc) return false;
+                                const direccion = loc.direccion || loc.address || '';
+                                return direccion.includes('Depósito') || direccion.includes('Parque Industrial') || direccion.includes('San Jorge');
+                            });
+                            const minLocations = hasDepot ? 3 : 2;
+                            const meetsLocationRequirement = locations.length >= minLocations;
+                            
+                            // También verificar que tenga ubicaciones reales (no solo depots)
+                            // Pero ser más flexible: si tiene totalWeight > 0, probablemente es válida
+                            const realLocations = locations.filter(loc => {
+                                if (!loc) return false;
+                                const direccion = loc.direccion || loc.address || '';
+                                const peso = loc.peso || 0;
+                                const isDepot = direccion.includes('Depósito') || direccion.includes('Parque Industrial') || direccion.includes('San Jorge');
+                                return peso > 0 && !isDepot;
+                            });
+                            const hasRealLocations = realLocations.length > 0;
+                            
+                            // Si tiene peso total pero no ubicaciones reales detectadas, puede ser un problema de formato
+                            // En ese caso, aceptar si tiene al menos 2 ubicaciones y peso total
+                            const isValid = (meetsLocationRequirement && hasWeight && hasRealLocations) || 
+                                          (locations.length >= 2 && hasWeight && !hasDepot); // Rutas sin depot explícito
+                            
+                            if (!isValid) {
+                                console.log(`⚠️ Ruta ${idx + 1} rechazada:`, {
+                                    locationsCount: locations.length,
+                                    realLocationsCount: realLocations.length,
+                                    totalWeight: route.totalWeight,
+                                    hasDepot: hasDepot,
+                                    meetsLocationRequirement: meetsLocationRequirement,
+                                    hasWeight: hasWeight,
+                                    hasRealLocations: hasRealLocations,
+                                    vehicleType: route.vehicleType,
+                                    firstLocation: locations[0] ? { direccion: locations[0].direccion, peso: locations[0].peso } : null
+                                });
+                            }
+                            
+                            return isValid;
+                        }) : [];
+                        
+                        const totalRoutes = (data.routes && Array.isArray(data.routes)) ? data.routes.length : 0;
+                        console.log(`📊 Rutas válidas: ${validRoutes.length} de ${totalRoutes} total`);
+                        
+                        if (totalRoutes > 0 && validRoutes.length === 0) {
+                            console.error('❌ Todas las rutas fueron rechazadas. Mostrando detalles de las primeras 3:');
+                            data.routes.slice(0, 3).forEach((route, idx) => {
+                                const locations = route.locations || route.stops || [];
+                                const firstLoc = locations[0] || {};
+                                const secondLoc = locations[1] || {};
+                                console.error(`   Ruta ${idx + 1}:`, {
+                                    locationsCount: locations.length,
+                                    totalWeight: route.totalWeight,
+                                    vehicleType: route.vehicleType,
+                                    hasLocations: route.locations ? 'locations' : route.stops ? 'stops' : 'none',
+                                    firstLocation: {
+                                        direccion: firstLoc.direccion || firstLoc.address || 'N/A',
+                                        peso: firstLoc.peso || 0,
+                                        lat: firstLoc.lat || firstLoc.latitud,
+                                        lon: firstLoc.lon || firstLoc.longitud
+                                    },
+                                    secondLocation: {
+                                        direccion: secondLoc.direccion || secondLoc.address || 'N/A',
+                                        peso: secondLoc.peso || 0
+                                    },
+                                    allLocationKeys: locations.length > 0 ? Object.keys(locations[0]) : []
+                                });
+                            });
+                        }
+                        
+                        displayRoutes(validRoutes);
+                        // Mostrar sección de resumen y actualizar indicadores
+                        updateRoutingSummary(data);
+                        
+                        if (validRoutes.length > 0) {
+                            showStatus('success', `Rutas calculadas exitosamente: ${validRoutes.length} rutas válidas, ${data.analysis.totalWorkingDays} días de trabajo`);
+                        } else {
+                            showStatus('warning', 'No se pudieron crear rutas válidas. Verifica la capacidad del vehículo.');
+                        }
+                    }
+                })
+                .catch(error => {
+                    clearInterval(logInterval);
+                    calculationLoading.style.display = 'none';
+                    console.error('❌ Error en proceso:', error);
+                    showStatus('error', 'Error al calcular rutas: ' + error.message);
+                });
+        }
+
+        // Mostrar rutas en el mapa
+        function displayRoutes(routes) {
+            console.log('🗺️ DEBUG: displayRoutes llamada con', routes.length, 'rutas');
+            console.log('🗺️ DEBUG: routes =', routes);
+            
+            // Limpiar rutas existentes
+            routeLayers.forEach(layer => map.removeLayer(layer));
+            routeLayers = [];
+
+            const colors = ['#27ae60', '#2ecc71', '#16a085', '#1abc9c', '#229954', '#58d68d', '#7dcea0'];
+
+            routes.forEach((route, index) => {
+                console.log(`🗺️ DEBUG: Procesando ruta ${index + 1}:`, route);
+                
+                // Asignar color según el tipo de vehículo
+                let color;
+                if (route.vehicleType === 'camion') {
+                    color = '#27ae60'; // Verde oscuro para camiones
+                } else if (route.vehicleType === 'moto') {
+                    color = '#2ecc71'; // Verde claro para motos
+                } else {
+                    color = colors[index % colors.length]; // Color por defecto
+                }
+                
+                // Verificar que la ruta tenga ubicaciones válidas
+                if (!route.locations || route.locations.length < 2) {
+                    console.log(`⚠️ Ruta ${index + 1} sin ubicaciones válidas, omitiendo`);
+                    return;
+                }
+                
+                // Crear línea de la ruta
+                const routePoints = route.locations.map(point => [point.lat, point.lon]);
+                const routeLine = L.polyline(routePoints, {
+                    color: color,
+                    weight: 4,
+                    opacity: 0.8
+                }).addTo(map);
+                routeLayers.push(routeLine);
+
+                // Agregar marcadores especiales para inicio/fin (depósito)
+                const vehicleTypeText = route.vehicleType === 'camion' ? '🚛 Camión' : route.vehicleType === 'moto' ? '🏍️ Moto' : '🚗 Vehículo';
+                const depotMarker = L.circleMarker([route.locations[0].lat, route.locations[0].lon], {
+                    radius: 8,
+                    fillColor: color,
+                    color: '#fff',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                }).bindPopup(`
+                    <div style="min-width: 200px;">
+                        <strong>${vehicleTypeText} - Ruta ${index + 1}</strong><br>
+                        <strong>📍 Depósito:</strong> Bogotá<br>
+                        <strong>⚖️ Peso Total:</strong> ${route.totalWeight.toFixed(1)} kg<br>
+                        <strong>📏 Distancia:</strong> ${route.totalDistance.toFixed(1)} km<br>
+                        <strong>⏱️ Tiempo:</strong> ${route.totalTime.toFixed(1)} min<br>
+                        <strong>💰 Costo:</strong> $${route.totalCost.toFixed(2)} USD<br>
+                        <strong>📊 Utilización:</strong> ${route.utilization.toFixed(1)}%
+                    </div>
+                `).addTo(map);
+                routeLayers.push(depotMarker);
+
+                // Agregar números a los puntos de la ruta
+                route.locations.forEach((point, pointIndex) => {
+                    if (pointIndex > 0 && pointIndex < route.locations.length - 1) {
+                        const numberMarker = L.marker([point.lat, point.lon], {
+                            icon: L.divIcon({
+                                className: 'route-number',
+                                html: `<div style="background: ${color}; color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px;">${pointIndex}</div>`,
+                                iconSize: [25, 25],
+                                iconAnchor: [12, 12]
+                            })
+                        }).bindPopup(`
+                            <div style="min-width: 250px;">
+                                <strong>${vehicleTypeText} - Parada ${pointIndex}</strong><br>
+                                <strong>📍 Dirección:</strong> ${point.direccion}<br>
+                                <strong>🏢 Empresas:</strong> ${point.empresas || 'N/A'}<br>
+                                <strong>⚖️ Peso:</strong> ${point.peso.toFixed(1)} kg<br>
+                                <strong>📦 Residuos:</strong> ${point.cantidad_residuos || 'N/A'} tipos<br>
+                                <strong>🏙️ Ciudad:</strong> ${point.ciudad || 'N/A'}<br>
+                                <strong>📊 Utilización Ruta:</strong> ${route.utilization.toFixed(1)}%
+                            </div>
+                        `).addTo(map);
+                        routeLayers.push(numberMarker);
+                    }
+                });
+            });
+        }
+
+        // Mostrar información de rutas
+        function showRouteInfo(data, vehicleCapacityToneladas) {
+            // Verificar que data existe
+            if (!data) {
+                console.error('❌ Error: data es undefined en showRouteInfo');
+                return;
+            }
+            
+            const routeInfo = document.getElementById('routeInfo');
+            const routeStats = document.getElementById('routeStats');
+            
+            if (!routeInfo || !routeStats) {
+                console.error('❌ Error: elementos del DOM no encontrados en showRouteInfo');
+                return;
+            }
+            
+            routeInfo.style.display = 'block';
+            
+            // Usar datos del análisis avanzado si están disponibles
+            const analysis = data.analysis || {};
+            
+            // Debug: verificar estructura de datos
+            console.log('🔍 DEBUG showRouteInfo - data:', data);
+            console.log('🔍 DEBUG showRouteInfo - analysis:', analysis);
+            
+            // Calcular peso total de manera segura
+            // PRIORIDAD 1: Usar analysis.pesoTotal si está disponible
+            // PRIORIDAD 2: Sumar route.totalWeight de todas las rutas
+            // PRIORIDAD 3: Sumar peso de locations individuales
+            let totalWeight = 0;
+            if (analysis.pesoTotal && analysis.pesoTotal > 0) {
+                totalWeight = analysis.pesoTotal;
+                console.log('✅ Usando pesoTotal del análisis:', totalWeight);
+            } else if (data.routes && Array.isArray(data.routes)) {
+                totalWeight = data.routes.reduce((sum, route) => {
+                    // Si la ruta tiene totalWeight directamente, usarlo (más confiable)
+                    if (route.totalWeight && route.totalWeight > 0) {
+                        return sum + route.totalWeight;
+                    }
+                    // Si no, intentar sumar de locations
+                    const locations = route.locations || route.stops || [];
+                    if (Array.isArray(locations)) {
+                        const routeWeight = locations.reduce((routeSum, point) => {
+                            return routeSum + (point.peso || 0);
+                        }, 0);
+                        return sum + routeWeight;
+                    }
+                    return sum;
+                }, 0);
+                console.log('✅ Usando pesoTotal calculado de rutas:', totalWeight);
+            }
+            
+            if (totalWeight === 0) {
+                console.warn('⚠️ Peso total es 0, puede haber un problema con los datos');
+            }
+
+            routeStats.innerHTML = `
+                <div class="stat-card">
+                    <div class="number">${analysis?.totalVehicles || data?.routes?.length || 0}</div>
+                    <div class="label">Vehículos Necesarios</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">${analysis?.totalWorkingDays || 1}</div>
+                    <div class="label">Días de Trabajo</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">${currentData?.length || 0}</div>
+                    <div class="label">Ubicaciones</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">${((analysis?.pesoTotal || totalWeight) / 1000).toFixed(2)}</div>
+                    <div class="label">Peso Total (ton)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">${vehicleCapacityToneladas || 'Híbrido'}</div>
+                    <div class="label">Capacidad por Vehículo</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">${(analysis?.totalDistance || 0).toFixed(1)}</div>
+                    <div class="label">Distancia Total (km)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">${(analysis?.averageUtilization || 0).toFixed(1)}%</div>
+                    <div class="label">Utilización Promedio</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">$${(analysis?.totalCost || 0).toFixed(2)}</div>
+                    <div class="label">Costo Total Combustible</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">${analysis?.feasibleRoutes || 0}/${analysis?.totalVehicles || (data?.routes && Array.isArray(data.routes) ? data.routes.length : 0) || 0}</div>
+                    <div class="label">Rutas Factibles</div>
+                </div>
+            `;
+            
+            // Mostrar análisis detallado si está disponible
+            if (analysis?.totalVehicles) {
+                const analysisDiv = document.createElement('div');
+                analysisDiv.className = 'analysis-detail';
+                
+                let utilizationInfo = '';
+                if (analysis.vehicleUtilization) {
+                    const camionInfo = analysis.vehicleUtilization.camion;
+                    const motoInfo = analysis.vehicleUtilization.moto;
+                    
+                    if (camionInfo || motoInfo) {
+                        utilizationInfo = '';
+                        
+                        if (camionInfo && camionInfo.routes !== undefined) {
+                            utilizationInfo += `
+                                <div class="analysis-item">
+                                    <strong>🚛 Camiones:</strong> ${camionInfo.routes || 0} vehículos, 
+                                    ${(camionInfo.utilization || 0).toFixed(1)}% utilización promedio
+                                </div>
+                            `;
+                        }
+                        
+                        if (motoInfo && motoInfo.routes !== undefined) {
+                            utilizationInfo += `
+                                <div class="analysis-item">
+                                    <strong>🏍️ Motos:</strong> ${motoInfo.routes || 0} vehículos, 
+                                    ${(motoInfo.utilization || 0).toFixed(1)}% utilización promedio
+                                </div>
+                            `;
+                        }
+                    }
+                }
+                
+                analysisDiv.innerHTML = `
+                    <h4><i class="fas fa-chart-line"></i> Análisis Detallado</h4>
+                    <div class="analysis-item">
+                        <strong>Número de Vehículos:</strong> ${analysis?.totalVehicles || 0} vehículos totales
+                    </div>
+                    <div class="analysis-item">
+                        <strong>Días de Recorrido:</strong> ${analysis?.totalWorkingDays || 0} días laborales
+                    </div>
+                    <div class="analysis-item">
+                        <strong>Costo por Tonelada:</strong> $${analysis?.costPerTon ? analysis.costPerTon.toFixed(2) : '0.00'} USD/ton
+                    </div>
+                    <div class="analysis-item">
+                        <strong>Rutas Factibles:</strong> ${analysis?.feasibleRoutes || 0}/${analysis?.totalVehicles || 0} cumplen restricciones de tiempo
+                    </div>
+                    ${utilizationInfo}
+                `;
+                routeStats.appendChild(analysisDiv);
+            }
+        }
+
+        // Mostrar leyenda de colores
+
+        // Calcular distancia total de todas las rutas
+        function calculateTotalDistance(routes) {
+            let totalDistance = 0;
+            
+            routes.forEach(route => {
+                for (let i = 0; i < route.length - 1; i++) {
+                    const distance = calculateDistance(
+                        route[i].lat, route[i].lon,
+                        route[i + 1].lat, route[i + 1].lon
+                    );
+                    totalDistance += distance;
+                }
+            });
+            
+            return totalDistance;
+        }
+
+        // Función para calcular distancia Manhattan entre dos puntos
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            // Distancia Manhattan: |lat1-lat2| + |lon1-lon2|
+            // Convertir grados a km aproximadamente (1 grado ≈ 111 km)
+            const latDiff = Math.abs(lat2 - lat1) * 111;
+            const lonDiff = Math.abs(lon2 - lon1) * 111 * Math.cos(lat1 * Math.PI / 180);
+            return latDiff + lonDiff;
+        }
+
+        // Limpiar mapa
+        function clearMap() {
+            // Limpiar cluster group si existe
+            if (markerClusterGroup) {
+                map.removeLayer(markerClusterGroup);
+                markerClusterGroup = null;
+            }
+            
+            // Limpiar marcadores individuales (por si acaso)
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+            
+            // Limpiar rutas
+            routeLayers.forEach(layer => map.removeLayer(layer));
+            routeLayers = [];
+            
+            // Limpiar datos actuales
+            currentData = [];
+            // No resetear currentSubidaId para mantener la referencia a la subida actual
+            // currentSubidaId = null;
+            currentSubidaInfo = null;
+            
+            // Ocultar información de rutas (solo si existen)
+            const routeInfo = document.getElementById('routeInfo');
+            const historialInfo = document.getElementById('historialInfo');
+            const colorLegend = document.getElementById('colorLegend');
+            
+            if (routeInfo) routeInfo.style.display = 'none';
+            if (historialInfo) historialInfo.style.display = 'none';
+            
+            // Limpiar tabla de historial (mantenerla visible)
+            // No limpiar la tabla, solo los datos del mapa
+            
+            // Limpiar información de capacidad (solo si existe)
+            const capacityInfo = document.getElementById('capacityInfo');
+            if (capacityInfo) {
+                capacityInfo.textContent = '';
+            }
+            
+            showStatus('info', 'Mapa completamente limpiado');
+        }
+
+        // Inicializar aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            loadData();
+            loadCustomVehicles();
+            
+            // Inicializar información del vehículo
+            updateVehicleInfo();
+            
+            // Event listener para actualizar información de capacidad
+            document.getElementById('vehicleCapacity').addEventListener('input', updateCapacityInfo);
+            
+            // Listener para resize de ventana
+            window.addEventListener('resize', function() {
+                if (map) {
+                    setTimeout(() => {
+                        map.invalidateSize();
+                    }, 100);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

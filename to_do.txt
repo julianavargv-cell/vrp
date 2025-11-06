@@ -1,0 +1,3 @@
+1. Limpieza de direcciones (Es necesario limpiar los puntos que esten dentro de Bogota y su area metropolitana, asi como validar las direcciones. Se recomienda hacer uso de una api publica o open source para encontrar el punto exacto de esa direccion)
+2. Las restricciones son las siguientes: un camión opera en horario diurno de 8am a 5pm en la ciudad de Bogota y su area metropolitana, además hay que tener en cuenta el trafico, la capacidad del camion y el costo del combustible. esto se debe tener en cuenta para el analisis que resulta luego de la subida del archivo
+3. Como parte de los resultados se espera un numero de camiones o cuantos recorridos en días tiene que hacer un solo camión.
