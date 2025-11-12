@@ -22,6 +22,7 @@
     "utm": "^1.1.1"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^11.12.0",
     "nodemon": "^3.0.1"
   },
   "keywords": [

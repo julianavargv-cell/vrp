@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RECONECTA - Optimización de Rutas VRP</title>
+    <title>RECONECTA - Sistema de ruteo</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
@@ -265,6 +265,10 @@
         .file-upload .btn {
             padding: 8px 16px;
             font-size: 0.9em;
+        }
+
+        .file-input {
+            display: none; /* Ocultar el input file nativo */
         }
 
         .btn {
@@ -1281,7 +1285,7 @@
                 <div class="main-logo">
                     <img src="grupo-colec-logo.png" alt="Grupo Colec" class="logo-image">
                     <div class="system-info">
-                        <h1><i class="fas fa-route"></i> Sistema de Optimización de Rutas VRP</h1>
+                        <h1><i class="fas fa-route"></i> Sistema de ruteo</h1>
                         <p>Administramos para la Corporación Reconecta su sistema colectivo para la gestión de RAEE</p>
                         <p><strong>Proyecto de Grado - Ingeniería Industrial</strong></p>
                     </div>
@@ -1300,6 +1304,9 @@
                         </button>
                         <button class="btn btn-warning" onclick="showEditVehiclesModal()">
                             <i class="fas fa-edit"></i> Editar Vehículos
+                        </button>
+                        <button class="btn btn-success" onclick="updateVehiclesInBackend()" style="background: #27ae60; border-color: #27ae60;">
+                            <i class="fas fa-sync-alt"></i> Actualizar
                         </button>
                     </div>
                     <div class="current-vehicles" id="currentVehicles">
@@ -1351,7 +1358,7 @@
                 <div class="calculate-routes-button-container" id="calculateRoutesButtonContainer" style="display: none;">
                     <div style="display: flex; gap: 15px; width: 100%; justify-content: center; flex-wrap: wrap;">
                         <button class="btn btn-success" onclick="calculateRoutes()" style="font-size: 1.1em; padding: 15px 30px; flex: 1; min-width: 200px; max-width: 300px;">
-                            <i class="fas fa-route"></i> Calcular Rutas Optimizadas
+                            <i class="fas fa-route"></i> Calcular Rutas
                         </button>
                         <button class="btn btn-warning" onclick="clearMap()" style="font-size: 1.1em; padding: 15px 30px; flex: 1; min-width: 200px; max-width: 300px;">
                             <i class="fas fa-trash"></i> Limpiar Mapa
@@ -1371,6 +1378,9 @@
             <div class="action-buttons" style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;">
                 <button class="btn" id="downloadRoutePlanBtn" onclick="downloadRoutePlan()" style="display: none; background: linear-gradient(45deg, #3498db, #2980b9);">
                     <i class="fas fa-download"></i> Descargar Plan de Rutas por Día
+                </button>
+                <button class="btn" id="viewRouteDetailBtn" onclick="openRouteDetailModal()" style="display: none; background: linear-gradient(45deg, #27ae60, #2ecc71);">
+                    <i class="fas fa-map-marked-alt"></i> Ver Detalle de Ruta
                 </button>
             </div>
             
@@ -1415,6 +1425,16 @@
                             <h3>Días Estimados</h3>
                             <p class="indicator-value" id="estimatedDaysDisplay">0 días</p>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- Indicadores por vehículo individual -->
+                <div class="vehicle-type-indicators" id="vehicleTypeIndicators" style="margin-top: 30px; display: none;">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.2em;">
+                        <i class="fas fa-truck"></i> Indicadores por Vehículo
+                    </h3>
+                    <div id="vehicleTypeDetailsList" style="display: grid; gap: 15px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+                        <!-- Se llenará dinámicamente -->
                     </div>
                 </div>
                 
@@ -1540,6 +1560,36 @@
         </div>
     </div>
 
+    <!-- Modal para Ver Detalle de Ruta -->
+    <div id="routeDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-route"></i> Ver Detalle de Ruta</h3>
+                <span class="close" onclick="closeRouteDetailModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="routeNumberSelect">Selecciona el número de ruta:</label>
+                    <select id="routeNumberSelect" class="form-control" style="width: 100%; padding: 10px; font-size: 1em; margin-top: 10px;">
+                        <option value="">-- Selecciona una ruta --</option>
+                    </select>
+                </div>
+                <div id="routeDetailInfo" style="margin-top: 20px; display: none;">
+                    <div class="status info" style="padding: 15px;">
+                        <strong>Información de la Ruta:</strong><br>
+                        <div id="routeDetailContent"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeRouteDetailModal()">Cerrar</button>
+                <button type="button" class="btn btn-success" onclick="showSelectedRoute()" id="showRouteBtn" disabled>
+                    <i class="fas fa-map-marked-alt"></i> Mostrar en Mapa
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <script>
@@ -1556,6 +1606,7 @@
             camion: null,
             moto: null
         };
+        let allRoutes = []; // Almacenar todas las rutas calculadas para visualización detallada
 
         // Cargar vehículos guardados al iniciar
         loadCustomVehicles();
@@ -1563,16 +1614,72 @@
 
         // Gestión de vehículos personalizados
         function loadCustomVehicles() {
+            // Primero intentar cargar desde el backend
+            fetch('/api/vehicles')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.vehicles && data.vehicles.length > 0) {
+                        customVehicles = data.vehicles;
+                        // Sincronizar con localStorage
+                        localStorage.setItem('customVehicles', JSON.stringify(customVehicles));
+                        updateVehiclesDisplay();
+                        console.log(`✅ ${customVehicles.length} vehículos cargados desde el backend`);
+                    } else {
+                        // Si no hay en el backend, cargar desde localStorage
             const saved = localStorage.getItem('customVehicles');
             if (saved) {
                 customVehicles = JSON.parse(saved);
                 updateVehiclesDisplay();
-            }
+                            console.log(`✅ Vehículos cargados desde localStorage`);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error cargando vehículos desde backend:', error);
+                    // Fallback a localStorage
+                    const saved = localStorage.getItem('customVehicles');
+                    if (saved) {
+                        customVehicles = JSON.parse(saved);
+                        updateVehiclesDisplay();
+                    }
+                });
         }
 
         function saveCustomVehicles() {
             localStorage.setItem('customVehicles', JSON.stringify(customVehicles));
             updateVehiclesDisplay();
+        }
+        
+        // Función para actualizar vehículos en el backend
+        function updateVehiclesInBackend() {
+            if (customVehicles.length === 0) {
+                showStatus('warning', 'No hay vehículos para actualizar. Añade al menos un vehículo primero.');
+                return;
+            }
+            
+            showStatus('info', 'Actualizando vehículos en el backend...');
+            
+            fetch('/api/vehicles/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ vehicles: customVehicles })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showStatus('success', `✅ ${data.message || 'Vehículos actualizados exitosamente en el backend'}`);
+                    // Limpiar resumen del ruteo para forzar recálculo
+                    clearRoutingSummary();
+                } else {
+                    showStatus('error', 'Error al actualizar vehículos: ' + (data.error || 'Error desconocido'));
+                }
+            })
+            .catch(error => {
+                console.error('Error actualizando vehículos:', error);
+                showStatus('error', 'Error al actualizar vehículos en el backend. Verifica la conexión.');
+            });
         }
 
         function updateVehiclesDisplay() {
@@ -1630,9 +1737,12 @@
                 updateDefaultVehicleConfig(vehicle.type, vehicle.capacity, vehicle.costPerTrip);
             }
             
+            // Limpiar resumen del ruteo anterior para forzar recálculo
+            clearRoutingSummary();
+            
             closeAddVehicleModal();
             
-            showStatus('success', `Vehículo "${vehicle.name}" añadido exitosamente.`);
+            showStatus('success', `Vehículo "${vehicle.name}" añadido exitosamente. Recuerda calcular las rutas nuevamente para ver los cambios.`);
         }
 
         function showEditVehiclesModal() {
@@ -1760,10 +1870,13 @@
                 updateDefaultVehicleConfig(type, capacity, costPerTrip);
             }
             
+            // Limpiar resumen del ruteo anterior para forzar recálculo
+            clearRoutingSummary();
+            
             // Recargar el modal
             showEditVehiclesModal();
             
-            showStatus('success', `Vehículo "${name}" actualizado exitosamente.`);
+            showStatus('success', `Vehículo "${name}" actualizado exitosamente. Recuerda calcular las rutas nuevamente para ver los cambios.`);
         }
 
         function closeEditVehiclesModal() {
@@ -1774,8 +1887,12 @@
             if (confirm('¿Estás seguro de que quieres eliminar este vehículo?')) {
                 customVehicles = customVehicles.filter(v => v.id !== vehicleId);
                 saveCustomVehicles();
+                
+                // Limpiar resumen del ruteo anterior para forzar recálculo
+                clearRoutingSummary();
+                
                 showEditVehiclesModal(); // Recargar la lista
-                showStatus('info', 'Vehículo eliminado exitosamente.');
+                showStatus('info', 'Vehículo eliminado exitosamente. Recuerda calcular las rutas nuevamente para ver los cambios.');
             }
         }
 
@@ -2051,6 +2168,55 @@
         }
 
         // Actualizar resumen del ruteo
+        // Limpiar resumen del ruteo cuando se cambian los vehículos
+        function clearRoutingSummary() {
+            const summarySection = document.getElementById('routingSummarySection');
+            if (summarySection) {
+                // Ocultar la sección de resumen
+                summarySection.style.display = 'none';
+                
+                // Limpiar los valores mostrados
+                const totalKilometersDisplay = document.getElementById('totalKilometersDisplay');
+                const totalPickupsDisplay = document.getElementById('totalPickupsDisplay');
+                const totalWeightDisplay = document.getElementById('totalWeightDisplay');
+                const estimatedDaysDisplay = document.getElementById('estimatedDaysDisplay');
+                
+                if (totalKilometersDisplay) totalKilometersDisplay.textContent = '0.00 km';
+                if (totalPickupsDisplay) totalPickupsDisplay.textContent = '0';
+                if (totalWeightDisplay) totalWeightDisplay.textContent = '0.00 ton';
+                if (estimatedDaysDisplay) estimatedDaysDisplay.textContent = '0 días';
+                
+                // Ocultar botón de descarga
+                const downloadBtn = document.getElementById('downloadRoutePlanBtn');
+                if (downloadBtn) downloadBtn.style.display = 'none';
+                
+                // Ocultar botón de ver detalle de ruta
+                const viewRouteDetailBtn = document.getElementById('viewRouteDetailBtn');
+                if (viewRouteDetailBtn) viewRouteDetailBtn.style.display = 'none';
+                
+                // Limpiar rutas almacenadas
+                allRoutes = [];
+                
+                // Limpiar vista previa
+                const previewBody = document.getElementById('routePlanPreviewBody');
+                if (previewBody) previewBody.innerHTML = '';
+                
+                // Ocultar indicadores por tipo de vehículo
+                const vehicleTypeIndicators = document.getElementById('vehicleTypeIndicators');
+                if (vehicleTypeIndicators) {
+                    vehicleTypeIndicators.style.display = 'none';
+                }
+                const vehicleTypeDetailsList = document.getElementById('vehicleTypeDetailsList');
+                if (vehicleTypeDetailsList) {
+                    vehicleTypeDetailsList.innerHTML = '';
+                }
+            }
+            
+            // Limpiar rutas del mapa
+            routeLayers.forEach(layer => map.removeLayer(layer));
+            routeLayers = [];
+        }
+
         function updateRoutingSummary(data) {
             const summarySection = document.getElementById('routingSummarySection');
             const analysis = data.analysis || {};
@@ -2090,7 +2256,10 @@
             }
             
             console.log('🔍 DEBUG updateRoutingSummary - totalWeight final:', totalWeight);
+            console.log('🔍 DEBUG updateRoutingSummary - data:', data);
+            console.log('🔍 DEBUG updateRoutingSummary - data.analysis:', data.analysis);
             console.log('🔍 DEBUG updateRoutingSummary - analysis:', analysis);
+            console.log('🔍 DEBUG updateRoutingSummary - analysis.vehicleTypeDetails:', analysis.vehicleTypeDetails);
             
             const totalPickups = data.routes ? data.routes.reduce((sum, route) => {
                 const locations = route.locations || route.stops || [];
@@ -2103,6 +2272,9 @@
             document.getElementById('totalWeightDisplay').textContent = totalWeight > 0 ? (totalWeight / 1000).toFixed(2) + ' ton' : '0.00 ton';
             document.getElementById('estimatedDaysDisplay').textContent = estimatedDays + ' días';
             
+            // Mostrar indicadores por tipo de vehículo
+            updateVehicleTypeIndicators(data.analysis);
+            
             // Mostrar botón de descarga
             document.getElementById('downloadRoutePlanBtn').style.display = 'inline-block';
             
@@ -2110,6 +2282,157 @@
             if (currentSubidaId) {
                 loadRoutePlanPreview(currentSubidaId);
             }
+        }
+        
+        // Actualizar indicadores por tipo de vehículo
+        function updateVehicleTypeIndicators(analysis) {
+            const vehicleTypeIndicators = document.getElementById('vehicleTypeIndicators');
+            const vehicleTypeDetailsList = document.getElementById('vehicleTypeDetailsList');
+            
+            if (!analysis || !analysis.vehicleTypeDetails || Object.keys(analysis.vehicleTypeDetails).length === 0) {
+                if (vehicleTypeIndicators) {
+                    vehicleTypeIndicators.style.display = 'none';
+                }
+                return;
+            }
+            
+            // Mostrar la sección
+            if (vehicleTypeIndicators) {
+                vehicleTypeIndicators.style.display = 'block';
+            }
+            
+            // Limpiar contenido anterior
+            if (vehicleTypeDetailsList) {
+                vehicleTypeDetailsList.innerHTML = '';
+            }
+            
+            // Crear tarjeta para cada vehículo individual
+            Object.keys(analysis.vehicleTypeDetails).forEach(tipo => {
+                const details = analysis.vehicleTypeDetails[tipo];
+                
+                // Determinar color según el tipo de vehículo
+                let colorGradient = 'linear-gradient(135deg, #3498db, #2980b9)'; // Azul por defecto
+                let icon = 'fa-truck';
+                let tipoNombre = tipo;
+                let borderColor = '#3498db';
+                
+                if (tipo === 'camion') {
+                    colorGradient = 'linear-gradient(135deg, #e67e22, #d35400)';
+                    icon = 'fa-truck';
+                    tipoNombre = 'Camión';
+                    borderColor = '#e67e22';
+                } else if (tipo === 'moto') {
+                    colorGradient = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                    icon = 'fa-motorcycle';
+                    tipoNombre = 'Moto';
+                    borderColor = '#27ae60';
+                } else {
+                    tipoNombre = tipo.charAt(0).toUpperCase() + tipo.slice(1);
+                }
+                
+                // Si hay vehículos individuales, crear una tarjeta para cada uno
+                if (details.vehicles && details.vehicles.length > 0) {
+                    details.vehicles.forEach((vehicle, index) => {
+                        const vehicleName = vehicle.name || `${tipoNombre} ${index + 1}`;
+                        const vehicleCapacity = vehicle.capacity && vehicle.capacity !== 'N/A' ? parseFloat(vehicle.capacity) : 0;
+                        const vehicleDays = vehicle.days || 0;
+                        const vehicleOccupancy = vehicle.occupancy || 0;
+                        const vehicleRoutes = vehicle.routes || 0;
+                        const vehicleWeight = vehicle.weight || 0;
+                        const vehicleTime = vehicle.time || 0;
+                        const vehicleCost = vehicle.cost || 0;
+                        const vehicleCostPerTrip = vehicle.costPerTrip || 0;
+                        
+                        // Debug: Verificar valores del vehículo
+                        console.log(`🔍 DEBUG vehículo ${vehicleName}:`, {
+                            cost: vehicle.cost,
+                            costPerTrip: vehicle.costPerTrip,
+                            routes: vehicle.routes,
+                            days: vehicle.days,
+                            calculatedCost: vehicleCostPerTrip * vehicleRoutes,
+                            expectedCost: `costPerTrip(${vehicleCostPerTrip}) * routes(${vehicleRoutes}) = ${vehicleCostPerTrip * vehicleRoutes}`
+                        });
+                        
+                        // Si el costo es 0 pero debería tener valor, mostrar advertencia
+                        if (vehicleCost === 0 && vehicleCostPerTrip > 0 && vehicleRoutes > 0) {
+                            console.warn(`⚠️ ADVERTENCIA: ${vehicleName} tiene cost=0 pero debería ser ${vehicleCostPerTrip * vehicleRoutes}`);
+                        }
+                        
+                        const card = document.createElement('div');
+                        card.style.cssText = `background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid ${borderColor};`;
+                        card.innerHTML = `
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <div style="background: ${colorGradient}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                    <i class="fas ${icon}" style="color: white; font-size: 1.5em;"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <h4 style="margin: 0; color: #2c3e50; font-size: 1.2em;">${vehicleName}</h4>
+                                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 0.9em;">${tipoNombre} - Capacidad: ${vehicleCapacity.toLocaleString()} kg</p>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                                    <div style="color: #7f8c8d; font-size: 0.85em; margin-bottom: 5px;">Días Estimados</div>
+                                    <div style="color: #2c3e50; font-size: 1.5em; font-weight: bold;">${vehicleDays.toFixed(1)} días</div>
+                                </div>
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                                    <div style="color: #7f8c8d; font-size: 0.85em; margin-bottom: 5px;">Ocupación Promedio Diaria</div>
+                                    <div style="color: ${vehicleOccupancy > 80 ? '#f39c12' : vehicleOccupancy > 50 ? '#2c3e50' : '#7f8c8d'}; font-size: 1.5em; font-weight: bold;">${vehicleOccupancy.toFixed(1)}%</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ecf0f1; color: #7f8c8d; font-size: 0.85em;">
+                                <i class="fas fa-info-circle"></i> ${vehicleRoutes} ruta(s) | ${(vehicleWeight / 1000).toFixed(1)} ton | ${(vehicleTime / 60).toFixed(1)} horas
+                            </div>
+                            <div style="margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 8px; border-left: 3px solid ${borderColor};">
+                                <div style="color: #7f8c8d; font-size: 0.85em; margin-bottom: 5px;">
+                                    <i class="fas fa-dollar-sign"></i> Costo Total
+                                </div>
+                                <div style="color: #2c3e50; font-size: 1.3em; font-weight: bold;">
+                                    $${vehicleCost.toLocaleString('es-CO')} COP
+                                </div>
+                            </div>
+                        `;
+                        if (vehicleTypeDetailsList) {
+                            vehicleTypeDetailsList.appendChild(card);
+                        }
+                    });
+                } else {
+                    // Fallback: si no hay vehículos individuales, mostrar resumen por tipo
+                    const cantidadVehiculos = details.cantidadVehiculos || 1;
+                    const diasPromedio = details.diasPromedioPorVehiculo || 0;
+                    const ocupacion = details.ocupacionPromedioDiaria || 0;
+                    
+                    const card = document.createElement('div');
+                    card.style.cssText = `background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid ${borderColor};`;
+                    card.innerHTML = `
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div style="background: ${colorGradient}; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                <i class="fas ${icon}" style="color: white; font-size: 1.5em;"></i>
+                            </div>
+                            <div>
+                                <h4 style="margin: 0; color: #2c3e50; font-size: 1.2em;">${tipoNombre}</h4>
+                                <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 0.9em;">${cantidadVehiculos} vehículo(s) disponible(s)</p>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                                <div style="color: #7f8c8d; font-size: 0.85em; margin-bottom: 5px;">Días Estimados por Vehículo</div>
+                                <div style="color: #2c3e50; font-size: 1.5em; font-weight: bold;">${diasPromedio.toFixed(1)} días</div>
+                            </div>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                                <div style="color: #7f8c8d; font-size: 0.85em; margin-bottom: 5px;">Ocupación Promedio Diaria</div>
+                                <div style="color: #2c3e50; font-size: 1.5em; font-weight: bold;">${ocupacion.toFixed(1)}%</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ecf0f1; color: #7f8c8d; font-size: 0.85em;">
+                            <i class="fas fa-info-circle"></i> Total: ${details.totalRutas || 0} ruta(s) | Tiempo total: ${(details.tiempoTotal / 60).toFixed(1)} horas
+                        </div>
+                    `;
+                    if (vehicleTypeDetailsList) {
+                        vehicleTypeDetailsList.appendChild(card);
+                    }
+                }
+            });
         }
         
         // Cargar vista previa del plan de rutas por día
@@ -2378,11 +2701,15 @@
                 const calculateRoutesContainer = document.getElementById('calculateRoutesButtonContainer');
                 const routingSummarySection = document.getElementById('routingSummarySection');
                 
+                // Limpiar resumen del ruteo al seleccionar una subida diferente
+                clearRoutingSummary();
+                
                 if (calculateRoutesContainer) {
                     calculateRoutesContainer.style.display = 'block';
                 }
+                // NO mostrar el resumen automáticamente - debe calcularse primero con los vehículos actuales
                 if (routingSummarySection) {
-                    routingSummarySection.style.display = 'block';
+                    routingSummarySection.style.display = 'none';
                 }
                 
                 // Actualizar capacidad del vehículo (convertir de toneladas a kg)
@@ -2452,30 +2779,208 @@
             loadHistorial();
             clearMap(); // Empezar con mapa limpio
             
-            // Mostrar botón y sección de resumen si hay una subida activa
+            // Limpiar resumen del ruteo al cargar la página para evitar mostrar datos antiguos
+            clearRoutingSummary();
+            
+            // Mostrar botón si hay una subida activa, pero NO mostrar el resumen automáticamente
+            // El resumen solo se mostrará después de calcular las rutas con los vehículos actuales
             if (currentSubidaId) {
                 document.getElementById('calculateRoutesButtonContainer').style.display = 'block';
-                document.getElementById('routingSummarySection').style.display = 'block';
-                showStatus('success', '📁 Archivo procesado. Haz clic en "Calcular Rutas Optimizadas" para ver los resultados.');
+                // NO mostrar el resumen automáticamente - debe calcularse primero
+                document.getElementById('routingSummarySection').style.display = 'none';
+                showStatus('success', '📁 Archivo procesado. Haz clic en "Calcular Rutas" para ver los resultados.');
             } else {
                 showStatus('info', '📁 Selecciona un archivo del historial o sube uno nuevo.');
             }
         }
 
         // Mostrar ubicaciones en el mapa - REHECHO COMPLETAMENTE
-        // Usa SOLO latitud y longitud del CSV cargado
-        function displayLocations(locations) {
-            console.log('🗺️ Mostrando ubicaciones en el mapa:', locations.length, 'puntos');
+        // Función para calcular distancia Haversine entre dos puntos
+        function calcularDistanciaHaversine(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radio de la Tierra en km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+        
+        // Función para determinar localidad de Bogotá basada en coordenadas
+        function determinarLocalidad(lat, lon) {
+            // Definición aproximada de las localidades de Bogotá con bounds y centros
+            const LOCALIDADES = {
+                'Usaquén': { 
+                    bounds: { minLat: 4.65, maxLat: 4.75, minLon: -74.10, maxLon: -74.03 },
+                    centro: { lat: 4.698, lon: -74.065 }
+                },
+                'Chapinero': { 
+                    bounds: { minLat: 4.62, maxLat: 4.68, minLon: -74.08, maxLon: -74.04 },
+                    centro: { lat: 4.648, lon: -74.063 }
+                },
+                'Santa Fe': { 
+                    bounds: { minLat: 4.60, maxLat: 4.62, minLon: -74.09, maxLon: -74.07 },
+                    centro: { lat: 4.610, lon: -74.082 }
+                },
+                'San Cristóbal': { 
+                    bounds: { minLat: 4.52, maxLat: 4.60, minLon: -74.10, maxLon: -74.05 },
+                    centro: { lat: 4.560, lon: -74.085 }
+                },
+                'Usme': { 
+                    bounds: { minLat: 4.45, maxLat: 4.55, minLon: -74.15, maxLon: -74.08 },
+                    centro: { lat: 4.500, lon: -74.110 }
+                },
+                'Tunjuelito': { 
+                    bounds: { minLat: 4.55, maxLat: 4.61, minLon: -74.14, maxLon: -74.11 },
+                    centro: { lat: 4.580, lon: -74.125 }
+                },
+                'Bosa': { 
+                    bounds: { minLat: 4.58, maxLat: 4.65, minLon: -74.22, maxLon: -74.15 },
+                    centro: { lat: 4.615, lon: -74.188 }
+                },
+                'Kennedy': { 
+                    bounds: { minLat: 4.60, maxLat: 4.68, minLon: -74.18, maxLon: -74.12 },
+                    centro: { lat: 4.640, lon: -74.150 }
+                },
+                'Fontibón': { 
+                    bounds: { minLat: 4.65, maxLat: 4.72, minLon: -74.16, maxLon: -74.12 },
+                    centro: { lat: 4.680, lon: -74.142 }
+                },
+                'Engativá': { 
+                    bounds: { minLat: 4.67, maxLat: 4.73, minLon: -74.13, maxLon: -74.09 },
+                    centro: { lat: 4.700, lon: -74.110 }
+                },
+                'Suba': { 
+                    bounds: { minLat: 4.70, maxLat: 4.80, minLon: -74.11, maxLon: -74.06 },
+                    centro: { lat: 4.750, lon: -74.085 }
+                },
+                'Barrios Unidos': { 
+                    bounds: { minLat: 4.68, maxLat: 4.72, minLon: -74.10, maxLon: -74.06 },
+                    centro: { lat: 4.670, lon: -74.088 }
+                },
+                'Teusaquillo': { 
+                    bounds: { minLat: 4.64, maxLat: 4.68, minLon: -74.10, maxLon: -74.06 },
+                    centro: { lat: 4.640, lon: -74.078 }
+                },
+                'Los Mártires': { 
+                    bounds: { minLat: 4.60, maxLat: 4.64, minLon: -74.10, maxLon: -74.06 },
+                    centro: { lat: 4.605, lon: -74.088 }
+                },
+                'Antonio Nariño': { 
+                    bounds: { minLat: 4.58, maxLat: 4.62, minLon: -74.10, maxLon: -74.06 },
+                    centro: { lat: 4.590, lon: -74.095 }
+                },
+                'Puente Aranda': { 
+                    bounds: { minLat: 4.60, maxLat: 4.65, minLon: -74.12, maxLon: -74.08 },
+                    centro: { lat: 4.625, lon: -74.105 }
+                },
+                'La Candelaria': { 
+                    bounds: { minLat: 4.595, maxLat: 4.605, minLon: -74.08, maxLon: -74.07 },
+                    centro: { lat: 4.595, lon: -74.076 }
+                },
+                'Rafael Uribe Uribe': { 
+                    bounds: { minLat: 4.55, maxLat: 4.60, minLon: -74.10, maxLon: -74.06 },
+                    centro: { lat: 4.570, lon: -74.105 }
+                },
+                'Ciudad Bolívar': { 
+                    bounds: { minLat: 4.50, maxLat: 4.58, minLon: -74.15, maxLon: -74.10 },
+                    centro: { lat: 4.520, lon: -74.140 }
+                },
+                'Sumapaz': { 
+                    bounds: { minLat: 4.30, maxLat: 4.50, minLon: -74.20, maxLon: -74.00 },
+                    centro: { lat: 4.450, lon: -74.150 }
+                }
+            };
             
-            // Limpiar todos los marcadores existentes
+            // Primero, verificar si está dentro de los bounds de alguna localidad
+            for (const [localidad, datos] of Object.entries(LOCALIDADES)) {
+                const bounds = datos.bounds;
+                if (lat >= bounds.minLat && lat <= bounds.maxLat && 
+                    lon >= bounds.minLon && lon <= bounds.maxLon) {
+                    return localidad;
+                }
+            }
+            
+            // Si no está en ningún bound, usar distancia al centro más cercano
+            let localidadMasCercana = 'Usaquén';
+            let distanciaMinima = Infinity;
+            
+            for (const [localidad, datos] of Object.entries(LOCALIDADES)) {
+                const centro = datos.centro;
+                const distancia = calcularDistanciaHaversine(lat, lon, centro.lat, centro.lon);
+                
+                if (distancia < distanciaMinima) {
+                    distanciaMinima = distancia;
+                    localidadMasCercana = localidad;
+                }
+            }
+            
+            return localidadMasCercana;
+        }
+        
+        // Función para obtener los bounds de una localidad
+        function obtenerBoundsLocalidad(localidad) {
+            const LOCALIDADES = {
+                'Usaquén': { bounds: { minLat: 4.65, maxLat: 4.75, minLon: -74.10, maxLon: -74.03 } },
+                'Chapinero': { bounds: { minLat: 4.62, maxLat: 4.68, minLon: -74.08, maxLon: -74.04 } },
+                'Santa Fe': { bounds: { minLat: 4.60, maxLat: 4.62, minLon: -74.09, maxLon: -74.07 } },
+                'San Cristóbal': { bounds: { minLat: 4.52, maxLat: 4.60, minLon: -74.10, maxLon: -74.05 } },
+                'Usme': { bounds: { minLat: 4.45, maxLat: 4.55, minLon: -74.15, maxLon: -74.08 } },
+                'Tunjuelito': { bounds: { minLat: 4.55, maxLat: 4.61, minLon: -74.14, maxLon: -74.11 } },
+                'Bosa': { bounds: { minLat: 4.58, maxLat: 4.65, minLon: -74.22, maxLon: -74.15 } },
+                'Kennedy': { bounds: { minLat: 4.60, maxLat: 4.68, minLon: -74.18, maxLon: -74.12 } },
+                'Fontibón': { bounds: { minLat: 4.65, maxLat: 4.72, minLon: -74.16, maxLon: -74.12 } },
+                'Engativá': { bounds: { minLat: 4.67, maxLat: 4.73, minLon: -74.13, maxLon: -74.09 } },
+                'Suba': { bounds: { minLat: 4.70, maxLat: 4.80, minLon: -74.11, maxLon: -74.06 } },
+                'Barrios Unidos': { bounds: { minLat: 4.68, maxLat: 4.72, minLon: -74.10, maxLon: -74.06 } },
+                'Teusaquillo': { bounds: { minLat: 4.64, maxLat: 4.68, minLon: -74.10, maxLon: -74.06 } },
+                'Los Mártires': { bounds: { minLat: 4.60, maxLat: 4.64, minLon: -74.10, maxLon: -74.06 } },
+                'Antonio Nariño': { bounds: { minLat: 4.58, maxLat: 4.62, minLon: -74.10, maxLon: -74.06 } },
+                'Puente Aranda': { bounds: { minLat: 4.60, maxLat: 4.65, minLon: -74.12, maxLon: -74.08 } },
+                'La Candelaria': { bounds: { minLat: 4.595, maxLat: 4.605, minLon: -74.08, maxLon: -74.07 } },
+                'Rafael Uribe Uribe': { bounds: { minLat: 4.55, maxLat: 4.60, minLon: -74.10, maxLon: -74.06 } },
+                'Ciudad Bolívar': { bounds: { minLat: 4.50, maxLat: 4.58, minLon: -74.15, maxLon: -74.10 } },
+                'Sumapaz': { bounds: { minLat: 4.30, maxLat: 4.50, minLon: -74.20, maxLon: -74.00 } }
+            };
+            
+            return LOCALIDADES[localidad] ? LOCALIDADES[localidad].bounds : null;
+        }
+
+        // Usa SOLO latitud y longitud del CSV cargado
+        function displayLocations(locations, useClustering = false) {
+            console.log('🗺️ Mostrando ubicaciones en el mapa:', locations.length, 'puntos', useClustering ? 'con clustering por localidad' : 'sin clustering');
+            
+            // Limpiar todos los marcadores existentes y zonas resaltadas
             if (markerClusterGroup) {
                 map.removeLayer(markerClusterGroup);
                 markerClusterGroup = null;
             }
             markers.forEach(marker => {
                 map.removeLayer(marker);
+                // Limpiar zonas resaltadas si existen
+                if (marker._zonaResaltada) {
+                    map.removeLayer(marker._zonaResaltada);
+                }
             });
             markers = [];
+            
+            // Limpiar todas las capas de zonas resaltadas
+            if (map && typeof map.eachLayer === 'function') {
+                try {
+                    map.eachLayer(function(layer) {
+                        try {
+                            if (layer.options && layer.options.className === 'zona-localidad') {
+                                map.removeLayer(layer);
+                            }
+                        } catch (e) {
+                            // Ignorar errores al remover capas individuales
+                        }
+                    });
+                } catch (e) {
+                    console.warn('⚠️ Error al iterar capas del mapa:', e);
+                }
+            }
 
             // Validar que tenemos ubicaciones
             if (!locations || locations.length === 0) {
@@ -2483,10 +2988,174 @@
                 return;
             }
 
-            // Crear grupo de marcadores sin clustering - todos los puntos individuales
+            // Si useClustering es true, agrupar por localidad en lugar de usar clustering automático
+            if (useClustering) {
+                // Agrupar ubicaciones por localidad
+                const ubicacionesPorLocalidad = {};
+                locations.forEach(location => {
+                    const lat = parseFloat(location.lat);
+                    const lon = parseFloat(location.lon);
+                    
+                    if (isNaN(lat) || isNaN(lon) || lat === 0 || lon === 0) {
+                        return;
+                    }
+                    
+                    const localidad = determinarLocalidad(lat, lon);
+                    if (!ubicacionesPorLocalidad[localidad]) {
+                        ubicacionesPorLocalidad[localidad] = [];
+                    }
+                    ubicacionesPorLocalidad[localidad].push(location);
+                });
+                
+                console.log(`📍 Agrupadas ${Object.keys(ubicacionesPorLocalidad).length} localidades`);
+                
+                // Crear un marcador por cada localidad
+                const localidadMarkers = [];
+                Object.entries(ubicacionesPorLocalidad).forEach(([localidad, ubicaciones]) => {
+                    // Calcular centro de la localidad (promedio de coordenadas)
+                    let sumLat = 0, sumLon = 0, totalPeso = 0, count = 0;
+                    const ciudades = new Set();
+                    
+                    ubicaciones.forEach(loc => {
+                        const lat = parseFloat(loc.lat);
+                        const lon = parseFloat(loc.lon);
+                        if (!isNaN(lat) && !isNaN(lon)) {
+                            sumLat += lat;
+                            sumLon += lon;
+                            totalPeso += parseFloat(loc.peso) || 0;
+                            count++;
+                            if (loc.ciudad) ciudades.add(loc.ciudad);
+                        }
+                    });
+                    
+                    if (count === 0) return;
+                    
+                    const centroLat = sumLat / count;
+                    const centroLon = sumLon / count;
+                    
+                    // Determinar tamaño y color del icono según cantidad
+                    let size = 40;
+                    let color = '#27ae60'; // Verde
+                    
+                    if (count > 100) {
+                        size = 60;
+                        color = '#e74c3c'; // Rojo
+                    } else if (count > 50) {
+                        size = 50;
+                        color = '#f39c12'; // Naranja
+                    } else if (count > 10) {
+                        size = 45;
+                        color = '#3498db'; // Azul
+                    }
+                    
+                    // Crear icono del cluster por localidad
+                    const localidadIcon = L.divIcon({
+                        html: `<div style="background-color: ${color}; color: white; border-radius: 50%; width: ${size}px; height: ${size}px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: ${size > 50 ? '16px' : '14px'}; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">${count}</div>`,
+                        className: 'marker-cluster-localidad',
+                        iconSize: L.point(size, size)
+                    });
+                    
+                    // Obtener bounds de la localidad para resaltar
+                    const boundsLocalidad = obtenerBoundsLocalidad(localidad);
+                    
+                    // Crear polígono para resaltar la zona de la localidad (inicialmente oculto)
+                    let zonaResaltada = null;
+                    if (boundsLocalidad) {
+                        zonaResaltada = L.rectangle([
+                            [boundsLocalidad.minLat, boundsLocalidad.minLon],
+                            [boundsLocalidad.maxLat, boundsLocalidad.maxLon]
+                        ], {
+                            color: color,
+                            fillColor: color,
+                            fillOpacity: 0.2,
+                            weight: 2,
+                            opacity: 0,
+                            className: 'zona-localidad'
+                        });
+                    }
+                    
+                    // Crear marcador para la localidad
+                    const marker = L.marker([centroLat, centroLon], { icon: localidadIcon })
+                        .bindPopup(`
+                            <div style="min-width: 300px; max-width: 400px;">
+                                <h3 style="margin: 0 0 10px 0; color: #27ae60;">🏘️ ${localidad}</h3>
+                                <div style="font-size: 1.1em; margin-bottom: 10px;">
+                                    <strong>📊 Total de Recogidas:</strong> ${count}<br>
+                                    <strong>⚖️ Peso Total:</strong> ${(totalPeso / 1000).toFixed(2)} ton<br>
+                                    <strong>🏙️ Ciudades:</strong> ${Array.from(ciudades).join(', ') || 'N/A'}
+                                </div>
+                                <div style="color: #7f8c8d; font-size: 0.9em; margin-top: 10px;">
+                                    💡 Haz clic para ver detalles de la localidad
+                                </div>
+                            </div>
+                        `);
+                    
+                    // Agregar efecto hover para resaltar la zona
+                    if (zonaResaltada) {
+                        marker.on('mouseover', function() {
+                            // Resaltar la zona de la localidad
+                            zonaResaltada.setStyle({
+                                opacity: 0.8,
+                                fillOpacity: 0.4,
+                                weight: 3
+                            });
+                            if (!map.hasLayer(zonaResaltada)) {
+                                zonaResaltada.addTo(map);
+                            }
+                            // Traer el marcador al frente
+                            marker.bringToFront();
+                        });
+                        
+                        marker.on('mouseout', function() {
+                            // Ocultar el resaltado
+                            zonaResaltada.setStyle({
+                                opacity: 0,
+                                fillOpacity: 0,
+                                weight: 2
+                            });
+                        });
+                    }
+                    
+                    // Guardar información de la localidad en el marcador
+                    marker._localidad = localidad;
+                    marker._ubicaciones = ubicaciones;
+                    marker._totalPeso = totalPeso;
+                    marker._count = count;
+                    marker._zonaResaltada = zonaResaltada;
+                    
+                    localidadMarkers.push(marker);
+                    markers.push(marker);
+                    
+                    // Agregar la zona resaltada al mapa (inicialmente invisible)
+                    if (zonaResaltada) {
+                        zonaResaltada.addTo(map);
+                    }
+                });
+                
+                // Agregar todos los marcadores de localidades al mapa
+                localidadMarkers.forEach(marker => {
+                    marker.addTo(map);
+                });
+                
+                // Ajustar vista del mapa
+                if (localidadMarkers.length > 0) {
+                    const group = new L.featureGroup(localidadMarkers);
+                    map.fitBounds(group.getBounds().pad(0.1));
+                }
+                
+                console.log(`✅ ${localidadMarkers.length} marcadores de localidades agregados al mapa`);
+                console.log('✅ SOLO se muestran clusters por localidad, NO puntos individuales');
+                return; // IMPORTANTE: Salir aquí para NO mostrar puntos individuales
+            }
+
+            // Si no se usa clustering por localidad, mostrar marcadores individuales
+            // Crear grupo de marcadores sin clustering automático (mostrar todos los puntos)
             markerClusterGroup = L.markerClusterGroup({
-                maxClusterRadius: 0, // Radio 0 = NO agrupar, mostrar todos los puntos individualmente
-                chunkedLoading: false
+                maxClusterRadius: 0, // Sin clustering automático
+                chunkedLoading: false,
+                spiderfyOnMaxZoom: false,
+                showCoverageOnHover: false,
+                zoomToBoundsOnClick: false
             });
 
             // Obtener capacidad del vehículo
@@ -2533,7 +3202,10 @@
                 });
                 
                 // Crear marcador usando latitud y longitud del CSV
-                const marker = L.marker([lat, lon], { icon: customIcon })
+                const marker = L.marker([lat, lon], { 
+                    icon: customIcon,
+                    locationData: location // Guardar datos de ubicación para usar en clusters
+                })
                     .bindPopup(`
                         <div style="min-width: 250px;">
                             <strong>📍 ${location.direccion || 'N/A'}</strong><br>
@@ -2561,6 +3233,7 @@
 
             // Agregar el grupo de marcadores al mapa
             markerClusterGroup.addTo(map);
+            
             console.log(`✅ ${marcadoresValidos} marcadores agregados al mapa usando coordenadas lat/lon del CSV`);
 
             // Ajustar vista del mapa para mostrar todos los marcadores
@@ -2877,12 +3550,39 @@
                             });
                         }
                         
+                        // Si se usa clustering por localidad, NO mostrar rutas individuales
+                        // Solo mostrar clusters por localidad
+                        if (currentData && currentData.length > 0) {
+                            console.log('🔄 Mostrando clusters por localidad...');
+                            console.log('🧹 Limpiando mapa completamente antes de mostrar clusters...');
+                            // Limpiar todo el mapa primero (incluyendo rutas y marcadores)
+                            clearMap();
+                            // Esperar un momento para asegurar que el mapa se limpió
+                            setTimeout(() => {
+                                // Mostrar solo clusters por localidad (sin puntos individuales)
+                                displayLocations(currentData, true); // true = activar clustering por localidad
+                                console.log('✅ Clusters por localidad mostrados. NO se muestran puntos individuales.');
+                            }, 100);
+                        } else {
+                            // Si no hay datos para clustering, mostrar rutas normalmente
+                            console.log('⚠️ No hay currentData, mostrando rutas individuales');
                         displayRoutes(validRoutes);
+                        }
+                        
+                        // Guardar rutas para visualización detallada
+                        allRoutes = validRoutes;
+                        
+                        // Mostrar botón de ver detalle si hay rutas
+                        const viewRouteDetailBtn = document.getElementById('viewRouteDetailBtn');
+                        if (viewRouteDetailBtn) {
+                            viewRouteDetailBtn.style.display = validRoutes.length > 0 ? 'inline-block' : 'none';
+                        }
+                        
                         // Mostrar sección de resumen y actualizar indicadores
                         updateRoutingSummary(data);
                         
                         if (validRoutes.length > 0) {
-                            showStatus('success', `Rutas calculadas exitosamente: ${validRoutes.length} rutas válidas, ${data.analysis.totalWorkingDays} días de trabajo`);
+                            showStatus('success', `Rutas calculadas exitosamente: ${validRoutes.length} rutas válidas, ${data.analysis.totalWorkingDays} días de trabajo. Los puntos ahora están agrupados en clusters.`);
                         } else {
                             showStatus('warning', 'No se pudieron crear rutas válidas. Verifica la capacidad del vehículo.');
                         }
@@ -2897,9 +3597,12 @@
         }
 
         // Mostrar rutas en el mapa
+        // NOTA: Esta función muestra puntos individuales. Si se usa clustering por localidad,
+        // esta función NO debe llamarse, solo se deben mostrar los clusters.
         function displayRoutes(routes) {
             console.log('🗺️ DEBUG: displayRoutes llamada con', routes.length, 'rutas');
             console.log('🗺️ DEBUG: routes =', routes);
+            console.log('⚠️ ADVERTENCIA: displayRoutes muestra puntos individuales. Si se usa clustering por localidad, esta función no debe ejecutarse.');
             
             // Limpiar rutas existentes
             routeLayers.forEach(layer => map.removeLayer(layer));
@@ -2921,13 +3624,19 @@
                 }
                 
                 // Verificar que la ruta tenga ubicaciones válidas
-                if (!route.locations || route.locations.length < 2) {
-                    console.log(`⚠️ Ruta ${index + 1} sin ubicaciones válidas, omitiendo`);
+                // Para rutas con 'stops' (vehículos personalizados), verificar stops
+                // Para rutas con 'locations' (otros algoritmos), verificar locations
+                const routeLocations = route.locations || route.stops || [];
+                const hasValidLocations = routeLocations.length >= 2 && (route.totalWeight || 0) > 0;
+                
+                if (!hasValidLocations) {
+                    console.log(`⚠️ Ruta ${index + 1} sin ubicaciones válidas (${routeLocations.length} ubicaciones, ${route.totalWeight || 0}kg peso), omitiendo`);
+                    console.log(`   Detalles: vehicleType=${route.vehicleType}, vehicleName=${route.vehicleName || 'N/A'}, hasLocations=${!!route.locations}, hasStops=${!!route.stops}`);
                     return;
                 }
                 
                 // Crear línea de la ruta
-                const routePoints = route.locations.map(point => [point.lat, point.lon]);
+                const routePoints = routeLocations.map(point => [point.lat, point.lon]);
                 const routeLine = L.polyline(routePoints, {
                     color: color,
                     weight: 4,
@@ -2937,7 +3646,7 @@
 
                 // Agregar marcadores especiales para inicio/fin (depósito)
                 const vehicleTypeText = route.vehicleType === 'camion' ? '🚛 Camión' : route.vehicleType === 'moto' ? '🏍️ Moto' : '🚗 Vehículo';
-                const depotMarker = L.circleMarker([route.locations[0].lat, route.locations[0].lon], {
+                const depotMarker = L.circleMarker([routeLocations[0].lat, routeLocations[0].lon], {
                     radius: 8,
                     fillColor: color,
                     color: '#fff',
@@ -2958,8 +3667,8 @@
                 routeLayers.push(depotMarker);
 
                 // Agregar números a los puntos de la ruta
-                route.locations.forEach((point, pointIndex) => {
-                    if (pointIndex > 0 && pointIndex < route.locations.length - 1) {
+                routeLocations.forEach((point, pointIndex) => {
+                    if (pointIndex > 0 && pointIndex < routeLocations.length - 1) {
                         const numberMarker = L.marker([point.lat, point.lon], {
                             icon: L.divIcon({
                                 className: 'route-number',
@@ -2982,6 +3691,250 @@
                     }
                 });
             });
+        }
+
+        // Funciones para el modal de detalle de ruta
+        function openRouteDetailModal() {
+            const modal = document.getElementById('routeDetailModal');
+            const select = document.getElementById('routeNumberSelect');
+            const showBtn = document.getElementById('showRouteBtn');
+            const routeDetailInfo = document.getElementById('routeDetailInfo');
+            const routeDetailContent = document.getElementById('routeDetailContent');
+            
+            if (!modal || !select) {
+                console.error('❌ Error: Elementos del modal no encontrados');
+                return;
+            }
+            
+            // Limpiar select
+            select.innerHTML = '<option value="">-- Selecciona una ruta --</option>';
+            
+            // Llenar select con las rutas disponibles
+            if (allRoutes && allRoutes.length > 0) {
+                allRoutes.forEach((route, index) => {
+                    const routeLocations = route.locations || route.stops || [];
+                    const vehicleName = route.vehicleName || route.vehicleType || 'Vehículo';
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = `Ruta ${index + 1} - ${vehicleName} (${routeLocations.length} paradas, ${(route.totalWeight || 0).toFixed(1)} kg)`;
+                    select.appendChild(option);
+                });
+            } else {
+                showStatus('warning', 'No hay rutas disponibles para mostrar');
+                return;
+            }
+            
+            // Resetear estado
+            showBtn.disabled = true;
+            routeDetailInfo.style.display = 'none';
+            
+            // Event listener para cuando se seleccione una ruta
+            select.onchange = function() {
+                const selectedIndex = parseInt(select.value);
+                if (!isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < allRoutes.length) {
+                    showBtn.disabled = false;
+                    const route = allRoutes[selectedIndex];
+                    const routeLocations = route.locations || route.stops || [];
+                    const vehicleName = route.vehicleName || route.vehicleType || 'Vehículo';
+                    
+                    // Mostrar información de la ruta
+                    routeDetailContent.innerHTML = `
+                        <strong>Vehículo:</strong> ${vehicleName}<br>
+                        <strong>Paradas:</strong> ${routeLocations.length}<br>
+                        <strong>Peso Total:</strong> ${(route.totalWeight || 0).toFixed(1)} kg<br>
+                        <strong>Distancia:</strong> ${(route.totalDistance || 0).toFixed(1)} km<br>
+                        <strong>Tiempo:</strong> ${(route.totalTime || 0).toFixed(1)} min<br>
+                        <strong>Utilización:</strong> ${(route.utilization || 0).toFixed(1)}%
+                    `;
+                    routeDetailInfo.style.display = 'block';
+                } else {
+                    showBtn.disabled = true;
+                    routeDetailInfo.style.display = 'none';
+                }
+            };
+            
+            // Mostrar modal
+            modal.style.display = 'block';
+        }
+
+        function closeRouteDetailModal() {
+            const modal = document.getElementById('routeDetailModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function showSelectedRoute() {
+            const select = document.getElementById('routeNumberSelect');
+            const selectedIndex = parseInt(select.value);
+            
+            if (isNaN(selectedIndex) || selectedIndex < 0 || selectedIndex >= allRoutes.length) {
+                showStatus('error', 'Por favor selecciona una ruta válida');
+                return;
+            }
+            
+            const route = allRoutes[selectedIndex];
+            displaySingleRoute(route, selectedIndex);
+            closeRouteDetailModal();
+        }
+
+        // Función para mostrar una ruta específica en el mapa
+        function displaySingleRoute(route, routeIndex) {
+            if (!map) {
+                console.error('❌ Error: Mapa no está inicializado');
+                return;
+            }
+            
+            // Limpiar mapa completamente
+            clearMap();
+            
+            const routeLocations = route.locations || route.stops || [];
+            if (routeLocations.length === 0) {
+                showStatus('error', 'La ruta seleccionada no tiene ubicaciones');
+                return;
+            }
+            
+            // Determinar color según tipo de vehículo
+            let color;
+            if (route.vehicleType === 'camion') {
+                color = '#27ae60'; // Verde oscuro para camiones
+            } else if (route.vehicleType === 'moto') {
+                color = '#2ecc71'; // Verde claro para motos
+            } else {
+                color = '#3498db'; // Azul por defecto
+            }
+            
+            const vehicleName = route.vehicleName || route.vehicleType || 'Vehículo';
+            const vehicleTypeText = route.vehicleType === 'camion' ? '🚛 Camión' : route.vehicleType === 'moto' ? '🏍️ Moto' : '🚗 Vehículo';
+            
+            // Coordenadas de la bodega (depósito) - Parque Industrial San Jorge
+            // Dirección: Parque Industrial San Jorge, Cll 93A # 13 - 24P, Mosquera, Cundinamarca
+            const BODEGA_LAT = 4.715254;
+            const BODEGA_LON = -74.242008;
+            
+            let depotLat, depotLon;
+            const firstLocation = routeLocations[0];
+            const isFirstLocationDepot = firstLocation.direccion && (
+                firstLocation.direccion.includes('Depósito') || 
+                firstLocation.direccion.includes('Parque Industrial') || 
+                firstLocation.direccion.includes('San Jorge')
+            );
+            
+            if (isFirstLocationDepot) {
+                // Si la primera ubicación es el depósito, usar sus coordenadas
+                depotLat = firstLocation.lat || firstLocation.latitud;
+                depotLon = firstLocation.lon || firstLocation.longitud;
+            } else {
+                // Usar coordenadas de la bodega real (Parque Industrial San Jorge)
+                depotLat = BODEGA_LAT;
+                depotLon = BODEGA_LON;
+            }
+            
+            // Crear array de puntos para la ruta completa (bodega -> puntos -> bodega)
+            const routePoints = [[depotLat, depotLon]]; // Inicio en bodega
+            
+            // Agregar todos los puntos de la ruta (excluyendo el depósito si está en la lista)
+            routeLocations.forEach((point, index) => {
+                const isDepot = point.direccion && (
+                    point.direccion.includes('Depósito') || 
+                    point.direccion.includes('Parque Industrial') || 
+                    point.direccion.includes('San Jorge')
+                );
+                
+                if (!isDepot || index === 0) { // Incluir el primer punto aunque sea depósito para referencia
+                    const lat = point.lat || point.latitud;
+                    const lon = point.lon || point.longitud;
+                    if (lat && lon) {
+                        routePoints.push([lat, lon]);
+                    }
+                }
+            });
+            
+            // Agregar regreso a bodega al final
+            routePoints.push([depotLat, depotLon]);
+            
+            // Crear línea de la ruta
+            const routeLine = L.polyline(routePoints, {
+                color: color,
+                weight: 5,
+                opacity: 0.8
+            }).addTo(map);
+            routeLayers.push(routeLine);
+            
+            // Marcador de inicio (bodega)
+            const startMarker = L.circleMarker([depotLat, depotLon], {
+                radius: 12,
+                fillColor: '#e74c3c',
+                color: '#fff',
+                weight: 3,
+                opacity: 1,
+                fillOpacity: 0.9
+            }).bindPopup(`
+                <div style="min-width: 250px;">
+                    <strong>🏭 Bodega (Inicio/Fin)</strong><br>
+                    <strong>📍 Dirección:</strong> Parque Industrial San Jorge<br>
+                    Cll 93A # 13 - 24P, Mosquera, Cundinamarca<br>
+                    <strong>📍 Coordenadas:</strong> ${depotLat.toFixed(6)}, ${depotLon.toFixed(6)}<br>
+                    <strong>🚛 Vehículo:</strong> ${vehicleName}<br>
+                    <strong>📊 Ruta:</strong> ${routeIndex + 1}
+                </div>
+            `).addTo(map);
+            routeLayers.push(startMarker);
+            
+            // Marcadores numerados para cada punto de recogida
+            let stopNumber = 1;
+            routeLocations.forEach((point, index) => {
+                const isDepot = point.direccion && (
+                    point.direccion.includes('Depósito') || 
+                    point.direccion.includes('Parque Industrial') || 
+                    point.direccion.includes('San Jorge')
+                );
+                
+                // Solo mostrar marcadores para puntos que no sean el depósito inicial
+                if (!isDepot || (isDepot && index > 0)) {
+                    const lat = point.lat || point.latitud;
+                    const lon = point.lon || point.longitud;
+                    
+                    if (lat && lon) {
+                        const numberMarker = L.marker([lat, lon], {
+                            icon: L.divIcon({
+                                className: 'route-number',
+                                html: `<div style="background: ${color}; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">${stopNumber}</div>`,
+                                iconSize: [30, 30],
+                                iconAnchor: [15, 15]
+                            })
+                        }).bindPopup(`
+                            <div style="min-width: 250px;">
+                                <strong>${vehicleTypeText} - Parada ${stopNumber}</strong><br>
+                                <strong>📍 Dirección:</strong> ${point.direccion || point.address || 'N/A'}<br>
+                                <strong>🏢 Empresas:</strong> ${point.empresas || 'N/A'}<br>
+                                <strong>⚖️ Peso:</strong> ${(point.peso || 0).toFixed(1)} kg<br>
+                                <strong>📦 Residuos:</strong> ${point.cantidad_residuos || 'N/A'} tipos<br>
+                                <strong>🏙️ Ciudad:</strong> ${point.ciudad || 'N/A'}<br>
+                                <strong>📊 Utilización Ruta:</strong> ${(route.utilization || 0).toFixed(1)}%
+                            </div>
+                        `).addTo(map);
+                        routeLayers.push(numberMarker);
+                        stopNumber++;
+                    }
+                }
+            });
+            
+            // Ajustar vista del mapa para mostrar toda la ruta
+            if (routePoints.length > 0) {
+                const bounds = L.latLngBounds(routePoints);
+                map.fitBounds(bounds, { padding: [50, 50] });
+            }
+            
+            showStatus('success', `Ruta ${routeIndex + 1} mostrada en el mapa`);
+        }
+
+        // Cerrar modal al hacer clic fuera de él
+        window.onclick = function(event) {
+            const routeDetailModal = document.getElementById('routeDetailModal');
+            if (event.target === routeDetailModal) {
+                closeRouteDetailModal();
+            }
         }
 
         // Mostrar información de rutas
@@ -3162,25 +4115,75 @@
 
         // Limpiar mapa
         function clearMap() {
+            // Verificar que el mapa esté inicializado
+            if (!map) {
+                console.warn('⚠️ Mapa no está inicializado, saltando limpieza');
+                return;
+            }
+            
+            console.log('🧹 Limpiando mapa: marcadores, clusters, rutas y zonas resaltadas...');
+            
             // Limpiar cluster group si existe
             if (markerClusterGroup) {
+                try {
                 map.removeLayer(markerClusterGroup);
+                } catch (e) {
+                    console.warn('⚠️ Error al remover markerClusterGroup:', e);
+                }
                 markerClusterGroup = null;
             }
             
-            // Limpiar marcadores individuales (por si acaso)
-            markers.forEach(marker => map.removeLayer(marker));
+            // Limpiar marcadores individuales y sus zonas resaltadas
+            markers.forEach(marker => {
+                try {
+                    map.removeLayer(marker);
+                    // Limpiar zonas resaltadas si existen
+                    if (marker._zonaResaltada) {
+                        map.removeLayer(marker._zonaResaltada);
+                    }
+                } catch (e) {
+                    console.warn('⚠️ Error al remover marcador:', e);
+                }
+            });
             markers = [];
             
-            // Limpiar rutas
-            routeLayers.forEach(layer => map.removeLayer(layer));
+            // Limpiar rutas (líneas y marcadores de rutas)
+            routeLayers.forEach(layer => {
+                try {
+                    map.removeLayer(layer);
+                } catch (e) {
+                    console.warn('⚠️ Error al remover ruta:', e);
+                }
+            });
             routeLayers = [];
             
-            // Limpiar datos actuales
-            currentData = [];
+            // Limpiar todas las capas de zonas resaltadas que puedan quedar
+            try {
+                map.eachLayer(function(layer) {
+                    try {
+                        if (layer.options && layer.options.className === 'zona-localidad') {
+                            map.removeLayer(layer);
+                        }
+                        // También limpiar marcadores de rutas (route-number)
+                        if (layer.options && layer.options.icon && layer.options.icon.options && layer.options.icon.options.className === 'route-number') {
+                            map.removeLayer(layer);
+                        }
+                    } catch (e) {
+                        // Ignorar errores al remover capas individuales
+                    }
+                });
+            } catch (e) {
+                console.warn('⚠️ Error al iterar capas del mapa:', e);
+            }
+            
+            console.log('✅ Mapa limpiado completamente');
+            
+            // NO limpiar currentData aquí porque se necesita para mostrar los clusters
+            // currentData se limpia solo cuando se carga un nuevo archivo o se selecciona otro del historial
+            // currentData = []; // COMENTADO: No limpiar aquí
             // No resetear currentSubidaId para mantener la referencia a la subida actual
             // currentSubidaId = null;
-            currentSubidaInfo = null;
+            // currentSubidaInfo = null; // COMENTADO: No limpiar aquí
             
             // Ocultar información de rutas (solo si existen)
             const routeInfo = document.getElementById('routeInfo');

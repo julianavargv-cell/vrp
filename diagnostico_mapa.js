@@ -39,7 +39,7 @@ console.log('• ❌ La función loadData() no cargaba datos automáticamente');
 console.log('• ❌ Faltaba comunicación entre backend y frontend');
 console.log('• ✅ Ahora corregido con carga automática de datos');
 
-console.log('\n✨ SOLUCIÓN IMPLEMENTADA:');
+console.log('\n✨ SOLUCIÓN IMPLEMENTADA:'); 
 console.log('=======================');
 console.log('• 🔄 loadData() ahora hace fetch a /api/data');
 console.log('• 📡 Manejo de respuestas con logging detallado');
